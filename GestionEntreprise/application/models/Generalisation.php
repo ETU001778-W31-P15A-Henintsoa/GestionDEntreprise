@@ -1,24 +1,26 @@
 <?php
 class Generalisation extends CI_Model {
-    public function SelectFromTable($NomTable){
+    //Ces Fonctions retournent des tableaux d'objet
+
+    public function avoirTable($NomTable){
         $query = $this->db->get($NomTable); // Remplacez 'table_name' par le nom de votre table PostgreSQL
-		$result = $query->result(); // Récupération des résultats
+		$resultats = $query->result(); // Récupération des résultats
         $raisons = array();
         $i = 0;
-		foreach ($result as $row) {
+		foreach ($resultats as $row) {
 			$raisons[$i]=$row; // Remplacez 'column_name' par le nom de la colonne que vous souhaitez afficher
             $i+=1;
 		}
         return $raisons;
     }
 
-    function inserting($table, $values){
-        $sql = sprintf( 'insert into %s values%s',$table, $values);
-       $this->db->query($sql);
+    function insertion($NomTable, $values){ // Metre values comme => '(data1, data2, 'data3')' par exemple
+        $sql = sprintf( 'insert into %s values%s',$NomTable, $values);
+        $this->db->query($sql);
     }
 
-    public function SelectSpecifiedFromTable($NomTable, $colonnes, $conditions ){
-        $this->db->select($colonne); // Select specific columns
+    public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
+        $this->db->select($colonnes); // Select specific columns
         $this->db->from($NomTable); // Specify the table name
 
         // Add WHERE conditions
@@ -44,19 +46,5 @@ class Generalisation extends CI_Model {
         }
 
 
-    }
-
-    public function InsertInTable($NomTable, $data){
-        // $data = array(
-        //     'column1' => 'value1',
-        //     'column2' => 'value2',
-        //     'column3' => 'value3'
-        // );
-        
-        $this->db->insert($NomTable, $data);
-
-        // if ($this->db->affected_rows() > 0) {
-        // } else {
-        // }
     }
 }
