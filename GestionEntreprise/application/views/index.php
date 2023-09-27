@@ -7,6 +7,6 @@
 	<title>Welcome</title>
 </head>
 <body>
-	<p>Welcome ohhhhh</p>	
+	<p>Welcome ohhhhh</p>
 </body>
 </html>
