@@ -7,4 +7,8 @@ class Besoins extends CI_Model {
         $personnesNecessaire = $nombreJours / $brancheDepartement->nombreJourPersonne;
         return $personnesNecessaire;
    }
+
+   public function essaie(){
+     echo $this->input->post('valeur');
+   }
 }

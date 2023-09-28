@@ -7,6 +7,9 @@
 	<title>Welcome</title>
 </head>
 <body>
-	<p>Welcome ohhhhh</p>
+	<form action="<?php echo site_url('welcome/essayage'); ?>" method="post">
+		<input type="text" value="valeur" name="valeur">
+		<input type="submit" value="OK">
+	</form>
 </body>
 </html>
