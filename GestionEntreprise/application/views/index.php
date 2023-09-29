@@ -49,7 +49,7 @@
 			var div = "<h5>Besoins Personnelles </h5>"
 
 			for(var i=0; i<tab.length; i++){
-				nouveau = nouveau + "<div><input type='checkbox' value='"+tab[i].idbranchedepartement+"' id='"+tab[i].branche+"' onchange=mabesoin("+tab[i].branche+")>"+tab[i].branche+"</div>";
+				nouveau = nouveau + "<div><input type='checkbox' value='"+tab[i].idbranchedepartement+"' id='"+tab[i].branche+"'>"+tab[i].branche+"</div>";
 				div = div + "<div id='"+ tab[i].branche +"'></div>";
 			}
 			nouveau = nouveau + div;
@@ -64,7 +64,7 @@
 		});
 	
 		// Configurez la requête
-		xhr.open("POST","<?php echo site_url("formulairebesoins/brancheDepartement?valeur="); ?>"+valeur);
+		xhr.open("GET","<?php echo site_url("formulairebesoins/brancheDepartement?valeur="); ?>"+valeur);
 	
 		// Les données envoyées sont ce que l'utilisateur a mis dans le formulaire
 		xhr.send();
