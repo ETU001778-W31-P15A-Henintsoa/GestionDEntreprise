@@ -21,11 +21,8 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('index');
-	}
-
-	public function essayage(){
-		$this->Besoins->essaie();
+		$data['departement'] = $this->Generalisation->avoirTable("departement");
+		$this->load->view('index', $data);
 	}
 
 	// autres fonctions
@@ -35,7 +32,7 @@ class Welcome extends CI_Controller {
 
 	public function avoirLesBranchesAAjouter($idDepartement){
 		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('brancheDepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
-		$vectorBranche = [];
+		$vectorBranche = array();
 		for($i=0; $i<count($touteBrancheDepartement); $i++){
 			if($this->input->post($touteBrancheDepartement[$i]->idBrancheDepartement)!=null){
 				$vectorBranche[] = $touteBrancheDepartement[$i];

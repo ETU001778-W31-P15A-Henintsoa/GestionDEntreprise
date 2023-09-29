@@ -20,31 +20,14 @@ class Generalisation extends CI_Model {
     }
 
     public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
-        $this->db->select($colonnes); // Select specific columns
-        $this->db->from($NomTable); // Specify the table name
-
-        // Add WHERE conditions
-        $MesConditions = explode("//", $conditions);
-        foreach ($conditions as $MesConditions) {
-            $separer  = explode(", ", $conditions);
-            $this->db->where($separer[0], $separer[1]);
+        $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
+        $query = $this->db->query($sql);
+        $resultats = array();
+        $a=0;
+        foreach($query->result() as $row){
+            $resultats[$a] = $row;
+            $a++;
         }
-
-        $query = $this->db->get(); // Execute the query
-
-        if ($query->num_rows() > 0) {
-            // Data found, process it
-            foreach ($query->result() as $row) {
-                // Access the values using column names
-                echo $row->column1;
-                echo $row->column2;
-                echo $row->column3;
-            }
-        } else {
-            // No data found
-            echo "No records found.";
-        }
-
-
+        return $resultats;
     }
 }
