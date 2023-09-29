@@ -34,8 +34,6 @@ create table BesoinPersonnelle(
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
 );
 
-alter table BesoinPersonnelle add njHTravail float;
-
 -- -----------------DIPLOME--------------------------
 create sequence seqDiplome;
 create table Diplome(
@@ -87,3 +85,5 @@ create table CritereCoefficient(
 -- ---------------Besoin personnelle-------------------
 ALTER TABLE BesoinPersonnelle
 ADD dateInsertion date default current_date;
+
+alter table BesoinPersonnelle add njHTravail float;

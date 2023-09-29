@@ -27,17 +27,18 @@ class Welcome extends CI_Controller {
 
 	public function formulaireBesoin(){
 		$iddepartement = $this->input->post("iddepartement");
-		// echo $iddepartement;
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
-		$this->insertionBesoins($brancheDepartementBesoin);
-		echo "OK";
+		// $this->insertionBesoins($brancheDepartementBesoin);
+		$data['branchebesoin'] = ($vectorBranche);
+		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "nomdepartement", sprintf("iddepartement='%s'", $iddepartement));
+		$this->load->view('criteres', $data);
 	}
 
 	// autres fonctions
 
 	public function avoirLesBranchesAAjouter($idDepartement){
-		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('branchedepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
+		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('v_branchedepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
 		$vectorBranche = array();
 		for($i=0; $i<count($touteBrancheDepartement); $i++){ 
 			$idbranche = $this->input->post($touteBrancheDepartement[$i]->idbranchedepartement);
