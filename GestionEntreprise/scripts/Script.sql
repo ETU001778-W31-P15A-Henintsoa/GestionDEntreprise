@@ -34,6 +34,8 @@ create table BesoinPersonnelle(
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
 );
 
+alter table BesoinPersonnelle add njHTravail float;
+
 -- -----------------DIPLOME--------------------------
 create sequence seqDiplome;
 create table Diplome(
