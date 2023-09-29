@@ -82,3 +82,6 @@ create table CritereCoefficient(
     foreign key(idBesoin) references BesoinPersonnelle(idBesoin)
 );
 
+-- ---------------Besoin personnelle-------------------
+ALTER TABLE BesoinPersonnelle
+ADD dateInsertion date default current_date;
