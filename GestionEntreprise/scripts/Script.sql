@@ -85,3 +85,6 @@ create table CritereCoefficient(
 -- ---------------Besoin personnelle-------------------
 ALTER TABLE BesoinPersonnelle
 ADD dateInsertion date default current_date;
+
+ALTER TABLE CritereCoefficient 
+ADD pourcentageNote float;
