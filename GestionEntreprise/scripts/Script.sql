@@ -99,3 +99,6 @@ create table Filiere(
 ALTER TABLE Critere 
 ADD idFiliere varchar(15), 
 ADD CONSTRAINT fk_Critere_Filiere FOREIGN KEY (idFiliere) REFERENCES Filiere(idFiliere);
+
+ALTER TABLE CritereCoefficient
+ADD Filiere float;
