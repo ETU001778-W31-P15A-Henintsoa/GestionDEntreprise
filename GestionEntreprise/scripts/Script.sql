@@ -87,3 +87,18 @@ ALTER TABLE BesoinPersonnelle
 ADD dateInsertion date default current_date;
 
 alter table BesoinPersonnelle add njHTravail float;
+
+ALTER TABLE CritereCoefficient 
+ADD pourcentageNote float;
+
+-- ----------------filiere------------------------
+create sequence seqFiliere;
+create table Filiere(
+    idFiliere varchar(15) default concat('FIL' || nextval('seqFiliere')) primary key,
+    libelle varchar(30)
+);
+
+ALTER TABLE Critere 
+ADD idFiliere varchar(15), 
+ADD CONSTRAINT fk_Critere_Filiere FOREIGN KEY (idFiliere) REFERENCES Filiere(idFiliere);
+
