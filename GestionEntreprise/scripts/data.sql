@@ -68,4 +68,17 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
+-- ---------------------FILIERE------------------------
+INSERT INTO Filiere (libelle) VALUES
+    ('Comptable'),
+    ('Informatique'),
+    ('Economie'),
+    ('Gestion des Ressources Humaines'),
+    ('Marketing'),
+    ('Sciences Politiques'),
+    ('Medecine'),
+    ('Droit'),
+    ('Ingenierie Electrique'),
+    ('Psychologie');
+
 
