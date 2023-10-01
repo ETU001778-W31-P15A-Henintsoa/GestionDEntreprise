@@ -19,6 +19,8 @@ class Generalisation extends CI_Model {
         $this->db->query($sql);
     }
 
+    
+
     public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
         $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         $query = $this->db->query($sql);
