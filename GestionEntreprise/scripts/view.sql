@@ -20,3 +20,9 @@ join Diplome on Diplome.idDiplome=Critere.idDiplome
 join Nationnalite on Nationnalite.idNationnalite=Critere.idNationnalite
 join Experience on Experience.idExperience=Critere.idExperience 
 join Filiere on Filiere.idFiliere = Critere.idFiliere;
+
+create or replace view v_CritereCoefficient as
+select cc.idCritereCoefficient,cc.Diplome,cc.Sexe,cc.Nationnalite,cc.Experience,cc.Filiere,
+bp.*
+from CritereCoefficient cc
+join v_BesoinPersonnelle bp on bp.idBesoin=cc.idBesoin;
