@@ -105,4 +105,5 @@ ADD CONSTRAINT fk_Critere_Filiere FOREIGN KEY (idFiliere) REFERENCES Filiere(idF
 ALTER TABLE CritereCoefficient
 ADD Filiere float;
 
-
+ALTER TABLE Filiere
+ALTER COLUMN libelle TYPE VARCHAR(100);
