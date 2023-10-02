@@ -21,8 +21,12 @@ join Nationnalite on Nationnalite.idNationnalite=Critere.idNationnalite
 join Experience on Experience.idExperience=Critere.idExperience 
 join Filiere on Filiere.idFiliere = Critere.idFiliere;
 
-create or replace view v_CritereCoefficient as
-select cc.idCritereCoefficient,cc.Diplome,cc.Sexe,cc.Nationnalite,cc.Experience,cc.Filiere,
-bp.*
+create or replace view v_CritereCoefficient as 
+select cc.idCritereCoefficient,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
+vc.sexe,cc.sexe as noteSexe,
+vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
+vc.idExperience,vc.Experience,cc.Experience as noteExperience,
+vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
+vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion
 from CritereCoefficient cc
-join v_BesoinPersonnelle bp on bp.idBesoin=cc.idBesoin;
+join v_Critere vc on vc.idBesoin=cc.idBesoin;
