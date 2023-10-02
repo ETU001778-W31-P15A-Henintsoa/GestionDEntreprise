@@ -31,7 +31,9 @@ class Welcome extends CI_Controller {
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
 		// $this->insertionBesoins($brancheDepartementBesoin);
 		$data['branchebesoin'] = ($vectorBranche);
-		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "nomdepartement", sprintf("iddepartement='%s'", $iddepartement));
+		$data['diplome'] = $this->Generalisation->avoirTable("diplome");
+		$data['nationnalite'] = $this->Generalisation->avoirTable("nationnalite");
+		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
 		$this->load->view('criteres', $data);
 	}
 
@@ -93,9 +95,15 @@ class Welcome extends CI_Controller {
 			$besoins[$a]['coeffnationnalite'] = $this->input->post(sprintf("CON%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['experience'] = $this->input->post(sprintf("E%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['coeffexperience'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['filiere'] = $this->input->post(sprintf("COF%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coefffiliere'] = $this->input->post(sprintf("COF%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['pourcentage'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
 			$a++;
 		}
 		return $besoins;
+	}
+
+	public function insertionCritere(){
+		
 	}
 }

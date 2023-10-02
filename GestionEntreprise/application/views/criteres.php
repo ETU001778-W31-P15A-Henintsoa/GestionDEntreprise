@@ -21,6 +21,10 @@
             <div>
                 <select name= "D<?php echo $branchebesoin[$i]->idbranchedepartement;?>" id="">
                     <option value="">Diplome</option>
+                    <?php 
+                    for ($a=0; $a<count($diplome); $a++){ ?>
+                    <option value="<?php echo $diplome[$a]->iddiplome; ?>"><?php echo $diplome[$a]->libelle;?></option>
+                    <?php } ?>
                 </select>
                 <input type="number" name="COD<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
             </div>
@@ -35,8 +39,22 @@
             <div>
                 <select name="N<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
                     <option value="">Nationnalite</option>
+                    <?php
+                    for ($a=0; $a<count($nationnalite); $a++){ ?>
+                        <option value="<?php echo $nationnalite[$a]->idnationnalite; ?>"><?php echo $nationnalite[$a]->libelle;?></option>
+                    <?php } ?>
                 </select>
                 <input type="number" name="CON<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <select name="F<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Filiere</option>
+                    <?php
+                    //for ($a=0; $a<count($filiere); $a++){ ?>
+                        <option value="<?php //echo $nationnalite[$a]->idnationnalite; ?>"><?php //echo $nationnalite[$a]->libelle;?></option>
+                    <?php //} ?>
+                </select>
+                <input type="number" name="COF<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
             </div>
             <div>
                 <select name="E<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
