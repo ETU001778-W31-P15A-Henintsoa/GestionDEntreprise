@@ -12,7 +12,7 @@ join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
 
 create or replace view v_Critere as
 select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
-Diplome.libelle as diplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, 
+Diplome.libelle as diplome,Diplome.etat as etatDiplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, Experience.etat as etatExperience,
 Filiere.libelle as filiere,Critere.*
 from Critere 
 join v_BesoinPersonnelle bp on bp.idBesoin=Critere.idBesoin
@@ -22,10 +22,10 @@ join Experience on Experience.idExperience=Critere.idExperience
 join Filiere on Filiere.idFiliere = Critere.idFiliere;
 
 create or replace view v_CritereCoefficient as 
-select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
+select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
 vc.sexe,cc.sexe as noteSexe,
 vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
-vc.idExperience,vc.Experience,cc.Experience as noteExperience,
+vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
 vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
 vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion
 from CritereCoefficient cc
