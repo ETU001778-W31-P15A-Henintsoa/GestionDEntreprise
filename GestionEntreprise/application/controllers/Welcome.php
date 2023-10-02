@@ -19,8 +19,7 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	
-	public function index()
-	{
+	public function index(){
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
 	}
@@ -30,12 +29,26 @@ class Welcome extends CI_Controller {
 		// echo $iddepartement;
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
+<<<<<<< Updated upstream
 		$this->insertionBesoins($brancheDepartementBesoin);
 		echo "OK";
+=======
+		// $this->insertionBesoins($brancheDepartementBesoin);
+		$data['branchebesoin'] = ($vectorBranche);
+		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
+		$this->load->view('criteres', $data);
+>>>>>>> Stashed changes
 	}
 
-	// autres fonctions
+	public function formulaireCriteres(){
+		$iddepartement = $this->input->post("iddepartement");
+		$besoins = $this->criteresParBranches($iddepartement);
+		var_dump($besoins);
+	}
 
+	// autres fonctions ayant des valeurs de Retour
+
+	// BESOINS BRANCHE DEPARTEMENT (fonction formulaireBesoins)
 	public function avoirLesBranchesAAjouter($idDepartement){
 		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('branchedepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
 		$vectorBranche = array();
@@ -70,4 +83,24 @@ class Welcome extends CI_Controller {
 		}
 	}
 
+	// CRITERES BRANCHE DEPARTEMENT (fonction formulaireCriteres)
+	public function criteresParBranches($iddepartement){
+		$branches = $this->avoirLesBranchesAAjouter($iddepartement);
+		$besoins = array();
+		$a=0;
+		for($i=0; $i<count($branches); $i++){
+			echo "hahaaa";
+			$besoins[$a]['diplome'] = $this->input->post(sprintf("D%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coeffdiplome'] = $this->input->post(sprintf("COD%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['sexe'] = $this->input->post(sprintf("S%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coeffsexe'] = $this->input->post(sprintf("COS%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['nationnalite'] = $this->input->post(sprintf("N%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coeffnationnalite'] = $this->input->post(sprintf("CON%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['experience'] = $this->input->post(sprintf("E%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coeffexperience'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['pourcentage'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
+			$a++;
+		}
+		return $besoins;
+	}
 }
