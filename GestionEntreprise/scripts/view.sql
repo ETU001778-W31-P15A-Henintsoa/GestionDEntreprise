@@ -22,7 +22,7 @@ join Experience on Experience.idExperience=Critere.idExperience
 join Filiere on Filiere.idFiliere = Critere.idFiliere;
 
 create or replace view v_CritereCoefficient as 
-select cc.idCritereCoefficient,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
+select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
 vc.sexe,cc.sexe as noteSexe,
 vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
 vc.idExperience,vc.Experience,cc.Experience as noteExperience,
