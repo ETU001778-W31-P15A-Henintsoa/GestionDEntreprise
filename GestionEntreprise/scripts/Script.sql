@@ -107,3 +107,10 @@ ADD Filiere float;
 
 ALTER TABLE Filiere
 ALTER COLUMN libelle TYPE VARCHAR(100);
+
+-- ------------------Branche departement--------------------------
+ALTER TABLE BrancheDepartement
+ADD DescriptionPost text;
+
+ALTER TABLE BrancheDepartement
+ADD Mission text;
