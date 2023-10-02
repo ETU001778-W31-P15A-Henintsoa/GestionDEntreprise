@@ -114,3 +114,9 @@ ADD DescriptionPost text;
 
 ALTER TABLE BrancheDepartement
 ADD Mission text;
+
+ALTER TABLE Diplome
+ADD etat int;
+
+ALTER TABLE Experience
+ADD etat int;
