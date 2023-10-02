@@ -29,15 +29,8 @@ class Welcome extends CI_Controller {
 		// echo $iddepartement;
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
-<<<<<<< Updated upstream
 		$this->insertionBesoins($brancheDepartementBesoin);
 		echo "OK";
-=======
-		// $this->insertionBesoins($brancheDepartementBesoin);
-		$data['branchebesoin'] = ($vectorBranche);
-		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
-		$this->load->view('criteres', $data);
->>>>>>> Stashed changes
 	}
 
 	public function formulaireCriteres(){
