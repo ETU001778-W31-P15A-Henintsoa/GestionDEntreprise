@@ -120,3 +120,20 @@ ADD etat int;
 
 ALTER TABLE Experience
 ADD etat int;
+
+-- ------------------SITUATION MATRIMONIALE---------------------------
+create sequence seqSituation;
+create table SituationMatrimoniale(
+    idSituation varchar(20) default concat('SIT'|| nextval('seqSituation')) primary key,
+    libelle varchar(30)
+);
+
+INSERT INTO SituationMatrimoniale (libelle)
+VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
+
+ALTER TABLE Critere 
+ADD situation varchar(20),
+ADD CONSTRAINT fk_situation FOREIGN KEY (situation) REFERENCES SituationMatrimoniale(idSituation);
+
+ALTER TABLE CritereCoefficient 
+ADD situation float;
