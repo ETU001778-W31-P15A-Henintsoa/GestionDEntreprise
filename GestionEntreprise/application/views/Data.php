@@ -19,25 +19,18 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	
-	public function index()
-	{
+	public function index(){
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
 	}
 
 	public function formulaireBesoin(){
 		$iddepartement = $this->input->post("iddepartement");
+		// echo $iddepartement;
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
-		// $this->insertionBesoins($brancheDepartementBesoin);
-		$data['branchebesoin'] = ($vectorBranche);
-		$data['diplome'] = $this->Generalisation->avoirTable("diplome");
-		$data['nationnalite'] = $this->Generalisation->avoirTable("nationnalite");
-		$data['filiere'] = $this->Generalisation->avoirTable("filiere");
-		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
-		$data['experience'] = $this->Generalisation->avoirTable("experience");
-		// var_dump($data['experience']);
-		$this->load->view('criteres', $data);
+		$this->insertionBesoins($brancheDepartementBesoin);
+		echo "OK";
 	}
 
 	public function formulaireCriteres(){
@@ -46,12 +39,11 @@ class Welcome extends CI_Controller {
 		var_dump($besoins);
 	}
 
-
-	// autres fonctions
+	// autres fonctions ayant des valeurs de Retour
 
 	// BESOINS BRANCHE DEPARTEMENT (fonction formulaireBesoins)
 	public function avoirLesBranchesAAjouter($idDepartement){
-		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('v_branchedepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
+		$touteBrancheDepartement = $this->Generalisation->avoirTableSpecifique('branchedepartement', '*', sprintf("iddepartement='%s'", $idDepartement));
 		$vectorBranche = array();
 		for($i=0; $i<count($touteBrancheDepartement); $i++){ 
 			$idbranche = $this->input->post($touteBrancheDepartement[$i]->idbranchedepartement);
@@ -90,7 +82,6 @@ class Welcome extends CI_Controller {
 		$besoins = array();
 		$a=0;
 		for($i=0; $i<count($branches); $i++){
-			$besoins[$a]['idbesoin'] = $branches[$i]->idbranchedepartement;
 			$besoins[$a]['diplome'] = $this->input->post(sprintf("D%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['coeffdiplome'] = $this->input->post(sprintf("COD%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['sexe'] = $this->input->post(sprintf("S%s", $branches[$i]->idbranchedepartement));
@@ -99,18 +90,74 @@ class Welcome extends CI_Controller {
 			$besoins[$a]['coeffnationnalite'] = $this->input->post(sprintf("CON%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['experience'] = $this->input->post(sprintf("E%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['coeffexperience'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['filiere'] = $this->input->post(sprintf("F%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['coefffiliere'] = $this->input->post(sprintf("COF%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['age'] = $this->input->post(sprintf("A%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['coeffage'] = $this->input->post(sprintf("COA%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['pourcentage'] = $this->input->post("pourcentage");
+			$besoins[$a]['pourcentage'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
 			$a++;
 		}
 		return $besoins;
 	}
-
-	public function insertionCritere($mescriteres){
-		$this->Generalisation->insertion("critere(idbesoin, iddiplome, idnationnalite, idexperience, sexe, idfiliere, age)", sprintf("('%s','%s', '%s', '%s', '%s', '%s', '%s')",  $mescriteres['idbesoins'], $mescriteres['diplome'], $mescriteres['nationnalite'], $mescriteres['experience'], $mescriteres['sexe'], $mescriteres['filiere'], $mescriteres['age']));
-		$this->Generalisation->insertion("criterecoefficient(idbesoin, diplome, sexe, nationnalite, experience, filiere, age, pourcentage)", sprintf("('%s','%s', '%s', '%s', '%s', '%s', '%s')",  $mescriteres['idbesoins'], $mescriteres['coeffdiplome'], $mescriteres['coeffnationnalite'], $mescriteres['coeffexperience'], $mescriteres['coeffsexe'], $mescriteres['coefffiliere'], $mescriteres['coeffage'], $mescriteres['pourcentage']));
-	}
 }
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Criteres </title>
+</head>
+<body>
+    <div>
+        <h3>Formulaire Criteres du Departement de <?php echo $departement[0]->nomdepartement; ?></h3>
+        <form action=<?php echo site_url("welcome/formulaireCriteres"); ?> method="POST"> 
+            <div>
+            <input type="hidden" name="iddepartement" value="<?php echo $departement[0]->iddepartement; ?>">
+            <?php
+            for($i=0; $i<count($branchebesoin); $i++){ ?>
+            <h4> Pour le <?php echo $branchebesoin[$i]->branche; ?> </h4>
+
+            <input type="hidden" name="<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" value="<?php echo $branchebesoin[$i]->idbranchedepartement; ?>">
+
+            <div>
+                <select name= "D<?php echo $branchebesoin[$i]->idbranchedepartement;?>" id="">
+                    <option value="">Diplome</option>
+                </select>
+                <input type="number" name="COD<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <select name="S<?php echo $branchebesoin[$i]->idbranchedepartement;?>" id="">
+                    <option value="">Sexe</option>
+                    <option value="0">Homme</option>
+                    <option value="1">Femme</option>
+                </select>
+                <input type="number" name="COS<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <select name="N<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Nationnalite</option>
+                </select>
+                <input type="number" name="CON<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <select name="E<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Experience</option>
+                </select>
+                <input type="number" name="COE<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <input type="number" placeholder="Pourcentage" name="pourcentage">
+            </div>
+            <?php } ?>
+            </br>
+            <div><input type="submit" value="OK"></div>
+
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
+
+
+

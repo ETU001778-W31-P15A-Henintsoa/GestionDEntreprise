@@ -137,3 +137,9 @@ ADD CONSTRAINT fk_situation FOREIGN KEY (situation) REFERENCES SituationMatrimon
 
 ALTER TABLE CritereCoefficient 
 ADD situation float;
+
+ALTER table Critere 
+ADD age int;
+
+ALTER table agecoefficient
+ADD age float;
