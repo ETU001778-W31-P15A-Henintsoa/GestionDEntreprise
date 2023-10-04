@@ -33,6 +33,7 @@ class Welcome extends CI_Controller {
 		$data['branchebesoin'] = ($vectorBranche);
 		$data['diplome'] = $this->Generalisation->avoirTable("diplome");
 		$data['nationnalite'] = $this->Generalisation->avoirTable("nationnalite");
+		$data['filiere'] = $this->Generalisation->avoirTable("filiere");
 		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
 		$this->load->view('criteres', $data);
 	}
@@ -104,6 +105,6 @@ class Welcome extends CI_Controller {
 	}
 
 	public function insertionCritere(){
-		
+
 	}
 }
