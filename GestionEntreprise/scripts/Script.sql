@@ -120,3 +120,9 @@ ADD etat int;
 
 ALTER TABLE Experience
 ADD etat int;
+
+ALTER table Critere 
+ADD age int;
+
+ALTER table agecoefficient
+ADD age float;

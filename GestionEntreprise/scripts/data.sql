@@ -82,12 +82,12 @@ INSERT INTO Filiere (libelle) VALUES
     ('Psychologie');
 
 -----------------------EXPERIENCE------------------
-INSERT INTO Exprerience VALUES
-    ("-1"),
-    ("2"),
-    ("3"),
-    ("4"),
-    ("+5"),
+INSERT INTO Experience(anneeexperience, etat) VALUES
+    ('-1', 1),
+    ('2', 2),
+    ('3', 3),
+    ('4', 4),
+    ('+5', 5);
 
 
 

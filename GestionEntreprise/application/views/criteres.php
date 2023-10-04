@@ -59,8 +59,22 @@
             <div>
                 <select name="E<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
                     <option value="">Experience</option>
+                    <?php 
+                    for ($a=0; $a<count($experience); $a++){ ?>
+                        <option value="<?php echo $experience[$a]->idexperience;?>"><?php echo $experience[$a]->anneeexperience; ?> </option>
+                    <?php } ?>
                 </select>
                 <input type="number" name="COE<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
+                <select name="A<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Age</option>
+                    <?php 
+                    for ($a=1; $a<100; $a++){ ?>
+                        <option value="<?php echo $a;?>" ><?php echo $a; ?> </option>
+                    <?php } ?>
+                </select>
+                <input type="number" name="COA<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
             </div>
             <div>
                 <input type="number" placeholder="Pourcentage" name="pourcentage">
