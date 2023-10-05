@@ -10,7 +10,7 @@
     <?php  var_dump($besoin); ?>
     <h4>Les Questions du testes</h4>
     <?php for($i=0; $i<count($besoin); $i++){ ?>
-        <h5>Branche Departement <?php echo $besoin[$i]->besoin; ?></h5>
+        <h5>Branche Departement <?php echo $besoin[$i]->; ?></h5>
     <?php } ?>
 
     
