@@ -143,3 +143,6 @@ ADD age int;
 
 ALTER table agecoefficient
 ADD age float;
+
+ALTER table critere 
+ADD agefin int;

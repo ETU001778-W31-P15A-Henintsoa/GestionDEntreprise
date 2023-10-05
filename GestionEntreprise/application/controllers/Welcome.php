@@ -25,29 +25,47 @@ class Welcome extends CI_Controller {
 		$this->load->view('index', $data);
 	}
 
+	// Loading view
+	public function versAcceuil(){
+		$this->load->view('acceuil');
+	}
+
+	public function versQuestionsResponses(){
+		$nombre = 1;
+		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
+		$this->load->view("qr", $data);
+	}
+
+	// Insertion formnulaire besoins
 	public function formulaireBesoin(){
 		$iddepartement = $this->input->post("iddepartement");
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
-		// $this->insertionBesoins($brancheDepartementBesoin);
+		$this->Besoins->insertionBesoins($brancheDepartementBesoin);
 		$data['branchebesoin'] = ($vectorBranche);
 		$data['diplome'] = $this->Generalisation->avoirTable("diplome");
 		$data['nationnalite'] = $this->Generalisation->avoirTable("nationnalite");
 		$data['filiere'] = $this->Generalisation->avoirTable("filiere");
 		$data['departement'] = $this->Generalisation->avoirTableSpecifique("departement", "*", sprintf("iddepartement='%s'", $iddepartement));
 		$data['experience'] = $this->Generalisation->avoirTable("experience");
+		$data['situation'] = $this->Generalisation->avoirTable("situationmatrimoniale");
 		// var_dump($data['experience']);
 		$this->load->view('criteres', $data);
 	}
 
+	// Insertion formulaire criteres 
 	public function formulaireCriteres(){
 		$iddepartement = $this->input->post("iddepartement");
-		$besoins = $this->criteresParBranches($iddepartement);
-		var_dump($besoins);
+		$critereCoefficient = $this->Criteres->criteresParBranches($iddepartement);
+		$besoinsentree = $this->Besoins->avoirbesoins(count($critereCoefficient));
+		for($i=0; $i<count($critereCoefficient); $i++){
+			$this->Criteres->insertionCritere($besoinsentree[$i], $critereCoefficient[$i]);
+		}
+		$this->load->view('acceuil');
 	}
 
 
-	// autres fonctions
+	// AUTRES FONCTIONS
 
 	// BESOINS BRANCHE DEPARTEMENT (fonction formulaireBesoins)
 	public function avoirLesBranchesAAjouter($idDepartement){
@@ -77,13 +95,6 @@ class Welcome extends CI_Controller {
 		return $brancheDepartementBesoin;
 	}
 
-	public function insertionBesoins($brancheDepartementBesoin){
-		for($i=0; $i<count($brancheDepartementBesoin); $i++){
-			$sql = sprintf("('%s', %s)", $brancheDepartementBesoin[$i]['branche']->idbranchedepartement, $brancheDepartementBesoin[$i]['besoin']);
-			$this->Generalisation->insertion('besoinpersonnelle(idbranchedepartement, njHTravail)', $sql);
-		}
-	}
-
 	// CRITERES BRANCHE DEPARTEMENT (fonction formulaireCriteres)
 	public function criteresParBranches($iddepartement){
 		$branches = $this->avoirLesBranchesAAjouter($iddepartement);
@@ -101,16 +112,15 @@ class Welcome extends CI_Controller {
 			$besoins[$a]['coeffexperience'] = $this->input->post(sprintf("COE%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['filiere'] = $this->input->post(sprintf("F%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['coefffiliere'] = $this->input->post(sprintf("COF%s", $branches[$i]->idbranchedepartement));
-			$besoins[$a]['age'] = $this->input->post(sprintf("A%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['agedebut'] = $this->input->post(sprintf("AD%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['agefin'] = $this->input->post(sprintf("AF%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['coeffage'] = $this->input->post(sprintf("COA%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['situation'] = $this->input->post(sprintf("M%s", $branches[$i]->idbranchedepartement));
+			$besoins[$a]['coeffsituation'] = $this->input->post(sprintf("COM%s", $branches[$i]->idbranchedepartement));
 			$besoins[$a]['pourcentage'] = $this->input->post("pourcentage");
 			$a++;
 		}
 		return $besoins;
 	}
 
-	public function insertionCritere($mescriteres){
-		$this->Generalisation->insertion("critere(idbesoin, iddiplome, idnationnalite, idexperience, sexe, idfiliere, age)", sprintf("('%s','%s', '%s', '%s', '%s', '%s', '%s')",  $mescriteres['idbesoins'], $mescriteres['diplome'], $mescriteres['nationnalite'], $mescriteres['experience'], $mescriteres['sexe'], $mescriteres['filiere'], $mescriteres['age']));
-		$this->Generalisation->insertion("criterecoefficient(idbesoin, diplome, sexe, nationnalite, experience, filiere, age, pourcentage)", sprintf("('%s','%s', '%s', '%s', '%s', '%s', '%s')",  $mescriteres['idbesoins'], $mescriteres['coeffdiplome'], $mescriteres['coeffnationnalite'], $mescriteres['coeffexperience'], $mescriteres['coeffsexe'], $mescriteres['coefffiliere'], $mescriteres['coeffage'], $mescriteres['pourcentage']));
-	}
 }
