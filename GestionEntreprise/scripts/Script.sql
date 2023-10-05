@@ -132,8 +132,8 @@ INSERT INTO SituationMatrimoniale (libelle)
 VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
 
 ALTER TABLE Critere 
-ADD situation varchar(20),
-ADD CONSTRAINT fk_situation FOREIGN KEY (situation) REFERENCES SituationMatrimoniale(idSituation);
+ADD idSituation varchar(20),
+ADD CONSTRAINT fk_situation FOREIGN KEY (idSituation) REFERENCES SituationMatrimoniale(idSituation);
 
 ALTER TABLE CritereCoefficient 
 ADD situation float;
