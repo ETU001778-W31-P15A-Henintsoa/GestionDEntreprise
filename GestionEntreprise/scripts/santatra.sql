@@ -20,6 +20,8 @@ create table Candidat(
     idville varchar(30),
     idSituation varchar(20),
     datePostulation date default current_date,
+    idAnnonce varchar(20),
+    foreign key(idAnnonce) references Annonce(idAnnonce),
     foreign key(idSituation) references SituationMatrimoniale(idSituation),
     foreign key(iddiplome) references Diplome(idDiplome),
     foreign key(idexperience) references Experience(idExperience),
