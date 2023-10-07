@@ -2,18 +2,19 @@ create sequence idAnnonce;
 create table annonce(
     idAnnonce varchar(15) default concat('annonce'|| nextval('idAnnonce')) primary key,
     idBesoin varchar(15),
-    texte text
+    texte text,
+    foreign key(idBesoin) references besoinPersonnelle(idbesoin)
 );
 
 create sequence idVille;
 create table ville(
     idVille varchar(15) default concat('ville'|| nextval('idVille')) primary key,
-    nomVille varchar(20),    
+    ville varchar(20)
 );
 
 create sequence idEntreprise;
 create table entreprise(
-    idEntreprise varchar(15) default concat('entrepise'|| nextval('idEntreprise')) primary key,
+    idEntreprise varchar(15) default concat('entreprise'|| nextval('idEntreprise')) primary key,
     ville varchar(30),
     adresse varchar(30),
     numero varchar(30),
@@ -21,19 +22,30 @@ create table entreprise(
     foreign key(ville) references ville(idVille)
 );
 
-create sequence idAnnoncePardefaut
+create sequence idAnnoncePardefaut;
 create table annonceParDefaut(
-    idAnnonceParDefaut varchar(15) default concat('annonceDefaut'|| nextval('idAnnonceDefaut')) primary key,
+    idAnnonceParDefaut varchar(15) default concat('annonceDefaut'|| nextval('idAnnonceParDefaut')) primary key,
     idEntreprise varchar(15),
+    texte text,
+    foreign key(idEntreprise) references entreprise(idEntreprise)
 );
+alter table annonceParDefaut 
+ADD avantage text;
+
+alter table entreprise
+ADD nom varchar(30);
+
+alter table Annonce
+ADD nombreDemande int;
+
+insert into entreprise(ville,adresse,numero,fax) values('ville1','village des jeux Ankorondrano','0202234456','67891234567');
+insert into annonceParDefaut(idEntreprise,texte,avantage) values('entrepise1',
+'Nous sommes à la recherche d_un(e) titreDuPoste passionné(e) et talentueux(se) pour rejoindre notre équipe 
+chez _NomEntrepriseIci_. En tant que _NomPosteIci_, vous jouerez un rôle essentiel dans _DescriptionIci_.
+ Vous travaillerez en étroite collaboration avec _DepartementIci_ pour _missionIci_.','Salaire compétitif; 
+ ;Assurance santé;Formation continue;Equipe dinamique');
 
 insert into annonce(idBesoin,texte) values('BES1','Annonce pour un dev');
 
-create or replace view v_BesoinPersonnelleAnnonce as 
-select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
-left join annonce  on bp.idBesoin=annonce.idBesoin;
+insert into ville(ville) values('Antananarivo');
 
-create or replace view v_BesoinPersonnelleAnnonceDetails as
-select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche
-from v_BesoinPersonnelleAnnonce as bpa 
-join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement;
