@@ -107,3 +107,42 @@ ADD Filiere float;
 
 ALTER TABLE Filiere
 ALTER COLUMN libelle TYPE VARCHAR(100);
+
+-- ------------------Branche departement--------------------------
+ALTER TABLE BrancheDepartement
+ADD DescriptionPost text;
+
+ALTER TABLE BrancheDepartement
+ADD Mission text;
+
+ALTER TABLE Diplome
+ADD etat int;
+
+ALTER TABLE Experience
+ADD etat int;
+
+-- ------------------SITUATION MATRIMONIALE---------------------------
+create sequence seqSituation;
+create table SituationMatrimoniale(
+    idSituation varchar(20) default concat('SIT'|| nextval('seqSituation')) primary key,
+    libelle varchar(30)
+);
+
+INSERT INTO SituationMatrimoniale (libelle)
+VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
+
+ALTER TABLE Critere 
+ADD idSituation varchar(20),
+ADD CONSTRAINT fk_situation FOREIGN KEY (idSituation) REFERENCES SituationMatrimoniale(idSituation);
+
+ALTER TABLE CritereCoefficient 
+ADD situation float;
+
+ALTER table Critere 
+ADD age int;
+
+ALTER table agecoefficient
+ADD age float;
+
+ALTER table critere 
+ADD agefin int;

@@ -7,26 +7,28 @@ join Departement on Departement.idDepartement = bd.idDepartement;
 
 create or replace view v_BesoinPersonnelle as
 select bd.branche,bd.idbranche,bd.iddepartement ,bd.departement , bd.njhparpersonne,bp.*
-from BesoinPersonnelle bp
-join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
+from BesoinPersonnelle as bp
+join v_BrancheDepartement as bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
 
 create or replace view v_Critere as
 select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
-Diplome.libelle as diplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, 
-Filiere.libelle as filiere,Critere.*
+Diplome.libelle as diplome,Diplome.etat as etatDiplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, Experience.etat as etatExperience,
+Filiere.libelle as filiere,sm.libelle as situation,Critere.*
 from Critere 
 join v_BesoinPersonnelle bp on bp.idBesoin=Critere.idBesoin
 join Diplome on Diplome.idDiplome=Critere.idDiplome
 join Nationnalite on Nationnalite.idNationnalite=Critere.idNationnalite
 join Experience on Experience.idExperience=Critere.idExperience 
-join Filiere on Filiere.idFiliere = Critere.idFiliere;
+join Filiere on Filiere.idFiliere = Critere.idFiliere
+join SituationMatrimoniale sm on sm.idSituation=Critere.idSituation; 
 
 create or replace view v_CritereCoefficient as 
-select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
+select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
 vc.sexe,cc.sexe as noteSexe,
 vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
-vc.idExperience,vc.Experience,cc.Experience as noteExperience,
+vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
 vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
-vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion
+vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion,
+vc.age,cc.age as noteAge,vc.idSituation,vc.situation,cc.situation as noteSituation
 from CritereCoefficient cc
 join v_Critere vc on vc.idBesoin=cc.idBesoin;

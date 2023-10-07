@@ -81,4 +81,13 @@ INSERT INTO Filiere (libelle) VALUES
     ('Ingenierie Electrique'),
     ('Psychologie');
 
+-----------------------EXPERIENCE------------------
+INSERT INTO Experience(anneeexperience, etat) VALUES
+    ('-1', 1),
+    ('2', 2),
+    ('3', 3),
+    ('4', 4),
+    ('+5', 5);
+
+
 
