@@ -143,3 +143,6 @@ ADD age int;
 
 ALTER table agecoefficient
 ADD age float;
+
+ALTER TABLE Critere 
+ADD dateFinDepot Date;
