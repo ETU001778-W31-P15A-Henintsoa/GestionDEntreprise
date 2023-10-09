@@ -23,7 +23,7 @@
                 </br>
                 <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question1reponse" placeholder="question1reponse1">
                 </br>
-                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question1autre1" id="question1autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="11" onclick="plusautrereponse(<?php echo $besoin[$i]->idbesoin; ?>1,1)">+</span>
+                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question1autre1" id="question1autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="11" onclick="plusautrereponse('<?php echo $besoin[$i]->idbesoin; ?>',1,1)">+</span>
                 <div id='question1autre2'></div>
             </div>
 
@@ -35,7 +35,7 @@
                 </br>
                 <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question2reponse" placeholder="question2reponse1">
                 </br>
-                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question2autre1" id="question2autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="21" onclick="plusautrereponse(<?php echo $besoin[$i]->idbesoin; ?>2,1)">+</span>
+                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question2autre1" id="question2autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="21" onclick="plusautrereponse('<?php echo $besoin[$i]->idbesoin; ?>',2,1)">+</span>
                 <div id='question2autre2'></div>
             </div>
 
@@ -47,7 +47,7 @@
                 </br>
                 <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question3reponse" placeholder="question3reponse1">
                 </br>
-                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question3autre1" id="question3autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="31" onclick="plusautrereponse(<?php echo $besoin[$i]->idbesoin; ?>3,1)">+</span>
+                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question3autre1" id="question3autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="31" onclick="plusautrereponse('<?php echo $besoin[$i]->idbesoin; ?>',3,1)">+</span>
                 <div id='question3autre2'></div>
             </div>
 
@@ -59,7 +59,7 @@
                 </br>
                 <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question4reponse" placeholder="question4reponse1">
                 </br>
-                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question4autre1" id="question4autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="41" onclick="plusautrereponse(<?php echo $besoin[$i]->idbesoin; ?>4,1)">+</span>
+                <input type="text" name="<?php echo $besoin[$i]->idbesoin; ?>question4autre1" id="question4autre1" placeholder="Autre 1"><span style="border: 1px solid;width:150px;height:50px;" id="41" onclick="plusautrereponse('<?php echo $besoin[$i]->idbesoin; ?>',4,1)">+</span>
                 <div id='question4autre2'></div>
             </div>
 
@@ -90,7 +90,9 @@
     } else {
         numeroreponseavant = numeroreponse;
         numeroreponse = numeroreponse + 1;
-        var nouveau = "<input type='text' name='"+idbesoins+"question" + numeroquestion + "autre" + numeroreponse + "' id='question"+numeroquestion+"autre"+numeroreponseavant+"' placeholder= 'Autre " + numeroreponse + "'><span style='border: 1px solid;width:100px' onclick='plusautrereponse('" + idbesoins + "'," + numeroquestion + "," + numeroreponse + ")'>+</span>" +
+        numeromanaraka = numeroreponse + 1;
+        
+        var nouveau = "<input type='text' name='"+idbesoins+"question" + numeroquestion + "autre" + numeroreponse + "' id='question"+numeroquestion+"autre"+numeroreponseavant+"' placeholder= 'Autre " + numeroreponse + "'><span style='border: 1px solid;width:100px' onclick='plusautrereponse('"+ idbesoins + "', "+ numeroquestion + "," + numeroreponse + ")'>+</span>" +
             "<div id='question" + numeroquestion + "autre" + numeromanaraka + "'></div>";
 
         var bouton = document.getElementById("" + numeroquestion + "" + numeroreponse);
