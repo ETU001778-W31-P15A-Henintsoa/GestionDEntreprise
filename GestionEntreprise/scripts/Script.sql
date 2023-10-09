@@ -82,8 +82,8 @@ create table CritereCoefficient(
     foreign key(idBesoin) references BesoinPersonnelle(idBesoin)
 );
 
--- ---------------Besoin personnelle-------------------
-ALTER TABLE BesoinPersonnelle
+-- -----------------BESOIN PERSONNELLE--------------------------
+ALTER TABLE BesoinPersonnelle 
 ADD dateInsertion date default current_date;
 
 alter table BesoinPersonnelle add njHTravail float;
@@ -107,6 +107,81 @@ ADD Filiere float;
 
 ALTER TABLE Filiere
 ALTER COLUMN libelle TYPE VARCHAR(100);
+
+-- ----------------Employe------------------------
+create sequence seqEmploye;
+create table employe(
+    idEmploye varchar(15) default concat('emp'|| nextval('seqEmploye')) primary key,
+    nom varchar(30),
+    prenom varchar(30),
+    adresse varchar(50),
+    numero varchar(15),
+    mail varchar(100),
+    mdp varchar(100),
+    idDepartement varchar(15),
+    etat int, --ilay itenenana hoe inona no azony atao--
+    foreign key(idDepartement) references departement(idDepartement)
+);
+
+-- ----------------departementAdresse------------------------
+create sequence seqDeptAdresse;
+create table departementAdresse(
+    idDepartementAdresse varchar(15) default concat('deptAdresse'|| nextval('seqDeptAdresse')) primary key,
+    idDepartement varchar(15),
+    idEntreprise varchar(15),
+    adresse varchar(50),
+    foreign key(idDepartement) references departement(idDepartement),
+    foreign key(idEntreprise) references departement(idDepartement)
+);
+
+-- ----------------AvantageNature------------------------
+create sequence seqAvantageNature;
+create table avantageNature(
+    idAvantageNature varchar(15) default concat('avantageNature'|| nextval('seqAvantageNature')) primary key,
+    libelle varchar(50)
+);
+
+-- ----------------AvantageDepartement------------------------
+create sequence seqAvantageDepartement;
+create table avantageDepartement(
+    idAvantageDepartement varchar(15) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
+    idBrancheDepartement varchar(15),
+    idAvantage varchar(15),
+    foreign key(idAvantageDepartement) references BrancheDepartement(idBrancheDepartement),
+    foreign key(idAvantage) references avantageNature(idAvantageNature)
+);
+
+-- ----------------Service------------------------
+create sequence seqService;
+create table service(
+    idService varchar(15) default concat('service'|| nextval('seqService')) primary key,
+    libelle  varchar(50),
+    valeur float
+);
+
+-- ----------------ContratEssai------------------------
+create sequence seqContratEssai;
+create table contratEssai(
+    isContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
+    idCandidat varchar (15),
+    salaireBrut float,
+    salireNet float,
+    duree float,
+    idBrancheDepartement varchar(15),
+    foreign key(idCandidat) references candidat(idCandidat),
+    foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
+);
+
+
+-- ----------------ServiceCandidat------------------------
+create sequence seqServiceCandidat;
+create table serviceCandidat(
+    idServiceCandidat varchar(15) default concat('serviceCand'|| nextval('seqServiceCandidat')) primary key,
+    idService varchar(15),
+    idContratEssai varchar(15),
+    foreign key(idService) references service(idService),
+    foreign key(idContratEssai) references contratEssai(idContratEssai)
+);
 
 -- ------------------Branche departement--------------------------
 ALTER TABLE BrancheDepartement
@@ -141,8 +216,75 @@ ADD situation float;
 ALTER table Critere 
 ADD age int;
 
-ALTER table agecoefficient
+ALTER table coefficient
 ADD age float;
 
-ALTER table critere 
-ADD agefin int;
+create sequence seqCandidat;
+create table Candidat(
+    idCandidat varchar(30) default concat('CAN'|| nextval('seqCandidat')) primary key,
+    nom varchar(50),
+    prenom varchar(50),
+    dateNaissance date,
+    adresse varchar(50),
+    email varchar(100),
+    sexe varchar(10),
+    telephone varchar(10),
+    photo varchar(50),
+    idnationnalite varchar(30),
+    idexperience varchar(30),
+    iddiplome varchar(30),
+    diplomeFile varchar(50),
+    dateDiplome date,
+    attestation varchar(50),
+    certificat varchar(50),
+    idfiliere varchar(30),
+    idville varchar(30),
+    idSituation varchar(20),
+    datePostulation date default current_date,
+    idAnnonce varchar(20),
+    foreign key(idAnnonce) references Annonce(idAnnonce),
+    foreign key(idSituation) references SituationMatrimoniale(idSituation),
+    foreign key(iddiplome) references Diplome(idDiplome),
+    foreign key(idexperience) references Experience(idExperience),
+    foreign key(idnationnalite) references Nationnalite(idNationnalite),
+    foreign key(idville) references ville(idVille),
+    foreign key(idfiliere) references filiere(idFiliere)
+);
+
+
+-- ------------------Programme izany hoe ny lera fidirana sy firavana---------------------------
+create sequence seqProgramme;
+create table programeme(
+    idProgramme varchar(20) default concat('PRO'|| nextval('seqProgramme')) primary key,
+    nomJour varchar(30),
+    heureEntre datetime,
+    heureFin datetime,
+    idBrancheDepartement varchar(15),
+    foreign key(idBrancheDepartement) references brancheDepartement(idAvantageDepartement)
+);
+
+-- ------------------Pause misy ao ampiasana---------------------------
+create sequence seqPause;
+create table pause(
+    idPause varchar(20) default concat('PAU'|| nextval('seqPause')) primary key,
+    heureDebut varchar(30),
+    heureFin datetime,                              
+    idBrancheDepartement varchar(15),
+    foreign key(idBrancheDepartement) references brancheDepartement(idAvantageDepartement)
+);
+
+-- ------------------Liste Entretien---------------------------
+create sequence seqEntretien;
+create table entretien(
+    idEntretien varchar(20) default concat('ENT'|| nextval('seqEntretien')) primary key,
+    idCandidat varchar(15),
+    heureDebut varchar(30),
+    heureFin datetime,                              
+    jour Date,
+    foreign key(idCandidat) references candidat(idCandidat)
+);
+
+-- --------------------critere--------------------------
+ALTER TABLE Critere 
+ADD dateFinDepot Date;
+
