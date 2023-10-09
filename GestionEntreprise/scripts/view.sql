@@ -23,7 +23,7 @@ join Filiere on Filiere.idFiliere = Critere.idFiliere
 join SituationMatrimoniale sm on sm.idSituation=Critere.idSituation; 
 
 create or replace view v_CritereCoefficient as 
-select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
+select vc.idbesoin,cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
 vc.sexe,cc.sexe as noteSexe,
 vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
 vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
