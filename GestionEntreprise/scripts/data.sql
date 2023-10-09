@@ -89,5 +89,11 @@ INSERT INTO Experience(anneeexperience, etat) VALUES
     ('4', 4),
     ('+5', 5);
 
+-- --------------------CRITERE-----------------------
+INSERT INTO Critere(idbesoin,iddiplome,idnationnalite,idexperience,sexe,idfiliere,age,idSituation,dateFinDepot,ageFin) VALUES
+('BES1','DIP4','NAT1','EXP3','1','FIL1',25,'SIT2','2023-10-10',50)
+
+INSERT INTO CritereCoefficient(idbesoin,diplome,sexe,nationnalite,experience,filiere,situation,age,pourcentageNote) VALUES
+('BES1',10,20,20,30,20,10,10,80);
 
 

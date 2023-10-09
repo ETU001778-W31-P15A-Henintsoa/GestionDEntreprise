@@ -284,6 +284,7 @@ create table entretien(
     foreign key(idCandidat) references candidat(idCandidat)
 );
 
+-- --------------------critere--------------------------
 ALTER TABLE Critere 
 ADD dateFinDepot Date;
 
