@@ -37,6 +37,16 @@
                 <input type="number" name="COS<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
             </div>
             <div>
+                <select name="M<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Situation Matrimoniale</option>
+                    <?php
+                    for ($a=0; $a<count($situation); $a++){ ?>
+                        <option value="<?php echo $situation[$a]->idsituation; ?>"><?php echo $situation[$a]->libelle;?></option>
+                    <?php } ?>
+                </select>
+                <input type="number" name="COM<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
+            </div>
+            <div>
                 <select name="N<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
                     <option value="">Nationnalite</option>
                     <?php
@@ -67,8 +77,15 @@
                 <input type="number" name="COE<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" placeholder="Coefficient">
             </div>
             <div>
-                <select name="A<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
-                    <option value="">Age</option>
+                <select name="AD<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Age Debut</option>
+                    <?php 
+                    for ($a=1; $a<100; $a++){ ?>
+                        <option value="<?php echo $a;?>" ><?php echo $a; ?> </option>
+                    <?php } ?>
+                </select>
+                <select name="AF<?php echo $branchebesoin[$i]->idbranchedepartement; ?>" id="">
+                    <option value="">Age Fin</option>
                     <?php 
                     for ($a=1; $a<100; $a++){ ?>
                         <option value="<?php echo $a;?>" ><?php echo $a; ?> </option>
