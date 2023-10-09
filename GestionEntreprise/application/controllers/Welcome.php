@@ -64,6 +64,16 @@ class Welcome extends CI_Controller {
 		$this->load->view('acceuil');
 	}
 
+	//Insertion des questions et des reponses
+	public function formulaireQuestionsReponses(){
+		$iddepartement = $this->input->post("iddepartement");
+		// echo $iddepartement;
+		$existants = $this->lesbesoinsExistants($iddepartement);
+		// var_dump($existants);
+		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
+		var_dump($questionsReponses);
+	}
+
 
 	// AUTRES FONCTIONS
 
@@ -80,6 +90,7 @@ class Welcome extends CI_Controller {
 		return $vectorBranche;
 	}
 
+	// Les Besoins par branche
 	public function avoirLesBesoinsParBranche($vecteurBranche){
 		$brancheDepartementBesoin = array();
 		$a = 0;
@@ -93,6 +104,19 @@ class Welcome extends CI_Controller {
 			}
 		}
 		return $brancheDepartementBesoin;
+	}
+
+	// Avoir besoins Existant
+	public function lesbesoinsExistants($idDepartement){
+		$tousbesoins = $this->Generalisation->avoirTableSpecifique('v_besoinpersonnelle', '*', sprintf("iddepartement='%s'", $idDepartement));
+		$vectorBesoins = array();
+		for($i=0; $i<count($tousbesoins); $i++){ 
+			$idbesoin = $this->input->post($tousbesoins[$i]->idbesoin);
+			if($idbesoin!=null){
+				$vectorBesoins[] = $tousbesoins[$i];
+			}
+		}
+		return $vectorBesoins;
 	}
 
 	// CRITERES BRANCHE DEPARTEMENT (fonction formulaireCriteres)
@@ -122,5 +146,46 @@ class Welcome extends CI_Controller {
 		}
 		return $besoins;
 	}
+
+	// Fonction REceuille des donnees des question
+	public function receuilleDonneesQuestionsReponses($vectorBesoins){
+		$array = array();
+		for ($i=0; $i<count($vectorBesoins); $i++){
+			$string = "";
+			$string = $string.$vectorBesoins[$i]->idbesoin;
+			// Boucle question
+			for ($q=1; $q<6; $q++){
+				$stringquestion=$string."question".$q;
+				$stringreponse=$stringquestion."reponse";
+				$stringcoefficient=$string."coeffquestion".$q;
+
+				// echo $stringquestion." question";
+				// echo $stringreponse." reponse";
+				// echo $stringcoefficient." coefficient";
+
+				// $question = $this->input->post($string);
+				$array[$i][$q-1]['question'] = $this->input->post($string);
+				$array[$i][$q-1]['reponse'] = $this->input->post($stringreponse);
+				$array[$i][$q-1]['coefficient'] = $this->input->post($stringcoefficient);
+				$r=1;
+				$stringautre= $stringquestion.'autre'.$r;
+				$reponse = $this->input->post($stringautre);
+				
+				// Boucle reponse
+				while($reponse!=""){
+					echo $stringautre;
+					$array[$i][$q-1]['autre'.$r] = $this->input->post($stringautre);
+					$r++;
+					$stringautre= $stringquestion.'autre'.$r;
+					echo $stringautre;					
+					$reponse = $this->input->post($stringautre);
+				}
+			}
+		}
+		return $array;
+	}
+
+
+
 
 }

@@ -6,9 +6,9 @@ join Branche on Branche.idBranche= bd.idBranche
 join Departement on Departement.idDepartement = bd.idDepartement;
 
 create or replace view v_BesoinPersonnelle as
-select bd.branche,bd.idbranche,bd.iddepartement ,bd.departement , bd.njhparpersonne,bp.*
-from BesoinPersonnelle as bp
-join v_BrancheDepartement as bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
+select v_BrancheDepartement.branche, v_BrancheDepartement.idbranche, v_BrancheDepartement.iddepartement, v_BrancheDepartement.departement, v_BrancheDepartement.njhparpersonne, BesoinPersonnelle.*
+from BesoinPersonnelle
+join v_BrancheDepartement on v_BrancheDepartement.idBrancheDepartement=BesoinPersonnelle.idBrancheDepartement;
 
 create or replace view v_Critere as
 select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
