@@ -21,5 +21,9 @@ class QuestionsReponses extends CI_Model {
             }
         }
     }
+
+    function avoirQuestionsReponses($idbesoin){
+        
+    }
     
 }
