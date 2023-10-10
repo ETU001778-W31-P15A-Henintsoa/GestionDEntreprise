@@ -8,14 +8,25 @@
 </head>
 <body>
     <div>
-        <h1> Formulaire de Test</h1>
+        <h1> Formulaire de Test <?php echo $besoin[0]->branche; ?> </h1>
         <form action="" method="POST">
-            <div>
-                <select name="" id="">
-                    
-                </select>     
-            </div>
+
         </form>
     </div>
 </body>
+
+<script>
+const checkboxes = document.querySelectorAll('.myCheckbox');
+
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    // Désélectionnez toutes les autres cases à cocher
+    checkboxes.forEach(otherCheckbox => {
+      if (otherCheckbox !== checkbox) {
+        otherCheckbox.checked = false;
+      }
+    });
+  });
+})
+</script>
 </html>

@@ -23,7 +23,18 @@ class QuestionsReponses extends CI_Model {
     }
 
     function avoirQuestionsReponses($idbesoin){
-        
+        // var_dump($idbesoin);        
+        $lesquestions = $this->Generalisation->avoirTableSpecifique("questions", "*", sprintf("idbesoin='%s'", $idbesoin));
+        // var_dump($lesquestions);
+        $array = array();
+        for($q=0; $q<count($lesquestions); $q++){
+            // var_dump($lesquestions[$q]);
+            $array[$q]['question'] = $lesquestions[$q] -> libelle;
+            $reponses = $this->Generalisation->avoirTableSpecifique("reponses", "*", sprintf("idquestion='%s'", $lesquestions[$q] -> idquestion));
+            shuffle($reponses);
+            $array[$q]['reponses'] = $reponses;
+        }
+        return $array;
     }
     
 }
