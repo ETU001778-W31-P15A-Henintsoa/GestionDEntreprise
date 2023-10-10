@@ -22,16 +22,15 @@ create or replace view v_Critere as
         join SituationMatrimoniale sm on sm.idSituation=Critere.idSituation; 
 
 create or replace view v_CritereCoefficient as 
-    select vc.idbesoin,cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
-    vc.sexe,cc.sexe as noteSexe,
-    vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
-    vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
-    vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
-    vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion,
-    vc.age,cc.age as noteAge,vc.idSituation,vc.situation,cc.situation as noteSituation
-    from CritereCoefficient cc
-        join v_Critere vc on vc.idBesoin=cc.idBesoin;
-
+select vc.idbesoin,cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,vc.etatDiplome,cc.diplome as noteDiplome,
+vc.sexe,cc.sexe as noteSexe,
+vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
+vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
+vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
+vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion,
+vc.age as agemin,vc.ageFin as ageMax,cc.age as noteAge,vc.idSituation,vc.situation,cc.situation as noteSituation,vc.dateFinDepot
+from CritereCoefficient cc
+join v_Critere vc on vc.idBesoin=cc.idBesoin;
 
 ------------------------ VUE QUESTION/REPONSES/V_BESOINSPERSONELLES ---------------------------------------------------
 create or replace view v_QuestionsReponsesVBesoinPersonnelle as 
