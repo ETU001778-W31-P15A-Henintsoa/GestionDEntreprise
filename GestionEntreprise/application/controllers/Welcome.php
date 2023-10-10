@@ -23,6 +23,7 @@ class Welcome extends CI_Controller {
 	{
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
+		
 	}
 
 	// Loading view
