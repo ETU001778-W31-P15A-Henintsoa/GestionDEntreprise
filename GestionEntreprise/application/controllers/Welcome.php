@@ -36,6 +36,12 @@ class Welcome extends CI_Controller {
 		$this->load->view("qr", $data);
 	}
 
+	public function versFormulaireTestCandidat(){
+		$idutilisateur = $_SESSION["utilisateur"];
+		$utilisateur = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("idemploye='%s'", $idutilisateur));
+		$this->load->view("formulairetestcandidat");
+	}
+
 	// Insertion formnulaire besoins
 	public function formulaireBesoin(){
 		$iddepartement = $this->input->post("iddepartement");
@@ -67,12 +73,13 @@ class Welcome extends CI_Controller {
 	//Insertion des questions et des reponses
 	public function formulaireQuestionsReponses(){
 		$iddepartement = $this->input->post("iddepartement");
-		// echo $iddepartement;
 		$existants = $this->lesbesoinsExistants($iddepartement);
-		// var_dump($existants);
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
-		var_dump($questionsReponses);
+		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
+		echo 'Okey';
 	}
+
+	
 
 
 	// AUTRES FONCTIONS
@@ -150,34 +157,30 @@ class Welcome extends CI_Controller {
 	// Fonction REceuille des donnees des question
 	public function receuilleDonneesQuestionsReponses($vectorBesoins){
 		$array = array();
+		// Boucle besoin
 		for ($i=0; $i<count($vectorBesoins); $i++){
 			$string = "";
 			$string = $string.$vectorBesoins[$i]->idbesoin;
+			
 			// Boucle question
 			for ($q=1; $q<6; $q++){
 				$stringquestion=$string."question".$q;
 				$stringreponse=$stringquestion."reponse";
 				$stringcoefficient=$string."coeffquestion".$q;
 
-				// echo $stringquestion." question";
-				// echo $stringreponse." reponse";
-				// echo $stringcoefficient." coefficient";
-
-				// $question = $this->input->post($string);
-				$array[$i][$q-1]['question'] = $this->input->post($string);
+				$array[$i][$q-1]['question'] = $this->input->post($stringquestion);
 				$array[$i][$q-1]['reponse'] = $this->input->post($stringreponse);
 				$array[$i][$q-1]['coefficient'] = $this->input->post($stringcoefficient);
+				$array[$i][$q-1]['idbesoin'] = $vectorBesoins[$i]->idbesoin;
 				$r=1;
 				$stringautre= $stringquestion.'autre'.$r;
 				$reponse = $this->input->post($stringautre);
 				
 				// Boucle reponse
 				while($reponse!=""){
-					echo $stringautre;
 					$array[$i][$q-1]['autre'.$r] = $this->input->post($stringautre);
 					$r++;
-					$stringautre= $stringquestion.'autre'.$r;
-					echo $stringautre;					
+					$stringautre= $stringquestion.'autre'.$r;			
 					$reponse = $this->input->post($stringautre);
 				}
 			}
