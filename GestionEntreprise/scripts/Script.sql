@@ -87,6 +87,7 @@ ALTER TABLE BesoinPersonnelle
 ADD dateInsertion date default current_date;
 
 alter table BesoinPersonnelle add njHTravail float;
+alter table BesoinPersonnelle add genererAnnonce boolean default false;
 
 ALTER TABLE CritereCoefficient 
 ADD pourcentageNote float;

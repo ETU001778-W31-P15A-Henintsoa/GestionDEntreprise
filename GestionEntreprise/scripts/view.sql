@@ -35,9 +35,9 @@ create or replace view v_CritereCoefficient as
 
 ------------------------ VUE QUESTION/REPONSES/V_BESOINSPERSONELLES ---------------------------------------------------
 create or replace view v_QuestionsReponsesVBesoinPersonnelle as 
-    select v_BesoinPersonnelle.idbranche, v_BesoinPersonnelle.branche, v_BesoinPersonnelle.iddepartement, v_BesoinPersonnelle.departement, v_BesoinPersonnelle.njhparpersonne, v_BesoinPersonnelle.idbesoin, v_BesoinPersonnelle.idbranchedepartement, v_BesoinPersonnelle.njhtravail, v_BesoinPersonnelle.dateinsertion,
+    select v_BesoinPersonnelle.idbranche, v_BesoinPersonnelle.branche, v_BesoinPersonnelle.iddepartement, v_BesoinPersonnelle.departement, v_BesoinPersonnelle.njhparpersonne, v_BesoinPersonnelle.idbesoin, v_BesoinPersonnelle.idbranchedepartement, v_BesoinPersonnelle.njhtravail, v_BesoinPersonnelle.dateinsertion, v_BesoinPersonnelle.genererannonce,
     Questions.idquestion, Questions.libelle as libellequestion, Questions.coefficient as coefficientquestion,
     Reponses.idreponse, Reponses.libelle as libellereponse, Reponses.bonnereponse
     from v_BesoinPersonnelle
         join Questions on Questions.idbesoin = v_BesoinPersonnelle.idbesoin
-        join Reponses on Reponses.idquestion = Questions.idquestion
+        join Reponses on Reponses.idquestion = Questions.idquestion ;
