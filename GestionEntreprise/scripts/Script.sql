@@ -87,6 +87,7 @@ ALTER TABLE BesoinPersonnelle
 ADD dateInsertion date default current_date;
 
 alter table BesoinPersonnelle add njHTravail float;
+alter table BesoinPersonnelle add genererAnnonce boolean default false;
 
 ALTER TABLE CritereCoefficient 
 ADD pourcentageNote float;
@@ -202,6 +203,37 @@ create table SituationMatrimoniale(
     idSituation varchar(20) default concat('SIT'|| nextval('seqSituation')) primary key,
     libelle varchar(30)
 );
+
+------------------------------ QUESTIONS ------------------------------
+create sequence seqQuestion;
+create table questions (
+    idquestion varchar(20) default concat('QUE'|| nextval('seqQuestion')) primary key,
+    idbesoin varchar(20),
+    libelle varchar(30),
+    coefficient int,
+    Foreign Key (idbesoin) REFERENCES besoinpersonnelle(idbesoin)
+);
+
+------------------------------ REPONSES ------------------------------------
+create sequence seqReponse;
+create table reponses (
+    idreponse varchar(20) default concat('REP'|| nextval('seqReponse')) primary key,
+    idquestion varchar(20),
+    libelle varchar(30),
+    bonnereponse boolean,
+    foreign key (idquestion) references questions(idquestion)
+);
+
+create table formulairecandidat(
+    idformulairecandidat int primary key auto_increment,
+    idcandidat varchar(30),
+    idquestion varchar(30),
+    idreponse varchar(30),
+    foreign key () references (),
+    foreign key () references (),
+    foreign key () references ()
+);
+
 
 INSERT INTO SituationMatrimoniale (libelle)
 VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
