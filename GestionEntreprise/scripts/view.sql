@@ -29,6 +29,6 @@ vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
 vc.idExperience,vc.Experience,cc.Experience as noteExperience,vc.etatExperience,
 vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
 vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion,
-vc.age,cc.age as noteAge,vc.idSituation,vc.situation,cc.situation as noteSituation
+vc.age,cc.age as noteAge,vc.idSituation,vc.situation,cc.situation as noteSituation,vc.dateFinDepot
 from CritereCoefficient cc
 join v_Critere vc on vc.idBesoin=cc.idBesoin;
