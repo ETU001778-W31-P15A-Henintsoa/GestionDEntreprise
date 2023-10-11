@@ -46,12 +46,26 @@ class Welcome extends CI_Controller {
 		$this->load->view("formulairetestcandidat", $data);
 	}
 
+	//Test an'ilay note Employer fotsiny
+	public function versCalculeNote(){
+		// $idcandidat = "CAN1";
+		// $note = $this->QuestionsReponses->calculNoteTest($idcandidat);
+		// echo $note;
+
+		$candidats = $this->Generalisation->avoirTable("candidat");
+		$candidatNote = $this->QuestionsReponses->calculNoteParCandidat($candidats);
+		var_dump($candidatNote);
+	}
+
 	//Calcule et insertion des reponses du test du candidat
 	public function formulairetestcansidat(){
+		$idcandidat = "CAN1";
 		$idbesoin = $this->input->post('idbesoin');
 		$lesquestions = $this->Generalisation->avoirTableSpecifique("questions", "*", sprintf("idbesoin='%s'", $idbesoin));
 		$reponses = $this->reponseAuxQuestion($lesquestions);
-		var_dump($reponses);
+		$this->QuestionsReponses->insererReponseCandidat($idcandidat, $reponses);
+		echo "Okey";
+		
 	}
 
 	// Insertion formnulaire besoins
@@ -202,13 +216,9 @@ class Welcome extends CI_Controller {
 	public function reponseAuxQuestion($question){
 		$array = array();
 		for ($i=0; $i < count($question); $i++) {
-			$array[$i]['question'] = $question[$i];
-			$array[$i]['reponses'] = $this->input->post($question[$i]->idquestion);
+			$array[$i] = $this->input->post($question[$i]->idquestion);
 		}
 		return $array;
 	}
-
-
-
 
 }

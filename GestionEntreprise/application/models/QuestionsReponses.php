@@ -37,5 +37,32 @@ class QuestionsReponses extends CI_Model {
         }
         return $array;
     }
+
+    function insererReponseCandidat($idcandidat, $reponses){
+        for($i=0; $i<count($reponses); $i++){
+            $this->Generalisation->insertion("formulairetestcandidat(idcandidat, idreponse)", sprintf("('%s', '%s')", $idcandidat, $reponses[$i]));
+        }
+    }
     
+    function calculNoteTest($idcandidat){
+        $note = 0;
+        $reponsesTest = $this->Generalisation->avoirTableSpecifique("v_FTCQuestionReponse", "*", sprintf("idcandidat='%s'", $idcandidat));
+        for($i=0; $i<count($reponsesTest); $i++){
+            $bonnereponse = $reponsesTest[$i]->bonnereponse;
+            if($bonnereponse==1){
+                $note += $reponsesTest[$i]->coefficient;
+            }
+        }
+        return $note;
+    }
+
+    function calculNoteParCandidat($candidats){
+        $array = array();
+        for($i=0; $i<count($candidats); $i++){
+            $array[$i]['candidat'] = $candidats[$i];
+            $array[$i]['note'] = $this->calculNoteTest($candidats[$i]->idcandidat);
+        }
+        return $array;
+    }
+
 }

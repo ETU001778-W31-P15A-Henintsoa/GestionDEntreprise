@@ -298,13 +298,11 @@ create table entretien(
 
 create sequence seqFTC;
 create table formulaireTestCandidat(
-   idformulaireTestCandidat varchar(20) default concat('FTC'|| nextval('seqFTC')) primary key,
-    idcandidat varchar(30),
-    idquestion varchar(30),
-    idreponse varchar(30),
-    foreign key () references (),
-    foreign key () references (),
-    foreign key () references ()
+    idformulaireTestCandidat varchar(20) default concat('FTC'|| nextval('seqFTC')) primary key,
+    idcandidat varchar(20),
+    idreponse varchar(20),
+    foreign key (idreponse) references reponses(idreponse),
+    foreign key (idcandidat) references candidat(idcandidat)
 );
 
 

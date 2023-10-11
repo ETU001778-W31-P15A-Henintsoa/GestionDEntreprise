@@ -117,4 +117,8 @@ chez _NomEntrepriseIci_. En tant que _NomPosteIci_, vous jouerez un rôle essent
 insert into annonce(idBesoin,texte) values('BES1','Annonce pour un dev');
 
 
+------------------- CANDIDAT -----------------------------------------------------------
+insert into candidat(nom, prenom) values ('Herinjanahary', 'Henintsoa'); 
+
+
 
