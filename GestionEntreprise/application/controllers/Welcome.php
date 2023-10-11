@@ -57,6 +57,11 @@ class Welcome extends CI_Controller {
 		var_dump($candidatNote);
 	}
 
+	public function versListeEmployeEssai(){
+		$data['employes'] = $this->Generalisation->avoirTableSpecifique("employe", "*", "estessaie=true");
+		$this->load->view("listeemployeessai", $data);
+	}
+
 	//Calcule et insertion des reponses du test du candidat
 	public function formulairetestcansidat(){
 		$idcandidat = "CAN1";

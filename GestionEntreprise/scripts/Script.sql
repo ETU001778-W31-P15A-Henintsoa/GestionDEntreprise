@@ -112,7 +112,7 @@ create table departementAdresse(
     idEntreprise varchar(15),
     adresse varchar(50),
     foreign key(idDepartement) references departement(idDepartement),
-    foreign key(idEntreprise) references departement(idDepartement)
+    foreign key(idEntreprise) references entreprise(identreprise)
 );
 
 -- ----------------AvantageNature------------------------
@@ -400,3 +400,10 @@ ADD moyenne float;
 ALTER TABLE Candidat
 ADD etat int;
 
+
+alter table contratEssai 
+drop salairebrut, 
+drop salirenet, 
+drop duree,
+ADD datedebut date,
+ADD datefin date;
