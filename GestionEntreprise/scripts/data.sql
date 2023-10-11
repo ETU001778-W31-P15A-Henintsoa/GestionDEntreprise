@@ -96,4 +96,10 @@ INSERT INTO Critere(idbesoin,iddiplome,idnationnalite,idexperience,sexe,idfilier
 INSERT INTO CritereCoefficient(idbesoin,diplome,sexe,nationnalite,experience,filiere,situation,age,pourcentageNote) VALUES
 ('BES1',10,20,20,30,20,10,10,80);
 
+-- -------------------LANGUE---------------------------------------
+INSERT INTO Langue (libelle) VALUES ('Anglais');
+INSERT INTO Langue (libelle) VALUES ('Français');
+INSERT INTO Langue (libelle) VALUES ('Espagnol');
+INSERT INTO Langue (libelle) VALUES ('Malgache');
+
 

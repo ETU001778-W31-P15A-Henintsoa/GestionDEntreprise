@@ -288,3 +288,27 @@ create table entretien(
 ALTER TABLE Critere 
 ADD dateFinDepot Date;
 
+-- -------------------LANGUE CANDIDAT-----------------------
+create sequence seqLangue;
+create table Langue (
+    idLangue varchar(30) default concat('LAN'|| nextval('seqLangue')) primary key,
+    libelle varchar(30)
+);
+
+create table LangueCandidat(
+    idCandidat varchar(30),
+    idLangue varchar(30),
+    foreign key(idCandidat) references Candidat(idCandidat),
+    foreign key(idLangue) references Langue(idLangue)
+);
+
+
+-- -------------------ALTER-------------------------------
+ALTER TABLE Candidat 
+ADD totalNote float;
+
+ALTER TABLE Candidat
+ADD moyenne float;
+
+ALTER TABLE Candidat
+ADD etat int;
