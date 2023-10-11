@@ -30,6 +30,7 @@ class QuestionsReponses extends CI_Model {
         for($q=0; $q<count($lesquestions); $q++){
             // var_dump($lesquestions[$q]);
             $array[$q]['question'] = $lesquestions[$q] -> libelle;
+            $array[$q]['idquestion'] = $lesquestions[$q] -> idquestion;
             $reponses = $this->Generalisation->avoirTableSpecifique("reponses", "*", sprintf("idquestion='%s'", $lesquestions[$q] -> idquestion));
             shuffle($reponses);
             $array[$q]['reponses'] = $reponses;

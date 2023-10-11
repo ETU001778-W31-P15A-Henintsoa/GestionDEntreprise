@@ -33,9 +33,7 @@ class Welcome extends CI_Controller {
 	public function versQuestionsResponses(){
 		$nombre = 1;
 		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
-		$this->QuestionsReponses->avoirVueBesoins($nombre);
-
-		// $this->load->view("qr", $data);
+		$this->load->view("qr", $data);
 	}
 
 	public function versFormulaireTestCandidat(){
@@ -43,9 +41,17 @@ class Welcome extends CI_Controller {
 		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
 		$data['questionreponses'] = $this->QuestionsReponses->avoirQuestionsReponses($data['besoin'][0]->idbesoin);
 
-		var_dump($data);
+		// var_dump($data);
 
-		$this->load->view("qr", $data);
+		$this->load->view("formulairetestcandidat", $data);
+	}
+
+	//Calcule et insertion des reponses du test du candidat
+	public function formulairetestcansidat(){
+		$idbesoin = $this->input->post('idbesoin');
+		$lesquestions = $this->Generalisation->avoirTableSpecifique("questions", "*", sprintf("idbesoin='%s'", $idbesoin));
+		$reponses = $this->reponseAuxQuestion($lesquestions);
+		var_dump($reponses);
 	}
 
 	// Insertion formnulaire besoins
@@ -188,6 +194,16 @@ class Welcome extends CI_Controller {
 					$reponse = $this->input->post($stringautre);
 				}
 			}
+		}
+		return $array;
+	}
+
+	// Avoir les reponses aux questions
+	public function reponseAuxQuestion($question){
+		$array = array();
+		for ($i=0; $i < count($question); $i++) {
+			$array[$i]['question'] = $question[$i];
+			$array[$i]['reponses'] = $this->input->post($question[$i]->idquestion);
 		}
 		return $array;
 	}

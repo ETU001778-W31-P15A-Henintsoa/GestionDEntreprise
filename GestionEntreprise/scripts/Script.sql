@@ -224,8 +224,11 @@ create table reponses (
     foreign key (idquestion) references questions(idquestion)
 );
 
-create table formulairecandidat(
-    idformulairecandidat int primary key auto_increment,
+----------------------------- FORMULAIRE REPONSE CANDIDAT -----------------------------------------
+
+create sequence seqFTC;
+create table formulaireTestCandidat(
+   idformulaireTestCandidat varchar(20) default concat('FTC'|| nextval('seqFTC')) primary key,
     idcandidat varchar(30),
     idquestion varchar(30),
     idreponse varchar(30),
