@@ -48,7 +48,7 @@ create table Nationnalite(
     libelle varchar(30)
 );
 
--- -----------------EXPERIENCE--------------------------
+--------------------EXPERIENCE--------------------------
 create sequence seqExperience;
 create table Experience(
     idExperience varchar(15) default concat('EXP'|| nextval('seqExperience')) primary key,
@@ -82,32 +82,12 @@ create table CritereCoefficient(
     foreign key(idBesoin) references BesoinPersonnelle(idBesoin)
 );
 
--- -----------------BESOIN PERSONNELLE--------------------------
-ALTER TABLE BesoinPersonnelle 
-ADD dateInsertion date default current_date;
-
-alter table BesoinPersonnelle add njHTravail float;
-alter table BesoinPersonnelle add genererAnnonce boolean default false;
-
-ALTER TABLE CritereCoefficient 
-ADD pourcentageNote float;
-
 -- ----------------filiere------------------------
 create sequence seqFiliere;
 create table Filiere(
     idFiliere varchar(15) default concat('FIL' || nextval('seqFiliere')) primary key,
     libelle varchar(30)
 );
-
-ALTER TABLE Critere 
-ADD idFiliere varchar(15), 
-ADD CONSTRAINT fk_Critere_Filiere FOREIGN KEY (idFiliere) REFERENCES Filiere(idFiliere);
-
-ALTER TABLE CritereCoefficient
-ADD Filiere float;
-
-ALTER TABLE Filiere
-ALTER COLUMN libelle TYPE VARCHAR(100);
 
 -- ----------------Employe------------------------
 create sequence seqEmploye;
@@ -162,16 +142,15 @@ create table service(
 -- ----------------ContratEssai------------------------
 create sequence seqContratEssai;
 create table contratEssai(
-    isContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
-    idCandidat varchar (15),
+    idContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
+    idEmploye varchar(15),
     salaireBrut float,
     salaireNet float,
     duree float,
     idBrancheDepartement varchar(15),
-    foreign key(idCandidat) references candidat(idCandidat),
+    foreign key(idEmploye) references employe(idemploye),
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
 );
-
 
 -- ----------------ServiceCandidat------------------------
 create sequence seqServiceCandidat;
@@ -182,19 +161,6 @@ create table serviceCandidat(
     foreign key(idService) references service(idService),
     foreign key(idContratEssai) references contratEssai(idContratEssai)
 );
-
--- ------------------Branche departement--------------------------
-ALTER TABLE BrancheDepartement
-ADD DescriptionPost text;
-
-ALTER TABLE BrancheDepartement
-ADD Mission text;
-
-ALTER TABLE Diplome
-ADD etat int;
-
-ALTER TABLE Experience
-ADD etat int;
 
 -- ------------------SITUATION MATRIMONIALE---------------------------
 create sequence seqSituation;
@@ -223,33 +189,43 @@ create table reponses (
     foreign key (idquestion) references questions(idquestion)
 );
 
-create table formulairecandidat(
-    idformulairecandidat int primary key auto_increment,
-    idcandidat varchar(30),
-    idquestion varchar(30),
-    idreponse varchar(30),
-    foreign key () references (),
-    foreign key () references (),
-    foreign key () references ()
+--------------------------------ENTREPRISE------------------------------------------------
+create sequence idEntreprise;
+create table entreprise(
+    idEntreprise varchar(15) default concat('entreprise'|| nextval('seqEntreprise')) primary key,
+    ville varchar(30),
+    adresse varchar(30),
+    numero varchar(30),
+    fax varchar(30),
+    foreign key(ville) references ville(idVille)
 );
 
+------------------------------ ANNONCE ----------------------------------------------------
+create sequence seqAnnonce;
+create table annonce(
+    idAnnonce varchar(15) default concat('annonce'|| nextval('seqAnnonce')) primary key,
+    idBesoin varchar(15),
+    texte text,
+    foreign key(idBesoin) references besoinPersonnelle(idbesoin)
+);
 
-INSERT INTO SituationMatrimoniale (libelle)
-VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
+----------------------------------- ANNONCE PAR DEFAUT ------------------------------------
+create sequence idAnnoncePardefaut;
+create table annonceParDefaut(
+    idAnnonceParDefaut varchar(15) default concat('annonceDefaut'|| nextval('idAnnonceParDefaut')) primary key,
+    idEntreprise varchar(15),
+    texte text,
+    foreign key(idEntreprise) references entreprise(idEntreprise)
+);
 
-ALTER TABLE Critere 
-ADD idSituation varchar(20),
-ADD CONSTRAINT fk_situation FOREIGN KEY (idSituation) REFERENCES SituationMatrimoniale(idSituation);
+------------------------------ VILLE ------------------------------------------------------
+create sequence seqVille;
+create table ville(
+    idVille varchar(15) default concat('ville'|| nextval('seqVille')) primary key,
+    ville varchar(20)
+);
 
-ALTER TABLE CritereCoefficient 
-ADD situation float;
-
-ALTER table Critere 
-ADD age int;
-
-ALTER table coefficient
-ADD age float;
-
+------------------------------ CANDIDAT ---------------------------------------------------
 create sequence seqCandidat;
 create table Candidat(
     idCandidat varchar(30) default concat('CAN'|| nextval('seqCandidat')) primary key,
@@ -285,7 +261,7 @@ create table Candidat(
 
 -- ------------------Programme izany hoe ny lera fidirana sy firavana---------------------------
 create sequence seqProgramme;
-create table programeme(
+create table programme(
     idProgramme varchar(20) default concat('PRO'|| nextval('seqProgramme')) primary key,
     nomJour varchar(30),
     heureEntre datetime,
@@ -294,7 +270,7 @@ create table programeme(
     foreign key(idBrancheDepartement) references brancheDepartement(idAvantageDepartement)
 );
 
--- ------------------Pause misy ao ampiasana---------------------------
+-- ------------------ Pause misy ao ampiasana ---------------------------
 create sequence seqPause;
 create table pause(
     idPause varchar(20) default concat('PAU'|| nextval('seqPause')) primary key,
@@ -315,9 +291,25 @@ create table entretien(
     foreign key(idCandidat) references candidat(idCandidat)
 );
 
--- --------------------critere--------------------------
-ALTER TABLE Critere 
-ADD dateFinDepot Date;
+----------------------------- FORMULAIRE REPONSE CANDIDAT -----------------------------------------
+
+create sequence seqFTC;
+create table formulaireTestCandidat(
+    idformulaireTestCandidat varchar(20) default concat('FTC'|| nextval('seqFTC')) primary key,
+    idcandidat varchar(20),
+    idreponse varchar(20),
+    foreign key (idreponse) references reponses(idreponse),
+    foreign key (idcandidat) references candidat(idcandidat)
+);
+
+------------------------------------SALAIRE-------------------------------------------------------
+create sequence seqSalaire;
+create table Salaire(
+    idSalaire varchar(20) default concat('SAL'|| nextval('seqSalaire')) primary key,
+    idBrancheDepartement varchar(20),
+    montantbrute float,
+    foreign key (idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
+);
 
 -- -------------------LANGUE CANDIDAT-----------------------
 create sequence seqLangue;
@@ -334,7 +326,70 @@ create table LangueCandidat(
 );
 
 
--- -------------------ALTER-------------------------------
+--------------------------------------- ALTER ---------------------------------------------
+
+ALTER TABLE Diplome
+ADD etat int;
+
+ALTER TABLE Experience
+ADD etat int;
+
+ALTER TABLE Critere 
+ADD dateFinDepot Date;
+
+ALTER TABLE BesoinPersonnelle 
+ADD dateInsertion date default current_date;
+
+alter table BesoinPersonnelle add njHTravail float;
+alter table BesoinPersonnelle add genererAnnonce boolean default false;
+
+ALTER TABLE CritereCoefficient 
+ADD pourcentageNote float;
+
+ALTER TABLE Critere 
+ADD idFiliere varchar(15), 
+ADD CONSTRAINT fk_Critere_Filiere FOREIGN KEY (idFiliere) REFERENCES Filiere(idFiliere);
+
+ALTER TABLE CritereCoefficient
+ADD Filiere float;
+
+ALTER TABLE Filiere
+ALTER COLUMN libelle TYPE VARCHAR(100);
+
+
+ALTER TABLE BrancheDepartement
+ADD DescriptionPost text;
+
+ALTER TABLE BrancheDepartement
+ADD Mission text;
+
+ALTER TABLE Critere 
+ADD idSituation varchar(20),
+ADD CONSTRAINT fk_situation FOREIGN KEY (idSituation) REFERENCES SituationMatrimoniale(idSituation);
+
+ALTER TABLE CritereCoefficient 
+ADD situation float;
+
+ALTER table Critere 
+ADD age int;
+
+ALTER table coefficient
+ADD age float;
+
+alter table annonceParDefaut 
+ADD avantage text;
+
+alter table entreprise
+ADD nom varchar(30);
+
+alter table Annonce
+ADD nombreDemande int;
+
+alter table Employe 
+ADD estessaie boolean;
+
+
+-- -------------------NEW ALTER-------------------------------
 ALTER TABLE Candidat 
 ADD totalNote float;
 
@@ -343,3 +398,4 @@ ADD moyenne float;
 
 ALTER TABLE Candidat
 ADD etat int;
+

@@ -89,12 +89,36 @@ INSERT INTO Experience(anneeexperience, etat) VALUES
     ('4', 4),
     ('+5', 5);
 
+----------------------- VILLE -------------------------
+insert into ville(ville) values('Antananarivo');
+
 -- --------------------CRITERE-----------------------
 INSERT INTO Critere(idbesoin,iddiplome,idnationnalite,idexperience,sexe,idfiliere,age,idSituation,dateFinDepot,ageFin) VALUES
 ('BES1','DIP4','NAT1','EXP3','1','FIL1',25,'SIT2','2023-10-10',50)
 
 INSERT INTO CritereCoefficient(idbesoin,diplome,sexe,nationnalite,experience,filiere,situation,age,pourcentageNote) VALUES
 ('BES1',10,20,20,30,20,10,10,80);
+
+---------------------- SITUATION AMOUREUSE ----------------------
+INSERT INTO SituationMatrimoniale (libelle)
+VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),('Separe(e)');
+
+----------------------ENTREPRISE------------------------------------
+insert into entreprise(ville,adresse,numero,fax) values('ville1','village des jeux Ankorondrano','0202234456','67891234567');
+
+-------------------- ANNONCE PAR DEFAUT -----------------------------------------
+insert into annonceParDefaut(idEntreprise,texte,avantage) values('entrepise1',
+'Nous sommes à la recherche d_un(e) titreDuPoste passionné(e) et talentueux(se) pour rejoindre notre équipe 
+chez _NomEntrepriseIci_. En tant que _NomPosteIci_, vous jouerez un rôle essentiel dans _DescriptionIci_.
+ Vous travaillerez en étroite collaboration avec _DepartementIci_ pour _missionIci_.','Salaire compétitif; 
+ ;Assurance santé;Formation continue;Equipe dinamique');
+
+------------------------ ANNONCE ------------------------------------------------
+insert into annonce(idBesoin,texte) values('BES1','Annonce pour un dev');
+
+
+------------------- CANDIDAT -----------------------------------------------------------
+insert into candidat(nom, prenom) values ('Herinjanahary', 'Henintsoa'); 
 
 -- -------------------LANGUE---------------------------------------
 INSERT INTO Langue (libelle) VALUES ('Anglais');
@@ -222,3 +246,4 @@ VALUES('BRA1','avantageNature3'),('BRA2','avantageNature3'),('BRA3','avantageNat
 ('BRA5','avantageNature4'),('BRA6','avantageNature5'),('BRA7','avantageNature3'),('BRA8','avantageNature2'),
 ('BRA9','avantageNature6'),('BRA10','avantageNature12'),('BRA11','avantageNature8'),('BRA12','avantageNature8'),
 ('BRA13','avantageNature3'),('BRA14','avantageNature3'),('BRA15','avantageNature4'),('BRA6','avantageNature2');
+
