@@ -23,7 +23,6 @@ class Welcome extends CI_Controller {
 	{
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
-		
 	}
 
 	// Loading view
@@ -35,6 +34,38 @@ class Welcome extends CI_Controller {
 		$nombre = 1;
 		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
 		$this->load->view("qr", $data);
+	}
+
+	public function versFormulaireTestCandidat(){
+		$nombre = 1;
+		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
+		$data['questionreponses'] = $this->QuestionsReponses->avoirQuestionsReponses($data['besoin'][0]->idbesoin);
+
+		// var_dump($data);
+
+		$this->load->view("formulairetestcandidat", $data);
+	}
+
+	//Test an'ilay note Employer fotsiny
+	public function versCalculeNote(){
+		// $idcandidat = "CAN1";
+		// $note = $this->QuestionsReponses->calculNoteTest($idcandidat);
+		// echo $note;
+
+		$candidats = $this->Generalisation->avoirTable("candidat");
+		$candidatNote = $this->QuestionsReponses->calculNoteParCandidat($candidats);
+		var_dump($candidatNote);
+	}
+
+	//Calcule et insertion des reponses du test du candidat
+	public function formulairetestcansidat(){
+		$idcandidat = "CAN1";
+		$idbesoin = $this->input->post('idbesoin');
+		$lesquestions = $this->Generalisation->avoirTableSpecifique("questions", "*", sprintf("idbesoin='%s'", $idbesoin));
+		$reponses = $this->reponseAuxQuestion($lesquestions);
+		$this->QuestionsReponses->insererReponseCandidat($idcandidat, $reponses);
+		echo "Okey";
+		
 	}
 
 	// Insertion formnulaire besoins
@@ -65,6 +96,15 @@ class Welcome extends CI_Controller {
 		$this->load->view('acceuil');
 	}
 
+	//Insertion des questions et des reponses
+	public function formulaireQuestionsReponses(){
+		$iddepartement = $this->input->post("iddepartement");
+		$existants = $this->lesbesoinsExistants($iddepartement);
+		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
+		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
+		echo 'Okey';
+	}
+
 
 	// AUTRES FONCTIONS
 
@@ -81,6 +121,7 @@ class Welcome extends CI_Controller {
 		return $vectorBranche;
 	}
 
+	// Les Besoins par branche
 	public function avoirLesBesoinsParBranche($vecteurBranche){
 		$brancheDepartementBesoin = array();
 		$a = 0;
@@ -94,6 +135,19 @@ class Welcome extends CI_Controller {
 			}
 		}
 		return $brancheDepartementBesoin;
+	}
+
+	// Avoir besoins Existant
+	public function lesbesoinsExistants($idDepartement){
+		$tousbesoins = $this->Generalisation->avoirTableSpecifique('v_besoinpersonnelle', '*', sprintf("iddepartement='%s'", $idDepartement));
+		$vectorBesoins = array();
+		for($i=0; $i<count($tousbesoins); $i++){ 
+			$idbesoin = $this->input->post($tousbesoins[$i]->idbesoin);
+			if($idbesoin!=null){
+				$vectorBesoins[] = $tousbesoins[$i];
+			}
+		}
+		return $vectorBesoins;
 	}
 
 	// CRITERES BRANCHE DEPARTEMENT (fonction formulaireCriteres)
@@ -124,5 +178,47 @@ class Welcome extends CI_Controller {
 		return $besoins;
 	}
 
-}
+	// Fonction REceuille des donnees des question
+	public function receuilleDonneesQuestionsReponses($vectorBesoins){
+		$array = array();
+		// Boucle besoin
+		for ($i=0; $i<count($vectorBesoins); $i++){
+			$string = "";
+			$string = $string.$vectorBesoins[$i]->idbesoin;
+			
+			// Boucle question
+			for ($q=1; $q<6; $q++){
+				$stringquestion=$string."question".$q;
+				$stringreponse=$stringquestion."reponse";
+				$stringcoefficient=$string."coeffquestion".$q;
 
+				$array[$i][$q-1]['question'] = $this->input->post($stringquestion);
+				$array[$i][$q-1]['reponse'] = $this->input->post($stringreponse);
+				$array[$i][$q-1]['coefficient'] = $this->input->post($stringcoefficient);
+				$array[$i][$q-1]['idbesoin'] = $vectorBesoins[$i]->idbesoin;
+				$r=1;
+				$stringautre= $stringquestion.'autre'.$r;
+				$reponse = $this->input->post($stringautre);
+				
+				// Boucle reponse
+				while($reponse!=""){
+					$array[$i][$q-1]['autre'.$r] = $this->input->post($stringautre);
+					$r++;
+					$stringautre= $stringquestion.'autre'.$r;			
+					$reponse = $this->input->post($stringautre);
+				}
+			}
+		}
+		return $array;
+	}
+
+	// Avoir les reponses aux questions
+	public function reponseAuxQuestion($question){
+		$array = array();
+		for ($i=0; $i < count($question); $i++) {
+			$array[$i] = $this->input->post($question[$i]->idquestion);
+		}
+		return $array;
+	}
+
+}

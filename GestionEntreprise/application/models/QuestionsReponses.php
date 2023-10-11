@@ -23,7 +23,46 @@ class QuestionsReponses extends CI_Model {
     }
 
     function avoirQuestionsReponses($idbesoin){
-        
+        // var_dump($idbesoin);        
+        $lesquestions = $this->Generalisation->avoirTableSpecifique("questions", "*", sprintf("idbesoin='%s'", $idbesoin));
+        // var_dump($lesquestions);
+        $array = array();
+        for($q=0; $q<count($lesquestions); $q++){
+            // var_dump($lesquestions[$q]);
+            $array[$q]['question'] = $lesquestions[$q] -> libelle;
+            $array[$q]['idquestion'] = $lesquestions[$q] -> idquestion;
+            $reponses = $this->Generalisation->avoirTableSpecifique("reponses", "*", sprintf("idquestion='%s'", $lesquestions[$q] -> idquestion));
+            shuffle($reponses);
+            $array[$q]['reponses'] = $reponses;
+        }
+        return $array;
+    }
+
+    function insererReponseCandidat($idcandidat, $reponses){
+        for($i=0; $i<count($reponses); $i++){
+            $this->Generalisation->insertion("formulairetestcandidat(idcandidat, idreponse)", sprintf("('%s', '%s')", $idcandidat, $reponses[$i]));
+        }
     }
     
+    function calculNoteTest($idcandidat){
+        $note = 0;
+        $reponsesTest = $this->Generalisation->avoirTableSpecifique("v_FTCQuestionReponse", "*", sprintf("idcandidat='%s'", $idcandidat));
+        for($i=0; $i<count($reponsesTest); $i++){
+            $bonnereponse = $reponsesTest[$i]->bonnereponse;
+            if($bonnereponse==1){
+                $note += $reponsesTest[$i]->coefficient;
+            }
+        }
+        return $note;
+    }
+
+    function calculNoteParCandidat($candidats){
+        $array = array();
+        for($i=0; $i<count($candidats); $i++){
+            $array[$i]['candidat'] = $candidats[$i];
+            $array[$i]['note'] = $this->calculNoteTest($candidats[$i]->idcandidat);
+        }
+        return $array;
+    }
+
 }
