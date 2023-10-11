@@ -82,8 +82,6 @@ create table CritereCoefficient(
     foreign key(idBesoin) references BesoinPersonnelle(idBesoin)
 );
 
--- -----------------BESOIN PERSONNELLE--------------------------
-
 -- ----------------filiere------------------------
 create sequence seqFiliere;
 create table Filiere(
@@ -145,13 +143,13 @@ create table service(
 -- ----------------ContratEssai------------------------
 create sequence seqContratEssai;
 create table contratEssai(
-    isContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
-    idCandidat varchar (15),
+    idContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
+    idEmploye varchar(15),
     salaireBrut float,
     salireNet float,
     duree float,
     idBrancheDepartement varchar(15),
-    foreign key(idCandidat) references candidat(idCandidat),
+    foreign key(idEmploye) references employe(idemploye),
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
 );
 
@@ -264,7 +262,7 @@ create table Candidat(
 
 -- ------------------Programme izany hoe ny lera fidirana sy firavana---------------------------
 create sequence seqProgramme;
-create table programeme(
+create table programme(
     idProgramme varchar(20) default concat('PRO'|| nextval('seqProgramme')) primary key,
     nomJour varchar(30),
     heureEntre datetime,
@@ -303,6 +301,15 @@ create table formulaireTestCandidat(
     idreponse varchar(20),
     foreign key (idreponse) references reponses(idreponse),
     foreign key (idcandidat) references candidat(idcandidat)
+);
+
+------------------------------------SALAIRE-------------------------------------------------------
+create sequence seqSalaire;
+create table Salaire(
+    idSalaire varchar(20) default concat('SAL'|| nextval('seqSalaire')) primary key,
+    idBrancheDepartement varchar(20),
+    montantbrute float,
+    foreign key (idBrancheDepartement) references BrancheDepartement(idBrancheDepartement)
 );
 
 
@@ -364,4 +371,7 @@ ADD nom varchar(30);
 
 alter table Annonce
 ADD nombreDemande int;
+
+alter table Employe 
+ADD estessaie boolean;
 
