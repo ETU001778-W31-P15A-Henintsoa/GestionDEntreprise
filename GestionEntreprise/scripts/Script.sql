@@ -112,23 +112,22 @@ create table departementAdresse(
     idEntreprise varchar(15),
     adresse varchar(50),
     foreign key(idDepartement) references departement(idDepartement),
-    foreign key(idEntreprise) references departement(idDepartement)
+    foreign key(idEntreprise) references Entreprise(idEntreprise)
 );
 
 -- ----------------AvantageNature------------------------
 create sequence seqAvantageNature;
 create table avantageNature(
-    idAvantageNature varchar(15) default concat('avantageNature'|| nextval('seqAvantageNature')) primary key,
+    idAvantageNature varchar(30) default concat('avantageNature'|| nextval('seqAvantageNature')) primary key,
     libelle varchar(50)
 );
 
 -- ----------------AvantageDepartement------------------------
-create sequence seqAvantageDepartement;
 create table avantageDepartement(
-    idAvantageDepartement varchar(15) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
+    idAvantageDepartement varchar(30) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
     idBrancheDepartement varchar(15),
-    idAvantage varchar(15),
-    foreign key(idAvantageDepartement) references BrancheDepartement(idBrancheDepartement),
+    idAvantage varchar(30),
+    foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement),
     foreign key(idAvantage) references avantageNature(idAvantageNature)
 );
 
@@ -146,7 +145,7 @@ create table contratEssai(
     idContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
     idEmploye varchar(15),
     salaireBrut float,
-    salireNet float,
+    salaireNet float,
     duree float,
     idBrancheDepartement varchar(15),
     foreign key(idEmploye) references employe(idemploye),
