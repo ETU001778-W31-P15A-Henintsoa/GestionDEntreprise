@@ -120,5 +120,11 @@ insert into annonce(idBesoin,texte) values('BES1','Annonce pour un dev');
 ------------------- CANDIDAT -----------------------------------------------------------
 insert into candidat(nom, prenom) values ('Herinjanahary', 'Henintsoa'); 
 
+-- -------------------LANGUE---------------------------------------
+INSERT INTO Langue (libelle) VALUES ('Anglais');
+INSERT INTO Langue (libelle) VALUES ('Français');
+INSERT INTO Langue (libelle) VALUES ('Espagnol');
+INSERT INTO Langue (libelle) VALUES ('Malgache');
+
 
 
