@@ -399,3 +399,8 @@ ADD moyenne float;
 ALTER TABLE Candidat
 ADD etat int;
 
+ALTER TABLE Employe
+ADD matricule varchar(100);
+
+ALTER TABLE Employe
+ADD dateAmbauche date;

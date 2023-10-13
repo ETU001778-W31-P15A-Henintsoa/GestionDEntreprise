@@ -247,3 +247,29 @@ VALUES('BRA1','avantageNature3'),('BRA2','avantageNature3'),('BRA3','avantageNat
 ('BRA9','avantageNature6'),('BRA10','avantageNature12'),('BRA11','avantageNature8'),('BRA12','avantageNature8'),
 ('BRA13','avantageNature3'),('BRA14','avantageNature3'),('BRA15','avantageNature4'),('BRA6','avantageNature2');
 
+-- ---------------------------SERVICES-----------------------------------------
+INSERT INTO service(libelle,valeur) 
+VALUES('CNAPS',250000),
+('OSTIE',200000),
+('AMIT',120000),
+('ESIA',300000);
+
+-- ------------------------SERVICES CANDIDATS----------------------------------------------
+INSERT INTO serviceCandidat(idService,idContratEssai) 
+VALUES('service1','contrEssai7');
+INSERT INTO serviceCandidat(idService,idContratEssai) 
+VALUES('service1','contrEssai8');
+INSERT INTO serviceCandidat(idService,idContratEssai) 
+VALUES('service1','contrEssai9');
+INSERT INTO serviceCandidat(idService,idContratEssai) 
+VALUES('service1','contrEssai12');
+INSERT INTO serviceCandidat(idService,idContratEssai) 
+VALUES('service1','contrEssai13');
+
+-- ----------------------------EMPLOYE UPDATE-----------------------------------------
+UPDATE Employe set dateNaissance='22-03-1973' where idemploye='emp1';
+UPDATE Employe set dateNaissance='10-01-1993' where idemploye='emp2';
+UPDATE Employe set dateNaissance='01-05-2000' where idemploye='emp3';
+UPDATE Employe set dateNaissance='02-06-1998' where idemploye='emp4';
+UPDATE Employe set dateNaissance='21-04-1980' where idemploye='emp5';
+UPDATE Employe set dateNaissance='25-10-1985' where idemploye='emp6';
