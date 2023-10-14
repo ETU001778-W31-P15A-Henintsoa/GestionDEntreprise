@@ -326,6 +326,26 @@ create table LangueCandidat(
     foreign key(idLangue) references Langue(idLangue)
 );
 
+--------------------------------TYPE CONGER -------------------------------------------------
+create sequence seqTypeConge;
+create table TypeConge(
+    idTypeConge varchar(20) default concat('TYC'|| nextval('seqTypeConge')) primary key,
+    libelle varchar(30),
+    durreeJournalier float,
+    estDeductible boolean
+);
+
+--------------------------------CONGE EMPLOYER ----------------------------------------------
+create sequence seqCongeEmploye;
+create table CongeEmploye(
+    idCongeEmploye varchar(20) default concat('COE'|| nextval('seqCongeEmploye')) primary key,
+    idemploye varchar(20),
+    DebutCange timestamp,
+    FinConge timestamp,
+    idTypeConge varchar(20), 
+    foreign key (idTypeConge) references TypeConge(idTypeConge),
+    foreign key (idEmploye) references Employe(idEmploye)
+);
 
 --------------------------------------- ALTER ---------------------------------------------
 

@@ -280,3 +280,12 @@ SET DescriptionPost = 'Les développeurs sont des professionnels chargés de con
 de créer, de mettre en œuvre et de maintenir des logiciels, des applications ou des systèmes informatiques',
 Mission = 'Développement de logiciels, Conception de bases de données, Maintenance et mise à jour, Intégration de systèmes, Tests et débogage'
 WHERE idbranchedepartement = 'BRA1';
+
+------------------------------Type Conge -------------------------------
+INSERT INTO TypeConge (libelle, durreeJournalier, estDeductible)
+VALUES
+    ('Congé annuel', 30, true),
+    ('Congé de maladie', 0.5, true),
+    ('Congé de maternité', 1.0, false),
+    ('Congé de paternité', 1.0, false),
+    ('Congé sans solde', 0.0, true);
