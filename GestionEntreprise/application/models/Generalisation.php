@@ -31,6 +31,11 @@ class Generalisation extends CI_Model {
         $this->db->query($sql);
     }
 
+    function miseAJour($NomTable, $nouveau, $conditions){ // Metre values comme => '(data1, data2, 'data3')' par exemple
+        $sql = sprintf( 'Update %s set %s where %s',$NomTable, $nouveau, $conditions);
+        $this->db->query($sql);
+    }
+
     public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
         $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         $query = $this->db->query($sql);

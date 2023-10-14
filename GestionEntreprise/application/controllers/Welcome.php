@@ -46,6 +46,39 @@ class Welcome extends CI_Controller {
 		$this->load->view("formulairetestcandidat", $data);
 	}
 
+	public function versListeEmployeEnEssaie(){
+		$data['employe'] = $this->Generalisation->avoirTableSpecifique('employe', '*', 'estessaie=true');
+		$this->load->view('listeemployeenessaie', $data);
+	} 
+
+	public function versContratEssaie(){
+		$idemploye = $this->input->get('idemploye');
+		$avoir = $this->ContratEssai->aUnContratEssai($idemploye);
+		// var_dump($avoir);
+		if($avoir==true){
+			redirect('welcome/versMonContratEssai?idemploye='.$idemploye);
+		}else{
+			redirect('welcome/versCreerContratEssai?idemploye='.$idemploye);
+		}
+	}
+
+	public function versMonContratEssai(){
+		$idemploye = $this->input->get('idemploye');
+		$data['employer'] = $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $idemploye));
+		$data['contrat'] = $this->Generalisation->avoirTableSpecifique('contratessai', '*', sprintf("idemploye='%s'", $idemploye));
+		$data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['contrat'][0]->idbranchedepartement));
+		$this->load->view('moncontratessai', $data);
+	}
+
+	public function versCreerContratEssai(){
+		$data['idemploye'] = $this->input->get('idemploye');
+		$employe =  $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $this->input->get('idemploye')));
+		$data['poste'] =  $this->Generalisation->avoirTableSpecifique('v_branchedepartement', '*', sprintf("iddepartement='%s'", $employe[0]->iddepartement));
+		$data['service'] =  $this->Generalisation->avoirTable('service');
+		$this->load->view('creationcontratessai', $data);
+	}
+
+
 	//Test an'ilay note Employer fotsiny
 	public function versCalculeNote(){
 		// $idcandidat = "CAN1";
@@ -103,6 +136,24 @@ class Welcome extends CI_Controller {
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
 		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
 		echo 'Okey';
+	}
+	
+	// Insertion donnees pour le contrat essaie
+	public function formulaireContratEssai(){
+		$idemploye = $this->input->post('idemploye');
+		$datedebut = $this->input->post('datedebut');
+		$datefin = $this->input->post('datefin');
+		$salaire = $this->input->post('salaire');
+		$idbranchedepartement = $this->input->post('idbranchedepartement');
+		// echo $idemploye;
+		// echo $datedebut;
+		// echo $datefin;
+		// echo $salaire;
+		// echo $idbranchedepartement;
+		$services = $this->lesServiceschoisis();
+		// var_dump($services);
+		$this->ContratEssai->InsertionContratEssaiService($idemploye, $datedebut, $datefin, $salaire, $idbranchedepartement, $services);
+		redirect("welcome/versMonContratEssai?idemploye=".$idemploye);
 	}
 
 
@@ -217,6 +268,19 @@ class Welcome extends CI_Controller {
 		$array = array();
 		for ($i=0; $i < count($question); $i++) {
 			$array[$i] = $this->input->post($question[$i]->idquestion);
+		}
+		return $array;
+	}
+
+	// Avoir les services choisis
+	public function lesServiceschoisis(){
+		$services=  $this->Generalisation->avoirTable('service');
+		$array=array();
+		for ($i=0; $i < count($services); $i++) {
+			$estla = $this->input->post($services[$i]->idservice);
+			if($estla!=null){
+				$array[] = $services[$i]->idservice;
+			}
 		}
 		return $array;
 	}
