@@ -255,16 +255,16 @@ VALUES('CNAPS',250000),
 ('ESIA',300000);
 
 -- ------------------------SERVICES CANDIDATS----------------------------------------------
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai7');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai8');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai9');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai12');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai13');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai7');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai8');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai9');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai12');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai13');
 
 -- ----------------------------EMPLOYE UPDATE-----------------------------------------
 UPDATE Employe set dateNaissance='22-03-1973' where idemploye='emp1';
