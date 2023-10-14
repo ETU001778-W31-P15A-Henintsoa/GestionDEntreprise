@@ -4,6 +4,10 @@ date_default_timezone_set('Africa/Nairobi');
 
 class Candidat extends CI_Controller {
 
+    public function index(){
+        $this->load->view('header');
+    }
+
     public function FormulaireCV($idannonce) {
         $this->load->model('CV');
         $data['idannonce'] = $idannonce;
