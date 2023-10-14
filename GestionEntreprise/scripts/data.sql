@@ -273,3 +273,10 @@ UPDATE Employe set dateNaissance='01-05-2000' where idemploye='emp3';
 UPDATE Employe set dateNaissance='02-06-1998' where idemploye='emp4';
 UPDATE Employe set dateNaissance='21-04-1980' where idemploye='emp5';
 UPDATE Employe set dateNaissance='25-10-1985' where idemploye='emp6';
+
+-- ------------------------------BRANCHE DEPARTEMENT----------------
+UPDATE brancheDepartement
+SET DescriptionPost = 'Les développeurs sont des professionnels chargés de concevoir,
+de créer, de mettre en œuvre et de maintenir des logiciels, des applications ou des systèmes informatiques',
+Mission = 'Développement de logiciels, Conception de bases de données, Maintenance et mise à jour, Intégration de systèmes, Tests et débogage'
+WHERE idbranchedepartement = 'BRA1';
