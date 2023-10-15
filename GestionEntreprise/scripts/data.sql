@@ -68,7 +68,7 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
--- ---------------------FILIERE------------------------
+
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -289,3 +289,31 @@ VALUES
     ('Congé de maternité', 1.0, false),
     ('Congé de paternité', 1.0, false),
     ('Congé sans solde', 0.0, true);
+
+--------------------------Programme--------------------
+insert into programme values(default,'monday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'tuesday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'wednesday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'thursday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'friday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'saturday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'sunday','08:00:00','17:00:00','DEPT1');
+
+--------------------------Pause----------------------------------
+insert into pause values(default,'10:00:00','10:30:00','DEPT1');
+
+-----------------------Jour Mois---------------------------------
+INSERT INTO jourMois
+VALUES
+(Default, 'January', '31','01'),
+(Default, 'February', '28','02'),
+(Default, 'March', '31','03'),
+(Default, 'April', '30','04'),
+(Default, 'May', '31','05'),
+(Default, 'June', '30','06'),
+(Default, 'July', '31','07'),
+(Default, 'August', '31','08'),
+(Default, 'September', '30','09'),
+(Default, 'October', '31','10'),
+(Default, 'November', '30','11'),
+(Default, 'December', '31','12');

@@ -347,6 +347,28 @@ create table CongeEmploye(
     foreign key (idEmploye) references Employe(idEmploye)
 );
 
+--------------------JourMois---------------------------
+create sequence seqJourMois;
+create table jourMois(
+    idJourMois varchar(20) default concat('JMois'|| nextval('seqJourMois')) primary key,
+    nomMois varchar(15),
+    finJour varchar(3)
+);
+
+alter table jourMois 
+ADD moisEnNombre varchar(3);
+
+--------------------poste Employe---------------------------
+create sequence seqPoste;
+create table posteEmploye(
+    idPoste varchar(20) default concat('JMois'|| nextval('seqJourMois')) primary key,
+    idEmploye varchar(20),
+    idBrancheDepartement varchar(20),
+    dateEmbauche date,
+    foreign key(idEmploye) references employe(idEmploye),
+    foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
+);
+
 --------------------------------------- ALTER ---------------------------------------------
 
 ALTER TABLE Diplome
@@ -431,3 +453,9 @@ drop duree,
 add datedebut date,
 add datefin date;
 
+--------------------15 Octobte---------------------------
+alter table employe
+drop iddepartement cascade;
+
+alter table employe 
+add categorie varchar(15);

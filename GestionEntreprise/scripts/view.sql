@@ -1,13 +1,13 @@
 create or replace view v_BrancheDepartement as
-    select Branche.libelle as branche, Departement.nomDepartement as departement, bd.*
-    from BrancheDepartement  bd
-        join Branche on Branche.idBranche= bd.idBranche
-        join Departement on Departement.idDepartement = bd.idDepartement;
+select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
+from BrancheDepartement as bd
+join Branche on Branche.idBranche= bd.idBranche
+join Departement on Departement.idDepartement = bd.idDepartement;
 
 create or replace view v_BesoinPersonnelle as
-    select v_BrancheDepartement.branche, v_BrancheDepartement.idbranche, v_BrancheDepartement.iddepartement, v_BrancheDepartement.departement, v_BrancheDepartement.njhparpersonne, BesoinPersonnelle.*
-    from BesoinPersonnelle
-        join v_BrancheDepartement on v_BrancheDepartement.idBrancheDepartement=BesoinPersonnelle.idBrancheDepartement;
+    select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
+    from BesoinPersonnelle bp
+        join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
 
 create or replace view v_Critere as
     select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
@@ -62,3 +62,31 @@ create or replace view v_avantagedepartement as
     AvantageDepartement.idAvantageDepartement, AvantageDepartement.idBrancheDepartement
     from AvantageDepartement
         join avantageNature on AvantageNature.idAvantageNature = AvantageDepartement.idAvantage
+
+
+create or replace view v_BesoinPersonnelleAnnonce as 
+    select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
+        left join annonce  on bp.idBesoin=annonce.idBesoin;
+
+create or replace view v_employePoste as
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,mission,DescriptionPost  from employe as emp
+        join posteEmploye as p on emp.idEmploye=p.idEmploye
+        join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
+
+create or replace view v_BesoinPersonnelleAnnonceDetails as
+    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot
+    from v_BesoinPersonnelleAnnonce as bpa 
+        join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
+        left join v_critere as c on c.idBesoin=bpa.idBesoin
+        left join v_employePoste as emp on emp.idDepartement=bd.idDepartement;
+
+create or replace view v_candidatEntretien as
+    select c.*,entretien.heuredebut,entretien.heurefin,entretien.jour,bd.idDepartement from candidat as c
+        left join entretien  on c.idCandidat=entretien.idCandidat
+        left join annonce on annonce.idAnnonce=c.idAnnonce
+        join besoinPersonnelle as bp on annonce.idBesoin=bp.idBesoin
+        join brancheDepartement as bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
+
+-- create view v_brancheDepartementEmploye as
+-- select emp.*,bd.idBranche,branche,idBrancheDepartement,categorie,mission,DescriptionPost from 
+-- v_employe_Poste as emp join brancheDepartement as bd on bd.idBrancheDepartement.emp.idBrancheDepartement;
