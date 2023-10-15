@@ -404,3 +404,19 @@ ADD matricule varchar(100);
 
 ALTER TABLE Employe
 ADD dateEmbauche date;
+
+
+alter table contratessai 
+drop duree,
+add datedebut date,
+add datefin date;
+
+--------------------15 Octobte---------------------------
+alter table employe
+drop iddepartement cascade;
+
+alter table employe 
+add categorie varchar(15);
+
+alter table employe
+drop dateembauche cascade;

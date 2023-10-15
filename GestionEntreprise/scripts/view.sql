@@ -50,3 +50,44 @@ create or replace view v_FTCQuestionReponse as
     from formulaireTestCandidat
         join Reponses on Reponses.idreponse = formulaireTestCandidat.idreponse
         join Questions on Questions.idquestion = Reponses.idquestion;
+        join Questions on Questions.idquestion = Reponses.idquestion;
+
+create or replace view v_ServiceServicesCandidat as
+    select Service.idservice, Service.libelle, Service.valeur,
+    ServiceCandidat.idServiceCandidat, ServiceCandidat.idContratEssai
+    from Service
+        join ServiceCandidat on ServiceCandidat.idservice = Service.idService;
+
+create or replace view v_avantagedepartement as
+    select avantageNature.idavantageNature, avantageNature.libelle,
+    AvantageDepartement.idAvantageDepartement, AvantageDepartement.idBrancheDepartement
+    from AvantageDepartement
+        join avantageNature on AvantageNature.idAvantageNature = AvantageDepartement.idAvantage;
+
+
+create or replace view v_BesoinPersonnelleAnnonce as 
+    select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
+        left join annonce  on bp.idBesoin=annonce.idBesoin;
+
+create or replace view v_employePoste as
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,mission,DescriptionPost  from employe as emp
+        join posteEmploye as p on emp.idEmploye=p.idEmploye
+        join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
+
+create or replace view v_BesoinPersonnelleAnnonceDetails as
+    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot
+    from v_BesoinPersonnelleAnnonce as bpa 
+        join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
+        left join v_critere as c on c.idBesoin=bpa.idBesoin
+        left join v_employePoste as emp on emp.idDepartement=bd.idDepartement;
+
+create or replace view v_candidatEntretien as
+    select c.*,entretien.heuredebut,entretien.heurefin,entretien.jour,bd.idDepartement from candidat as c
+        left join entretien  on c.idCandidat=entretien.idCandidat
+        left join annonce on annonce.idAnnonce=c.idAnnonce
+        join besoinPersonnelle as bp on annonce.idBesoin=bp.idBesoin
+        join brancheDepartement as bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
+
+-- create view v_brancheDepartementEmploye as
+-- select emp.*,bd.idBranche,branche,idBrancheDepartement,categorie,mission,DescriptionPost from 
+-- v_employe_Poste as emp join brancheDepartement as bd on bd.idBrancheDepartement.emp.idBrancheDepartement;
