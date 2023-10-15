@@ -68,7 +68,7 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
--- ---------------------FILIERE------------------------
+
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -255,16 +255,16 @@ VALUES('CNAPS',250000),
 ('ESIA',300000);
 
 -- ------------------------SERVICES CANDIDATS----------------------------------------------
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai7');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai8');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai9');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai12');
-INSERT INTO serviceCandidat(idService,idContratEssai) 
-VALUES('service1','contrEssai13');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai7');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai8');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai9');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai12');
+-- INSERT INTO serviceCandidat(idService,idContratEssai) 
+-- VALUES('service1','contrEssai13');
 
 -- ----------------------------EMPLOYE UPDATE-----------------------------------------
 UPDATE Employe set dateNaissance='22-03-1973' where idemploye='emp1';
@@ -280,3 +280,40 @@ SET DescriptionPost = 'Les développeurs sont des professionnels chargés de con
 de créer, de mettre en œuvre et de maintenir des logiciels, des applications ou des systèmes informatiques',
 Mission = 'Développement de logiciels, Conception de bases de données, Maintenance et mise à jour, Intégration de systèmes, Tests et débogage'
 WHERE idbranchedepartement = 'BRA1';
+
+------------------------------Type Conge -------------------------------
+INSERT INTO TypeConge (libelle, durreeJournalier, estDeductible)
+VALUES
+    ('Congé annuel', 30, true),
+    ('Congé de maladie', 0.5, true),
+    ('Congé de maternité', 1.0, false),
+    ('Congé de paternité', 1.0, false),
+    ('Congé sans solde', 0.0, true);
+
+--------------------------Programme--------------------
+insert into programme values(default,'monday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'tuesday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'wednesday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'thursday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'friday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'saturday','08:00:00','17:00:00','DEPT1');
+insert into programme values(default,'sunday','08:00:00','17:00:00','DEPT1');
+
+--------------------------Pause----------------------------------
+insert into pause values(default,'10:00:00','10:30:00','DEPT1');
+
+-----------------------Jour Mois---------------------------------
+INSERT INTO jourMois
+VALUES
+(Default, 'January', '31','01'),
+(Default, 'February', '28','02'),
+(Default, 'March', '31','03'),
+(Default, 'April', '30','04'),
+(Default, 'May', '31','05'),
+(Default, 'June', '30','06'),
+(Default, 'July', '31','07'),
+(Default, 'August', '31','08'),
+(Default, 'September', '30','09'),
+(Default, 'October', '31','10'),
+(Default, 'November', '30','11'),
+(Default, 'December', '31','12');

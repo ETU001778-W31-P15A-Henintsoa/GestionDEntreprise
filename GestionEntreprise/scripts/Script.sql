@@ -104,17 +104,6 @@ create table employe(
     foreign key(idDepartement) references departement(idDepartement)
 );
 
--- ----------------departementAdresse------------------------
-create sequence seqDeptAdresse;
-create table departementAdresse(
-    idDepartementAdresse varchar(15) default concat('deptAdresse'|| nextval('seqDeptAdresse')) primary key,
-    idDepartement varchar(15),
-    idEntreprise varchar(15),
-    adresse varchar(50),
-    foreign key(idDepartement) references departement(idDepartement),
-    foreign key(idEntreprise) references Entreprise(idEntreprise)
-);
-
 -- ----------------AvantageNature------------------------
 create sequence seqAvantageNature;
 create table avantageNature(
@@ -123,6 +112,7 @@ create table avantageNature(
 );
 
 -- ----------------AvantageDepartement------------------------
+create sequence seqavantageDepartement;
 create table avantageDepartement(
     idAvantageDepartement varchar(30) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
     idBrancheDepartement varchar(15),
@@ -189,8 +179,15 @@ create table reponses (
     foreign key (idquestion) references questions(idquestion)
 );
 
+------------------------------ VILLE ------------------------------------------------------
+create sequence seqVille;
+create table ville(
+    idVille varchar(15) default concat('ville'|| nextval('seqVille')) primary key,
+    ville varchar(20)
+);
+
 --------------------------------ENTREPRISE------------------------------------------------
-create sequence idEntreprise;
+create sequence seqEntreprise;
 create table entreprise(
     idEntreprise varchar(15) default concat('entreprise'|| nextval('seqEntreprise')) primary key,
     ville varchar(30),
@@ -198,6 +195,17 @@ create table entreprise(
     numero varchar(30),
     fax varchar(30),
     foreign key(ville) references ville(idVille)
+);
+
+-- ----------------departementAdresse------------------------
+create sequence seqDeptAdresse;
+create table departementAdresse(
+    idDepartementAdresse varchar(15) default concat('deptAdresse'|| nextval('seqDeptAdresse')) primary key,
+    idDepartement varchar(15),
+    idEntreprise varchar(15),
+    adresse varchar(50),
+    foreign key(idDepartement) references departement(idDepartement),
+    foreign key(idEntreprise) references Entreprise(idEntreprise)
 );
 
 ------------------------------ ANNONCE ----------------------------------------------------
@@ -216,13 +224,6 @@ create table annonceParDefaut(
     idEntreprise varchar(15),
     texte text,
     foreign key(idEntreprise) references entreprise(idEntreprise)
-);
-
------------------------------- VILLE ------------------------------------------------------
-create sequence seqVille;
-create table ville(
-    idVille varchar(15) default concat('ville'|| nextval('seqVille')) primary key,
-    ville varchar(20)
 );
 
 ------------------------------ CANDIDAT ---------------------------------------------------
@@ -264,10 +265,10 @@ create sequence seqProgramme;
 create table programme(
     idProgramme varchar(20) default concat('PRO'|| nextval('seqProgramme')) primary key,
     nomJour varchar(30),
-    heureEntre datetime,
-    heureFin datetime,
+    heureEntre timestamp,
+    heureFin timestamp,
     idBrancheDepartement varchar(15),
-    foreign key(idBrancheDepartement) references brancheDepartement(idAvantageDepartement)
+    foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
 -- ------------------ Pause misy ao ampiasana ---------------------------
@@ -275,9 +276,9 @@ create sequence seqPause;
 create table pause(
     idPause varchar(20) default concat('PAU'|| nextval('seqPause')) primary key,
     heureDebut varchar(30),
-    heureFin datetime,                              
+    heureFin timestamp,                              
     idBrancheDepartement varchar(15),
-    foreign key(idBrancheDepartement) references brancheDepartement(idAvantageDepartement)
+    foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
 -- ------------------Liste Entretien---------------------------
@@ -286,7 +287,7 @@ create table entretien(
     idEntretien varchar(20) default concat('ENT'|| nextval('seqEntretien')) primary key,
     idCandidat varchar(15),
     heureDebut varchar(30),
-    heureFin datetime,                              
+    heureFin timestamp,                              
     jour Date,
     foreign key(idCandidat) references candidat(idCandidat)
 );
@@ -325,6 +326,48 @@ create table LangueCandidat(
     foreign key(idLangue) references Langue(idLangue)
 );
 
+--------------------------------TYPE CONGER -------------------------------------------------
+create sequence seqTypeConge;
+create table TypeConge(
+    idTypeConge varchar(20) default concat('TYC'|| nextval('seqTypeConge')) primary key,
+    libelle varchar(30),
+    durreeJournalier float,
+    estDeductible boolean
+);
+
+--------------------------------CONGE EMPLOYER ----------------------------------------------
+create sequence seqCongeEmploye;
+create table CongeEmploye(
+    idCongeEmploye varchar(20) default concat('COE'|| nextval('seqCongeEmploye')) primary key,
+    idemploye varchar(20),
+    DebutCange timestamp,
+    FinConge timestamp,
+    idTypeConge varchar(20), 
+    foreign key (idTypeConge) references TypeConge(idTypeConge),
+    foreign key (idEmploye) references Employe(idEmploye)
+);
+
+--------------------JourMois---------------------------
+create sequence seqJourMois;
+create table jourMois(
+    idJourMois varchar(20) default concat('JMois'|| nextval('seqJourMois')) primary key,
+    nomMois varchar(15),
+    finJour varchar(3)
+);
+
+alter table jourMois 
+ADD moisEnNombre varchar(3);
+
+--------------------poste Employe---------------------------
+create sequence seqPoste;
+create table posteEmploye(
+    idPoste varchar(20) default concat('JMois'|| nextval('seqJourMois')) primary key,
+    idEmploye varchar(20),
+    idBrancheDepartement varchar(20),
+    dateEmbauche date,
+    foreign key(idEmploye) references employe(idEmploye),
+    foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
+);
 
 --------------------------------------- ALTER ---------------------------------------------
 
@@ -356,7 +399,6 @@ ADD Filiere float;
 ALTER TABLE Filiere
 ALTER COLUMN libelle TYPE VARCHAR(100);
 
-
 ALTER TABLE BrancheDepartement
 ADD DescriptionPost text;
 
@@ -373,7 +415,7 @@ ADD situation float;
 ALTER table Critere 
 ADD age int;
 
-ALTER table coefficient
+ALTER table Criterecoefficient
 ADD age float;
 
 alter table annonceParDefaut 
@@ -420,3 +462,4 @@ add categorie varchar(15);
 
 alter table employe
 drop dateembauche cascade;
+
