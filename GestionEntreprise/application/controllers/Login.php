@@ -8,6 +8,7 @@
 		
         public function traitementlogin()
 		{
+			$data['cv']=$this->Candidats->avoirCV("");
 			$mail = $this->input->post('mail');
 			$mdp = $this->input->post('mdp');
 
@@ -15,8 +16,10 @@
 
 
 			if($reponse==true){
-				$this->load->view('accueil2');
-				echo $reponse;
+				$this->load->view('header2',$data);
+				$this->load->view('CV',$data);
+				// echo $reponse;
+				// echo "tongasoa";
 			}
 		}
 

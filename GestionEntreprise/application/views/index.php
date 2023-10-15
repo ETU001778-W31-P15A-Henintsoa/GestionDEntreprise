@@ -125,7 +125,7 @@
               <h4 class="mb-2">Welcome! 👋</h4>
               <p class="mb-4">Veuillez vous connecter. </p>
 
-              <form id="formAuthentication" class="mb-3" action="<?php echo site_url("login/traitementlogin"); ?>" method="POST">
+              <form id="formAuthentication" class="mb-3" action="<?php echo site_url("Login/traitementlogin"); ?>" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">G-Mail</label>
                   <input

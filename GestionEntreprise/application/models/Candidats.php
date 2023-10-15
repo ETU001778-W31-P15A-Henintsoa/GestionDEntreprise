@@ -65,6 +65,25 @@
             $result = $query->row_array();
             return $result;
         }
+
+        // public function avoirCV() {
+        //     $sql = "SELECT * FROM v_candidat where etat=1";
+        //     $query = $this->db->query($sql);
+        //     $result = $query->result_array();
+        //     return $result;
+        // }
+
+        public function avoirCV($idCandidat) {
+            if($idCandidat == null) {
+            $sql = "SELECT * FROM v_candidat where etat=1";
+            $query = $this->db->query($sql);
+            }else {
+            $sql = "SELECT * FROM v_candidat where etat=1 AND idcandidat =?";
+            $query = $this->db->query($sql,array($idCandidat));
+            }
+            $result = $query->result_array();
+            return $result;
+        }
         
     }
 ?>
