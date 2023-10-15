@@ -15,9 +15,11 @@
         }
 
         public function afficherTous(){
+            $this->load->view('header');
             $data['annonces']=$this->Annonce->afficher("");
             $this->load->view('afficherannonce',$data);
         }
+
     }
 
 ?>
