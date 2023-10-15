@@ -459,3 +459,7 @@ drop iddepartement cascade;
 
 alter table employe 
 add categorie varchar(15);
+
+alter table employe
+drop dateembauche cascade;
+

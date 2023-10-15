@@ -4,9 +4,14 @@ date_default_timezone_set('Africa/Nairobi');
 
 class Candidat extends CI_Controller {
 
-    public function index(){
-        $this->load->view('header');
-    }
+
+    // public function cv() {
+    //     // $data['css'] = 'header.css'; 
+    //     $data['css']='cv.css';
+    //     $this->load->view('header',$data);
+    //     $this->load->view('cv',$data);
+    // }
+                                                                                                                                                                                                                             
 
     public function FormulaireCV($idannonce) {
         $this->load->model('CV');
@@ -18,6 +23,7 @@ class Candidat extends CI_Controller {
         $data['langue'] = $this->CV->avoirLangue();
         $data['filiere'] = $this->CV->avoirFiliere();
         $data['situation'] = $this->CV->avoirSituationMatrimoile();
+        $this->load->view('header');
         $this->load->view('candidatForm',$data);
     }
 
@@ -74,7 +80,7 @@ class Candidat extends CI_Controller {
         $situation = $this->input->post('situation');
         $idannonce = $this->input->post('idannonce');
 
-        $totalnote = $this->CV->calculNoteCandidat($idannonce,$sexe,$nationnalite,$diplome,$experience,$situation,$naissance);
+        $totalnote = $this->CV->calculNoteCandidat($idannonce,$sexe,$nationnalite,$diplome,$experience,$situation,$naissance,$filiere);
         $moyenne = $this->CV->calculerNoteMoyenne($idannonce);
 
         $etat;
@@ -92,13 +98,15 @@ class Candidat extends CI_Controller {
             $this->Candidats->insererLangueCandidat($candidatID,$langue);
         }
 
+        redirect("annonce_controller/afficherTous");
+
     }
 
-    public function listeCV() {
-        $this->load->model('CV');
-        $data['candidat']=$this->CV->avoirCV();
-        $this->load->view('ListeCV',$data);
-    }
+    // public function listeCV() {
+    //     $this->load->model('CV');
+    //     $data['candidat']=$this->CV->avoirCV();
+    //     // $this->load->view('ListeCV',$data);
+    // }
 
 }
 

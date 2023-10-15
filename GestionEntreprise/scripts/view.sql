@@ -51,6 +51,7 @@ create or replace view v_FTCQuestionReponse as
         join Reponses on Reponses.idreponse = formulaireTestCandidat.idreponse
         join Questions on Questions.idquestion = Reponses.idquestion;
 
+
 create or replace view v_ServiceServicesCandidat as
     select Service.idservice, Service.libelle, Service.valeur,
     ServiceCandidat.idServiceCandidat, ServiceCandidat.idContratEssai
@@ -61,7 +62,8 @@ create or replace view v_avantagedepartement as
     select avantageNature.idavantageNature, avantageNature.libelle,
     AvantageDepartement.idAvantageDepartement, AvantageDepartement.idBrancheDepartement
     from AvantageDepartement
-        join avantageNature on AvantageNature.idAvantageNature = AvantageDepartement.idAvantage
+        join avantageNature on AvantageNature.idAvantageNature = AvantageDepartement.idAvantage;
+
 
 
 create or replace view v_BesoinPersonnelleAnnonce as 
@@ -90,3 +92,5 @@ create or replace view v_candidatEntretien as
 -- create view v_brancheDepartementEmploye as
 -- select emp.*,bd.idBranche,branche,idBrancheDepartement,categorie,mission,DescriptionPost from 
 -- v_employe_Poste as emp join brancheDepartement as bd on bd.idBrancheDepartement.emp.idBrancheDepartement;
+
+
