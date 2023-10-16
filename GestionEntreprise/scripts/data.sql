@@ -326,3 +326,6 @@ INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
 ('emp4','BRA17','2015-11-15'),
 ('emp5','BRA13','2021-04-11'),
 ('emp6','BRA16','2016-03-15');
+
+-- -------------------BRANCHES-------------------------------
+INSERT INTO Branche (libelle) VALUES ('Chef de projets');

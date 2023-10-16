@@ -1,5 +1,5 @@
 create or replace view v_BrancheDepartement as
-select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
+select Branche.libelle as branche,Branche.mgr, Departement.nomDepartement as departement,bd.*
 from BrancheDepartement as bd
 join Branche on Branche.idBranche= bd.idBranche
 join Departement on Departement.idDepartement = bd.idDepartement;
@@ -71,7 +71,7 @@ create or replace view v_BesoinPersonnelleAnnonce as
         left join annonce  on bp.idBesoin=annonce.idBesoin;
 
 create or replace view v_employePoste as
-    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,mission,DescriptionPost  from employe as emp
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost  from employe as emp
         join posteEmploye as p on emp.idEmploye=p.idEmploye
         join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
 

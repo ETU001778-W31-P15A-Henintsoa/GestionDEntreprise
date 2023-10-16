@@ -21,7 +21,7 @@ class gestionConge extends CI_Model {
 
     function creerConge($idEmploye,$type,$idDemande,$dateDebut,$dateFin){
         $conge['idEmploye']=$idEmploye;
-        $conge['nombreConge']= $dateDebut->diff($dateFin);
+        $conge['nombreConge']= $dateDebut->diff($dateFin)->d;
         $conge['type']=$type;
         $conge['idDemande']=$idDemande;
         $conge['dateDebut']=$dateDebut;

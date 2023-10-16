@@ -169,6 +169,12 @@
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
             </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Conges </div>
+              </a>
+            </li>
           </ul>
         </aside>
         <!-- / Menu -->

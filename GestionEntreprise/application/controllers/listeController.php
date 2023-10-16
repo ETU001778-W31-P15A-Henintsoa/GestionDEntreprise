@@ -35,6 +35,7 @@
             $dateDebut=new DateTime("2023-09-12");
             $dateFin=new DateTime("2023-12-12");
             $data['conge']=$this->gestionConge->nombreJourConge($dateDebut,$dateFin,null,null,null,null);
+            $this->load->view('header2');
             $this->load->view('listeConge',$data);
         }
     }

@@ -369,6 +369,13 @@ create table posteEmploye(
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
+-- ----------------------QUALITE REQUISE----------------------------------------
+create sequence seqQualite;
+create table QualiteRequise(
+    idQualite varchar(20) default concat('QUA' || nextval('seqQualite')) primary key,
+    libelle varchar(100)
+);
+
 --------------------------------------- ALTER ---------------------------------------------
 
 ALTER TABLE Diplome
@@ -462,4 +469,8 @@ add categorie varchar(15);
 
 alter table employe
 drop dateembauche cascade;
+
+alter table Branche
+add mgr varchar(15),
+ADD CONSTRAINT fk_branchedept FOREIGN KEY (mgr) REFERENCES Branche(idBranche);
 
