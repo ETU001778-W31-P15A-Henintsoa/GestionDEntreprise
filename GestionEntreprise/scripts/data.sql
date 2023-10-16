@@ -317,3 +317,12 @@ VALUES
 (Default, 'October', '31','10'),
 (Default, 'November', '30','11'),
 (Default, 'December', '31','12');
+
+-- --------------------POSTE EMPLOYE-------------------------------
+INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
+('emp1','BRA1','2020-03-15'),
+('emp2','BRA2','2018-04-02'),
+('emp3','BRA11','2019-10-05'),
+('emp4','BRA17','2015-11-15'),
+('emp5','BRA13','2021-04-11'),
+('emp6','BRA16','2016-03-15');
