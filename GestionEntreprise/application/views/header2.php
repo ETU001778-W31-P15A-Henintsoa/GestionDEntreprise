@@ -164,7 +164,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php ?>" class="menu-link">
+              <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
