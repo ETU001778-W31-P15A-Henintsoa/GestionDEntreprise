@@ -347,6 +347,18 @@ create table CongeEmploye(
     foreign key (idEmploye) references Employe(idEmploye)
 );
 
+
+-------------------------- RETRAIT CONGE ---------------------------------------------------
+create sequence seqRetraitConge;
+create table RetraitConge(
+    idretraitconge varchar(20) default concat('RC'|| nextval('seqRetraitConge')) primary key,
+    idcongeemploye varchar(20),
+    resteconge float,
+    totalpris float,
+    foreign key (idcongeemploye) references CongeEmploye(idcongeemploye)
+);
+
+
 --------------------JourMois---------------------------
 create sequence seqJourMois;
 create table jourMois(
@@ -369,8 +381,39 @@ create table posteEmploye(
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
---------------------------------------- ALTER ---------------------------------------------
+------------------------------ QUESTIONS EVALUATION------------------------------
+create sequence seqQuestionEvaluation;
+create table questionsEvluation (
+    idquestionEvaluation varchar(20) default concat('QEV'|| nextval('seqQuestionEvaluation')) primary key,
+    idBrancheDepartement varchar(20),
+    libelle varchar(30),
+    coefficient int,
+    Foreign Key (idBrancheDepartement) REFERENCES BrancheDepartement(idBrancheDepartement)
+);
 
+------------------------------ REPONSES EVA ------------------------------------
+create sequence seqReponseEvaluation;
+create table reponsesEvaluation (
+    idreponseEvaluation varchar(20) default concat('REV'|| nextval('seqReponseEvaluation')) primary key,
+    idquestionEvaluation varchar(20),
+    libelle varchar(30),
+    bonnereponse boolean,
+    foreign key (idquestionEValuation) references questionsEvaluation(idquestionEvaluation)
+);
+
+------------------------------ REPONSES EVALUATION EMPLOYE ------------------------------------
+create sequence seqReponseEvaluationEmploye;
+create table reponsesEvaluationEmploye (
+    idreponseEvaluationEmploye varchar(20) default concat('REE'|| nextval('seqReponseEvaluationEmploye')) primary key,
+    idemploye varchar(20),
+    idquestionEvaluation varchar(20),
+    idreponseEvaluation varchar(20),
+    foreign key (idquestionEvaluation) references questionsEvaluation(idquestionEvaluation),
+    foreign key (idreponseEvaluation) references reponsesEvaluation(idreponseEvaluation),
+    foreign key (idemploye) references employe(idemploye)
+);
+
+--------------------------------------- ALTER ---------------------------------------------
 ALTER TABLE Diplome
 ADD etat int;
 
@@ -462,4 +505,12 @@ add categorie varchar(15);
 
 alter table employe
 drop dateembauche cascade;
+
+-------------------------------
+alter table congeemploye
+add accordDG boolean;
+
+alter table congeemploye
+add accordRH boolean;
+
 

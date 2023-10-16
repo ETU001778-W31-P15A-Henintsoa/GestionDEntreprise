@@ -33,6 +33,11 @@ class Welcome extends CI_Controller {
 		$this->load->view('formulairebesoin', $data);
 	}
 
+	public function versFicheEvaluation()
+	{
+		$this->load->view('formulaireficheevaluation');
+	}
+
 	public function versAcceuil(){
 		$this->load->view('acceuil');
 	}
