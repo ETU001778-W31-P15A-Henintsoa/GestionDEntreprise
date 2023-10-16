@@ -21,11 +21,18 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$data['departement'] = $this->Generalisation->avoirTable("departement");
+		// $data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
 	}
 
 	// Loading view
+	public function versFormulaireBesoin()
+	{
+		$data['departement'] = $this->Generalisation->avoirTable("departement");
+		// $this->load->view('header');
+		$this->load->view('formulairebesoin', $data);
+	}
+
 	public function versAcceuil(){
 		$this->load->view('acceuil');
 	}
