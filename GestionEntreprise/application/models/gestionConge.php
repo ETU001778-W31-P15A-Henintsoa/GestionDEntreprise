@@ -75,6 +75,17 @@ class gestionConge extends CI_Model {
         }
        return $conge;
     }
+
+    // DEMANDE DE CONGE
+
+    function verification($dateden)
+
+    function insertionDemandeConge($matricule, $idtypeconge, $datetimedebut, $datetimefin){
+        $employe = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("matricule='%s'", $matricule));
+        $this->Generalisation->insertion("demandeconge(idemploye, idTypeconge, datedebut, datefin)", sprintf("('%s', '%s', '%s', '%s')", $employe[0]->idemploye, $idtypeconge, $datetimedebut, $datetimefin));
+    }
+
+    
 }
 
 // $date1 = new DateTime('2023-10-13');

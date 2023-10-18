@@ -1,8 +1,8 @@
 create or replace view v_BrancheDepartement as
-select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
-from BrancheDepartement as bd
-join Branche on Branche.idBranche= bd.idBranche
-join Departement on Departement.idDepartement = bd.idDepartement;
+    select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
+    from BrancheDepartement as bd
+        join Branche on Branche.idBranche= bd.idBranche
+        join Departement on Departement.idDepartement = bd.idDepartement;
 
 create or replace view v_BesoinPersonnelle as
     select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
@@ -122,3 +122,12 @@ create or replace view v_retraitCongeEmploye as
     from CongeEmploye
         join RetraitConge on RetraitConge.idcongeEmploye = CongeEmploye.idcongeEmploye
         join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge
+
+------------------------------------- VUE EMPLOYE/TYPE PRIME/ PRIME EMPLOYEs----------------------------
+create or replace view v_TypePrimeEmploye as
+    select Employe.*,
+    PrimeEmploye.idPrimeEmploye, PrimeEmploye.idTypePrime, PrimeEmploye.qunatite,
+    TypePrime.libelle, TypePrime.pourcentage
+    from Employe 
+        join PrimeEmploye on PrimeEmploye.idEmploye = Employe.idEmploye
+        join TypePrime on TypePrime.idTypePrime = PrimeEmploye.idTypePrime
