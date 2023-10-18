@@ -78,7 +78,24 @@ class gestionConge extends CI_Model {
 
     // DEMANDE DE CONGE
 
-    function verification($dateden)
+    function distanceEntreDate($datedebut){
+        // $sql = sprintf("SELECT Extract(DAY FROM AGE (NOW(), '%s')) as ageEnJour");
+        $sql = sprintf("SELECT DATE_PART('day', AGE(NOW(), '%s')) as ageEnJour");
+        $query = $this->db->query($sql);
+        foreach($query->result() as $row){
+            return $row;
+        }
+    }
+
+    function verification($datedebut){
+        $distance = $this->distanceEntreDate($datedebut);
+        $distance = floatval($distance);
+        if($distance<15){
+            return false;
+        }else{
+            return true;
+        }        
+    }
 
     function insertionDemandeConge($matricule, $idtypeconge, $datetimedebut, $datetimefin){
         $employe = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("matricule='%s'", $matricule));

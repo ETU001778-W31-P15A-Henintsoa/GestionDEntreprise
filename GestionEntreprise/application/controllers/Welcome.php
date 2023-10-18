@@ -24,8 +24,21 @@ class Welcome extends CI_Controller {
 		// $data['departement'] = $this->Generalisation->avoirTable("departement");
 		$this->load->view('index', $data);
 	}
+	
 
 	// Loading view
+	public function versDemandeConge()
+	{
+		// $data['departement'] = $this->Generalisation->avoirTable("departement");
+		$this->load->view('demandeconge');
+	}
+
+	public function versPrimeEmploye()
+	{
+		$data['prime'] = $this->Generalisation->avoirTable("TypePrime");
+		$this->load->view('primeemploye', $data);
+	}
+
 	public function versFormulaireBesoin()
 	{
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
@@ -148,6 +161,7 @@ class Welcome extends CI_Controller {
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
 		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
 		echo 'Okey';
+		// Load view manaraka
 	}
 	
 	// Insertion donnees pour le contrat essaie
@@ -166,6 +180,26 @@ class Welcome extends CI_Controller {
 		// var_dump($services);
 		$this->ContratEssai->InsertionContratEssaiService($idemploye, $datedebut, $datefin, $salaire, $idbranchedepartement, $services);
 		redirect("welcome/versMonContratEssai?idemploye=".$idemploye);
+	}
+
+	// INsertion de demande de conge
+	public function formulaireDemandeConge(){
+		$matricule = $this->input->post("matricule");
+		$idtypeconge = $this->input->post("idtypeconge");
+		$datedebut = $this->input->post("datedebut");
+		$heuredebut = $this->input->post("heuredebut");
+		$datefin = $this->input->post("datefin");
+		$heurefin = $this->input->post("heurefin");
+		$datedebut = $datedebut." ".$heuredebut;
+		$datefin = $datefin." ".$heurefin;
+		$this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
+		echo 'Okey';
+		// Load view manaraka
+	}
+
+	// Insertion Prime Employe
+	public function formulairePrimeEmploye(){
+
 	}
 
 

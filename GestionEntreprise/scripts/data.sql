@@ -326,3 +326,15 @@ INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
 ('emp4','BRA17','2015-11-15'),
 ('emp5','BRA13','2021-04-11'),
 ('emp6','BRA16','2016-03-15');
+
+--------------------------- TYPE PRIME ------------------------------------
+INSERT INTO TypePrime(libelle, pourcentage) VALUES
+    ('Prime de Rendement', 0),
+    ('Prime d Anciennete', 0),
+    ('Heure Suplementaire 8h', 30),
+    ('Heure Suplementaire 16h', 50),
+    ('Travail Week-End', 40),
+    ('Travaux Jour Feries', 200),
+    ('Travail de nuit', 30),
+    ('Prime Diverse', 20),
+    ('Droit de Conge', 0);
