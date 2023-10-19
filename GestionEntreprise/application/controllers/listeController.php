@@ -38,5 +38,15 @@
             $this->load->view('header2');
             $this->load->view('listeConge',$data);
         }
+
+        public function insertionConges() {
+            $this->load->view('header2');
+            $this->load->view('insertionConge');
+        }
+
+        public function DemandeConges() {
+            $this->load->view('header2');
+            $this->load->view('demandeConge');
+        }
     }
 ?>  
