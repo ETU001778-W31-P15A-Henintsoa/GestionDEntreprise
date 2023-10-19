@@ -24,6 +24,9 @@
                           <div class="col-sm-10">
                             <select name="typeconge" id="basic-default-phone" class="form-control phone-mask">
                                   <option>typeConge</option>
+                                  <?php foreach($typeConge as $typeConges) { ?>
+                                  <option value="<?php echo $typeConges['idtypeconge'] ?>"><?php echo $typeConges['libelle']; ?></option>
+                                  <?php } ?>
                             </select>
                           </div>
                         </div>

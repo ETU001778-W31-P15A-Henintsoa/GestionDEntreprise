@@ -19,14 +19,15 @@ class gestionConge extends CI_Model {
         return null;
     }
 
-    function creerConge($idEmploye,$type,$idDemande,$dateDebut,$dateFin){
+    function creerConge($idEmploye,$reste,$totalPrix){
         $conge['idEmploye']=$idEmploye;
-        $conge['nombreConge']= $dateDebut->diff($dateFin)->d;
+        $conge['nombreConge']= $dateDebut->diff($dateFin);
         $conge['type']=$type;
         $conge['idDemande']=$idDemande;
         $conge['dateDebut']=$dateDebut;
         $conge['dateFin']=$dateFin;
-        $conge['reste']=20;
+        $conge['reste']=$reste;
+        $conge['totalPrix']=$totalPrix;
         return $conge;
     }
 
@@ -75,6 +76,49 @@ class gestionConge extends CI_Model {
         }
        return $conge;
     }
+
+    public function insererConge($dateHeureDebut,$dateHeureFin,$idDemandeConge,$idTypeConge){
+        // $dateDebut,$heureDebut,$dateFin,$heureFin
+        $dateDebut = $dateHeureDebut->format('Y-m-d H:i:s');
+        $dateFin = $dateHeureFin->format('Y-m-d H:i:s');
+        $valeur="(default,'".$idDemandeConge."','".$dateDebut."','".$dateFin."','".$idTypeConge."')";
+        $this->Generalisation->insertion("CongeEmploye",$valeur);
+    }
+
+    public function insererCongeEmploye($idCongeEmploye,$dateHeureDebut,$dateHeureFin){
+        $demande=$this->Generalisation->avoirTableSpecifique("v_demandeCongeEmploye","*"," idCongeEmploye='".$idCongeEmploye."'");
+        // var_dump($demande);
+        
+        $retraitConge=$this->Generalisation->avoirTableSpecifique("retraitConge","*"," idEmploye='".$demande[0]->idemploye."' and  idcongeemploye is not null order by idCongeEmploye desc limit 1");
+        $nombreConge=$dateHeureFin->diff($dateHeureDebut)->d;
+        $reste=($retraitConge[0]->resteconge)-$nombreConge;
+        $totalPris=$retraitConge[0]->totalpris+$nombreConge;
+        $valeur="(default,'".$idCongeEmploye."','".$reste."','".$totalPris."','".$demande[0]->idemploye."')";
+        $this->Generalisation->insertion("retraitConge",$valeur);
+    }
+
+    public function insertionConge($dateDebut,$heureDebut,$dateFin,$heureFin,$idDemande,$idTypeConge){//insertion ao am congeEmploye sy retrait
+        $dateHeureDebut=new DateTime($dateDebut." ".$heureDebut);
+        $dateHeureFin=new DateTime($dateFin." ".$heureFin);
+        $this->insererConge($dateHeureDebut,$dateHeureFin,$idDemande,$idTypeConge);
+        $dernierCongeEmp=$this->Generalisation->avoirTableAutrement("congeEmploye","*"," order by idCongeEmploye desc limit 1");
+        $this->insererCongeEmploye($dernierCongeEmp[0]->idcongeemploye,$dateHeureDebut,$dateHeureFin);
+    }
+
+    public function avoirTypeConge() {
+        $sql = "SELECT * FROM typeConge";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function avoirDemandeConge() {
+        $sql = "SELECT * FROM demandeconge";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
 }
 
 // $date1 = new DateTime('2023-10-13');

@@ -107,3 +107,15 @@ join Nationnalite on c.idNationnalite=Nationnalite.idnationnalite
 join SituationMatrimoniale sm on sm.idSituation=c.idSituation
 join Annonce on annonce.idannonce= c.idannonce 
 join v_BesoinPersonnelle vb on annonce.idbesoin= vb.idbesoin;
+
+-- -------------------------------CONGE----------------------------------------------
+
+create or replace view v_demandeCongeEmploye as
+    select dc.idemploye,dc.debutConge as debutDemande,dc.finConge as finDemande,ce.* 
+    from demandeConge as dc 
+        join CongeEmploye as ce on ce.idDemandeConge=dc.idDemandeConge;
+
+create or replace view v_retraitCongeEmploye as
+    select rc.resteconge,rc.totalpris,dc.*
+    from RetraitConge as rc 
+        left join v_demandeCongeEmploye as dc on dc.idcongeEmploye=rc.idcongeEmploye;

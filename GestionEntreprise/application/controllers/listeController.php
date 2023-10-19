@@ -1,6 +1,6 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
-
+    date_default_timezone_set('Africa/Nairobi');
     class listeController extends CI_Controller {
 
         public function formulaireListe(){
@@ -39,14 +39,26 @@
             $this->load->view('listeConge',$data);
         }
 
-        public function insertionConges() {
+        public function formulaireConge() {
+            $data['typeConge'] = $this->gestionConge->avoirTypeConge();
+            $data['demande'] = $this->gestionConge->avoirDemandeConge();
             $this->load->view('header2');
-            $this->load->view('insertionConge');
+            $this->load->view('insertionConge',$data);
         }
 
-        public function DemandeConges() {
-            $this->load->view('header2');
-            $this->load->view('demandeConge');
+        public function insertionConge() {
+            $Debut = $this->input->post('debut');
+            list($dateDebut, $heureDebut) = explode('T', $Debut);
+
+            $Fin = $this->input->post('fin');
+            list($dateFin, $heureFin) = explode('T', $Fin);
+
+            $idDemande = $this->input->post('iddemande');
+            $idTypeConge = $this->input->post('typeconge');
+
+            $this->gestionConge->insertionConge($dateDebut,$heureDebut,$dateFin,$heureFin,$idDemande,$idTypeConge);
+
+            redirect('listeController/listeConge/');
         }
     }
 ?>  

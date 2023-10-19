@@ -14,8 +14,13 @@ class Generalisation extends CI_Model {
         return $raisons;
     }
 
-    function avoirTableConditionnee($NomTable){
-        $sql = sprintf( 'select * from %s',$NomTable);
+    function insertion($NomTable, $values){ // Metre values comme => '(data1, data2, 'data3')' par exemple
+        $sql = sprintf( 'insert into %s values%s',$NomTable, $values);
+        $this->db->query($sql);
+    }
+
+    public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
+        $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         $query = $this->db->query($sql);
         $resultats = array();
         $a=0;
@@ -26,18 +31,8 @@ class Generalisation extends CI_Model {
         return $resultats;
     }
 
-    function insertion($NomTable, $values){ // Metre values comme => '(data1, data2, 'data3')' par exemple
-        $sql = sprintf( 'insert into %s values%s',$NomTable, $values);
-        $this->db->query($sql);
-    }
-
-    function miseAJour($NomTable, $nouveau, $conditions){ // Metre values comme => '(data1, data2, 'data3')' par exemple
-        $sql = sprintf( 'Update %s set %s where %s',$NomTable, $nouveau, $conditions);
-        $this->db->query($sql);
-    }
-
-    public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
-        $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
+    public function avoirTableAutrement($NomTable, $colonnes, $conditions ){//mety hoe limit ny eo
+        $sql = "SELECT $colonnes FROM $NomTable $conditions";
         $query = $this->db->query($sql);
         $resultats = array();
         $a=0;

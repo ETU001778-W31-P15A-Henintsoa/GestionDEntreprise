@@ -329,3 +329,9 @@ INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
 
 -- -------------------BRANCHES-------------------------------
 INSERT INTO Branche (libelle) VALUES ('Chef de projets');
+
+-- -------------------DEMANDE CONGE---------------------------
+INSERT INTO demandeConge values(default,'emp1','2023-11-24 12:00:00','2023-11-28 12:00:00','TYC1');
+
+-- --------------------RETRAIT CONGE--------------------------
+INSERT INTO RetraitConge values(default,null,2.5,0,'emp1');
