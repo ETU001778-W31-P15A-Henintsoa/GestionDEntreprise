@@ -29,9 +29,13 @@ class Welcome extends CI_Controller {
 	// Loading view
 	public function versDemandeConge()
 	{
-		// $data['departement'] = $this->Generalisation->avoirTable("departement");
+		$erreur = $this->input->get("erreur");
+		if(isset($erreur)){
+			$data['erreur'] = "Vous devez soumettre votre demande de conge 15 jours avant la date de debut de votre conge";
+		}
+		$data['typeconge'] = $this->Generalisation->avoirTable("typeconge");
 		$this->load->view('header2');
-		$this->load->view('demandeconge');
+		$this->load->view('demandeconge', $data);
 	}
 
 	public function versPrimeEmploye()
@@ -188,17 +192,24 @@ class Welcome extends CI_Controller {
 		$matricule = $this->input->post("matricule");
 		$idtypeconge = $this->input->post("idtypeconge");
 		$datedebut = $this->input->post("datedebut");
-		$heuredebut = $this->input->post("heuredebut");
+		// $heuredebut = $this->input->post("heuredebut");
 		$datefin = $this->input->post("datefin");
-		$heurefin = $this->input->post("heurefin");
-		echo $matricule;
-		echo $idtypeconge;
-		echo $datedebut;
-		echo $datefin;
+		// $heurefin = $this->input->post("heurefin");
+
+		$datedebut = str_replace("T", " ", $datedebut);
+		$datefin = str_replace("T", " ", $datefin);
+
+		// echo $matricule;
+		// echo $idtypeconge;
+		// echo $datedebut;
+		// echo $datefin;
 		// $datedebut = $datedebut." ".$heuredebut;
-		// $datefin = $datefin." ".$heurefin;
-		// $this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
-		echo 'Okey';
+		// $dateatefin." ".$heurefin;fin = $d
+		$retour = $this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
+		if($retour==false){
+			redirect("welcome/versDemandeConge?erreur=1");
+		}
+		// echo 'Okey';
 		// Load view manaraka
 	}
 

@@ -284,11 +284,11 @@ WHERE idbranchedepartement = 'BRA1';
 ------------------------------Type Conge -------------------------------
 INSERT INTO TypeConge (libelle, durreeJournalier, estDeductible)
 VALUES
-    ('Congé an', true),
-    ('Congé de mala', true),
+    ('Congé an', 2.5, true),
+    ('Congé de maladie', 1.0, true),
     ('Congé de maternité', 1.0, false),
     ('Congé de paternité', 1.0, false),
-    ('Congé sans so', true);
+    ('Congé sans so', 1.0, true);
 
 --------------------------Programme--------------------
 insert into programme values(default,'monday','08:00:00','17:00:00','DEPT1');
@@ -338,3 +338,10 @@ INSERT INTO TypePrime(libelle, pourcentage) VALUES
     ('Travail de nuit', 30),
     ('Prime Diverse', 20),
     ('Droit de Conge', 0);
+
+------------------------------ ANCIENETE -------------------------------------
+INSERT INTO Ancienete (debut, fin, valeur) VALUES
+    (5, 10, 10000),
+    (10, 15, 15000),
+    (15, 20, 30000),
+    (20, 100, 35000);

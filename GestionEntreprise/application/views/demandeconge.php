@@ -11,33 +11,43 @@
                       <!-- <small class="text-muted float-end">Default label</small> -->
                     </div>
                     <div class="card-body">
-                      <form action="<?php echo site_url("welcome/formulaire"); ?>" method="post">
+                        <?php if(isset($erreur)){
+                            echo "<p style=color:red;>".$erreur."</p>";
+                        }?>
+                      <form action="<?php echo site_url("welcome/formulaireDemandeConge"); ?>" method="post">
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-fullname">Matricule de l'Employe</label>
                           <input type="text" class="form-control" id="basic-default-fullname" name="matricule" placeholder="Matricule" />
                         </div>
                         <div class="mb-3">
-                          <label class="form-label" for="basic-default-company">Type de Conge</label>
-                          <input type="text" class="form-control" id="basic-default-company" placeholder="ACME Inc." />
+                            <label for="defaultSelect" class="form-label">type de Conge</label>
+                            <select id="defaultSelect" class="form-select">
+                            <option>Choisir</option>
+                            <?php for ($i=0; $i < count($typeconge); $i++) { ?>
+                                <option value="<?php echo $typeconge[$i]->idtypeconge; ?>"><?php echo $typeconge[$i]->libelle; ?></option>
+                            <?php } ?>
+                            </select>
                         </div>
                         <div class="mb-3">
-                        <label class="form-label" for="basic-default-company">Date debut du Conge</label>
+                        <label class="form-label" for="basic-default-company" name="datedebut">Date debut du Conge</label>
                             <!-- <div class="col-md-12"> -->
                             <input
                                 class="form-control"
                                 type="datetime-local"
                                 id="html5-datetime-local-input"
+                                name="datedebut"
                             />
                                 <!-- </div> -->
                             <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
                         </div>
                         <div class="mb-3">
-                        <label class="form-label" for="basic-default-company">Date fin du Conge</label>
+                        <label class="form-label" for="basic-default-company" name="datefin">Date fin du Conge</label>
                             <!-- <div class="col-md-12"> -->
                             <input
                                 class="form-control"
                                 type="datetime-local"
                                 id="html5-datetime-local-input"
+                                name="datefin"
                             />
                                 <!-- </div> -->
                             <!-- <div class="form-text">You can use letters, numbers & periods</div> -->

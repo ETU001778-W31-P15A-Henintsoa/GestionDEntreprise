@@ -424,7 +424,7 @@ create table DemandeConge(
     datefin timestamp,
     etat int default 0, 
     foreign key (idEmploye) references Employe(idEmploye),
-    foreign key (idTypeConge) references TypeConge(idTypesConge)
+    foreign key (idTypeConge) references TypeConge(idTypeConge)
 );
 
 
@@ -445,6 +445,14 @@ create table PrimeEmploye(
     quantite float
 );
 
+------------------------------------ ANCIENETE -----------------------------------------
+create sequence seqAncienete;
+create table Ancienete(
+    idAncienete varchar(20) default concat('ANC'|| nextval('seqAncienete')) primary key,
+    debut int,
+    fin int,
+    valeur float
+);
 --------------------------------------- ALTER ---------------------------------------------
 ALTER TABLE Diplome
 ADD etat int;
@@ -551,4 +559,11 @@ alter table BrancheDepartement
 ADD salaireMinimum float,
 ADD salaireMAximum float;
 
+alter table PrimeEmploye
+ADD dateprime date;
+
+alter table Salaire
+drop idbranchedepartement,
+add idemploye varchar(20),
+add CONSTRAINT idemploye foreign key (idemploye) references employe(idemploye);
 

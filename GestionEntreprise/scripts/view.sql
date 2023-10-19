@@ -131,3 +131,15 @@ create or replace view v_TypePrimeEmploye as
     from Employe 
         join PrimeEmploye on PrimeEmploye.idEmploye = Employe.idEmploye
         join TypePrime on TypePrime.idTypePrime = PrimeEmploye.idTypePrime;
+
+------------------------------- VUE MOIS PRIME -------------------------------------------------
+create or replace view MoisPrime as
+    SELECT idprimeemploye, EXTRACT(MONTH FROM dateprime) AS moisprime 
+    FROM PrimeEmploye;
+
+------------------------------- VUE TYPEPTIMEEMPLOYE -------------------------------------------
+create or replace view v_MoisTypePrimeEmploye as
+    select v_TypePrimeEmploye.*,
+    MoisPrime.moisprime
+    from v_TypePrimeEmploye
+        join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
