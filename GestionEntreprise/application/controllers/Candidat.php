@@ -102,10 +102,16 @@ class Candidat extends CI_Controller {
 
     }
 
-    public function detailsCV($idCandidat) {
-        $data['cv']=$this->Candidats->avoirCV($idCandidat);
+    public function listeCV() {
+        $data['cv']=$this->Candidats->avoirCV("");
+        $this->load->view('header2',$data);
+		$this->load->view('CV',$data);
+    }
+
+    public function detailsCV($idcandidat) {
+        $data['cv'] = $this->Candidats->avoirCV($idcandidat);
         $this->load->view('header2');
-        $this->load->view('DetailsCV',$data);
+        $this->load->view('DetailsCV', $data);
     }
 
 }

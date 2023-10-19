@@ -4,6 +4,7 @@ create or replace view v_BrancheDepartement as
         join Branche on Branche.idBranche= bd.idBranche
         join Departement on Departement.idDepartement = bd.idDepartement;
 
+
 create or replace view v_BesoinPersonnelle as
     select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
     from BesoinPersonnelle bp
@@ -77,7 +78,7 @@ create or replace view v_BesoinPersonnelleAnnonce as
         left join annonce  on bp.idBesoin=annonce.idBesoin;
 
 create or replace view v_employePoste as
-    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,mission,DescriptionPost  from employe as emp
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost  from employe as emp
         join posteEmploye as p on emp.idEmploye=p.idEmploye
         join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
 
@@ -102,7 +103,7 @@ create or replace view v_candidatEntretien as
 
 -- ---------------------------------CANDIDAT-----------------------------------------------------
 create or replace view v_candidat as 
-    select c.*,vb.branche,vb.departement,
+  select c.*,vb.branche,vb.departement,
     diplome.libelle as diplome,experience.anneeExperience,ville.ville ,filiere.libelle as filiere,Nationnalite.libelle as nationnalite
     from Candidat c
         join diplome on c.iddiplome=diplome.idDiplome
@@ -113,6 +114,18 @@ create or replace view v_candidat as
         join SituationMatrimoniale sm on sm.idSituation=c.idSituation
         join Annonce on annonce.idannonce= c.idannonce 
         join v_BesoinPersonnelle vb on annonce.idbesoin= vb.idbesoin;
+
+-- -------------------------------CONGE----------------------------------------------
+
+create or replace view v_demandeCongeEmploye as
+    select dc.idemploye,dc.debutConge as debutDemande,dc.finConge as finDemande,ce.* 
+    from demandeConge as dc 
+        join CongeEmploye as ce on ce.idDemandeConge=dc.idDemandeConge;
+
+create or replace view v_retraitCongeEmploye as
+    select rc.resteconge,rc.totalpris,dc.*
+    from RetraitConge as rc 
+        left join v_demandeCongeEmploye as dc on dc.idcongeEmploye=rc.idcongeEmploye;
 
 ------------------------------------- RETRAIT CONGE EMPLOYE ------------------------------------------------------------
 create or replace view v_retraitCongeEmploye as
@@ -143,3 +156,4 @@ create or replace view v_MoisTypePrimeEmploye as
     MoisPrime.moisprime
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
+

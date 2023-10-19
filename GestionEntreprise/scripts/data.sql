@@ -327,6 +327,15 @@ INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
 ('emp5','BRA13','2021-04-11'),
 ('emp6','BRA16','2016-03-15');
 
+-- -------------------BRANCHES-------------------------------
+INSERT INTO Branche (libelle) VALUES ('Chef de projets');
+
+-- -------------------DEMANDE CONGE---------------------------
+INSERT INTO demandeConge values(default,'emp1','2023-11-24 12:00:00','2023-11-28 12:00:00','TYC1');
+
+-- --------------------RETRAIT CONGE--------------------------
+INSERT INTO RetraitConge values(default,null,2.5,0,'emp1');
+
 --------------------------- TYPE PRIME ------------------------------------
 INSERT INTO TypePrime(libelle, pourcentage) VALUES
     ('Prime de Rendement', 0),

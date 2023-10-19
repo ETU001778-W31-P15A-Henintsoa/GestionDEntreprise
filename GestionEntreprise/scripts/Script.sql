@@ -381,6 +381,14 @@ create table posteEmploye(
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
+
+-- ----------------------QUALITE REQUISE----------------------------------------
+create sequence seqQualite;
+create table QualiteRequise(
+    idQualite varchar(20) default concat('QUA' || nextval('seqQualite')) primary key,
+    libelle varchar(100)
+);
+
 ------------------------------ QUESTIONS EVALUATION------------------------------
 -- create sequence seqQuestionEvaluation;
 -- create table questionsEvluation (
@@ -453,6 +461,7 @@ create table Ancienete(
     fin int,
     valeur float
 );
+
 --------------------------------------- ALTER ---------------------------------------------
 ALTER TABLE Diplome
 ADD etat int;
@@ -545,6 +554,10 @@ add categorie varchar(15);
 alter table employe
 drop dateembauche cascade;
 
+alter table Branche
+add mgr varchar(15),
+ADD CONSTRAINT fk_branchedept FOREIGN KEY (mgr) REFERENCES Branche(idBranche);
+
 -------------------------------
 alter table congeemploye
 add accordDG boolean,
@@ -566,4 +579,5 @@ alter table Salaire
 drop idbranchedepartement,
 add idemploye varchar(20),
 add CONSTRAINT idemploye foreign key (idemploye) references employe(idemploye);
+
 

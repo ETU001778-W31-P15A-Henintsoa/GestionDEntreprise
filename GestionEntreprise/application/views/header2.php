@@ -164,9 +164,27 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php ?>" class="menu-link">
+              <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables"> Voir CV</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Conges </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('listeController/formulaireConge/') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Insertion Conges </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('listeController/formulaireDemandeConges/') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Demande de Conges </div>
               </a>
             </li>
           </ul>
