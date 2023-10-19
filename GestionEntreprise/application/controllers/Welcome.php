@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		// $data['departement'] = $this->Generalisation->avoirTable("departement");
-		$this->load->view('index', $data);
+		$this->load->view('index');
 	}
 	
 
@@ -30,6 +30,7 @@ class Welcome extends CI_Controller {
 	public function versDemandeConge()
 	{
 		// $data['departement'] = $this->Generalisation->avoirTable("departement");
+		$this->load->view('header2');
 		$this->load->view('demandeconge');
 	}
 
@@ -190,9 +191,13 @@ class Welcome extends CI_Controller {
 		$heuredebut = $this->input->post("heuredebut");
 		$datefin = $this->input->post("datefin");
 		$heurefin = $this->input->post("heurefin");
-		$datedebut = $datedebut." ".$heuredebut;
-		$datefin = $datefin." ".$heurefin;
-		$this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
+		echo $matricule;
+		echo $idtypeconge;
+		echo $datedebut;
+		echo $datefin;
+		// $datedebut = $datedebut." ".$heuredebut;
+		// $datefin = $datefin." ".$heurefin;
+		// $this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
 		echo 'Okey';
 		// Load view manaraka
 	}

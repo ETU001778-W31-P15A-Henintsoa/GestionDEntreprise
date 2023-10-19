@@ -121,13 +121,13 @@ create or replace view v_retraitCongeEmploye as
     TypeConge.libelle, TypeConge.durreeJournalier, TypeConge.estDeductible
     from CongeEmploye
         join RetraitConge on RetraitConge.idcongeEmploye = CongeEmploye.idcongeEmploye
-        join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge
+        join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge;
 
 ------------------------------------- VUE EMPLOYE/TYPE PRIME/ PRIME EMPLOYEs----------------------------
 create or replace view v_TypePrimeEmploye as
     select Employe.*,
-    PrimeEmploye.idPrimeEmploye, PrimeEmploye.idTypePrime, PrimeEmploye.qunatite,
+    PrimeEmploye.idPrimeEmploye, PrimeEmploye.idTypePrime, PrimeEmploye.quantite,
     TypePrime.libelle, TypePrime.pourcentage
     from Employe 
         join PrimeEmploye on PrimeEmploye.idEmploye = Employe.idEmploye
-        join TypePrime on TypePrime.idTypePrime = PrimeEmploye.idTypePrime
+        join TypePrime on TypePrime.idTypePrime = PrimeEmploye.idTypePrime;

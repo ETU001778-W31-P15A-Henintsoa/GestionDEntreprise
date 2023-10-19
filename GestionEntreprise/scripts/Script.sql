@@ -539,10 +539,12 @@ drop dateembauche cascade;
 
 -------------------------------
 alter table congeemploye
-add accordDG boolean;
+add accordDG boolean,
+add accordRH boolean;
 
 alter table congeemploye
-add accordRH boolean;
+drop accordDG cascade,
+drop accordRH cascade;
 
 --------------------- FOURCHETTE ------------------------
 alter table BrancheDepartement
