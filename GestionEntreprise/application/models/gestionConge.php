@@ -105,6 +105,36 @@ class gestionConge extends CI_Model {
         $this->insererCongeEmploye($dernierCongeEmp[0]->idcongeemploye,$dateHeureDebut,$dateHeureFin);
     }
 
+    // DEMANDE DE CONGE
+
+    function distanceEntreDate($datedebut){
+        // $sql = sprintf("SELECT Extract(DAY FROM AGE (NOW(), '%s')) as ageEnJour");
+        $sql = sprintf("SELECT DATE_PART('day', AGE('%s', NOW())) as ageEnJour", $datedebut);
+        $query = $this->db->query($sql);
+        foreach($query->result() as $row){
+            return $row;
+        }
+    }
+
+    function verification($datedebut){
+        $distance = $this->distanceEntreDate($datedebut);
+        $distance = floatval($distance->ageenjour);
+        var_dump($distance);
+        if($distance<15){
+            return false;
+        }
+        return true;
+    }
+
+    function insertionDemandeConge($matricule, $idtypeconge, $datetimedebut, $datetimefin){
+        $distance = $this->verification($datetimedebut);
+        if($distance==false){
+            return false;
+        }
+        // $employe = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("matricule='%s'", $matricule));
+        // $this->Generalisation->insertion("demandeconge(idemploye, idTypeconge, datedebut, datefin)", sprintf("('%s', '%s', '%s', '%s')", $employe[0]->idemploye, $idtypeconge, $datetimedebut, $datetimefin));
+    }
+
     public function avoirTypeConge() {
         $sql = "SELECT * FROM typeConge";
         $query = $this->db->query($sql);
@@ -118,7 +148,6 @@ class gestionConge extends CI_Model {
         $result = $query->result_array();
         return $result;
     }
-
 }
 
 // $date1 = new DateTime('2023-10-13');

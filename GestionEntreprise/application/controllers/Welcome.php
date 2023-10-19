@@ -21,11 +21,41 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$data['departement'] = $this->Generalisation->avoirTable("departement");
-		$this->load->view('index', $data);
+		// $data['departement'] = $this->Generalisation->avoirTable("departement");
+		$this->load->view('index');
 	}
+	
 
 	// Loading view
+	public function versDemandeConge()
+	{
+		$erreur = $this->input->get("erreur");
+		if(isset($erreur)){
+			$data['erreur'] = "Vous devez soumettre votre demande de conge 15 jours avant la date de debut de votre conge";
+		}
+		$data['typeconge'] = $this->Generalisation->avoirTable("typeconge");
+		$this->load->view('header2');
+		$this->load->view('demandeconge', $data);
+	}
+
+	public function versPrimeEmploye()
+	{
+		$data['prime'] = $this->Generalisation->avoirTable("TypePrime");
+		$this->load->view('primeemploye', $data);
+	}
+
+	public function versFormulaireBesoin()
+	{
+		$data['departement'] = $this->Generalisation->avoirTable("departement");
+		// $this->load->view('header');
+		$this->load->view('formulairebesoin', $data);
+	}
+
+	public function versFicheEvaluation()
+	{
+		$this->load->view('formulaireficheevaluation');
+	}
+
 	public function versAcceuil(){
 		$this->load->view('acceuil');
 	}
@@ -136,6 +166,7 @@ class Welcome extends CI_Controller {
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
 		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
 		echo 'Okey';
+		// Load view manaraka
 	}
 	
 	// Insertion donnees pour le contrat essaie
@@ -154,6 +185,37 @@ class Welcome extends CI_Controller {
 		// var_dump($services);
 		$this->ContratEssai->InsertionContratEssaiService($idemploye, $datedebut, $datefin, $salaire, $idbranchedepartement, $services);
 		redirect("welcome/versMonContratEssai?idemploye=".$idemploye);
+	}
+
+	// INsertion de demande de conge
+	public function formulaireDemandeConge(){
+		$matricule = $this->input->post("matricule");
+		$idtypeconge = $this->input->post("idtypeconge");
+		$datedebut = $this->input->post("datedebut");
+		// $heuredebut = $this->input->post("heuredebut");
+		$datefin = $this->input->post("datefin");
+		// $heurefin = $this->input->post("heurefin");
+
+		$datedebut = str_replace("T", " ", $datedebut);
+		$datefin = str_replace("T", " ", $datefin);
+
+		// echo $matricule;
+		// echo $idtypeconge;
+		// echo $datedebut;
+		// echo $datefin;
+		// $datedebut = $datedebut." ".$heuredebut;
+		// $dateatefin." ".$heurefin;fin = $d
+		$retour = $this->gestionConge->insertionDemandeConge($matricule, $idtypeconge, $datedebut, $datefin);
+		if($retour==false){
+			redirect("welcome/versDemandeConge?erreur=1");
+		}
+		// echo 'Okey';
+		// Load view manaraka
+	}
+
+	// Insertion Prime Employe
+	public function formulairePrimeEmploye(){
+
 	}
 
 

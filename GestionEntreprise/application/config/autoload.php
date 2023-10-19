@@ -135,3 +135,4 @@ $autoload['language'] = array();
 
 $autoload['model'] = array('Besoins', 'Generalisation', 'Criteres', 'Login_modele', 'QuestionsReponses', 'ContratEssai','Annonce','Candidats','gestionConge');
 
+
