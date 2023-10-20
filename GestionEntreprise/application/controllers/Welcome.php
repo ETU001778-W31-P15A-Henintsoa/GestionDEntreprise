@@ -38,9 +38,27 @@ class Welcome extends CI_Controller {
 		$this->load->view('demandeconge', $data);
 	}
 
+	public function versListeConge()
+	{
+		$idemploye = 'emp1'; //$this->input->get('idemploye');
+		$tous = $this->input->get('tous');
+		$data = array();
+		if($_SESSION['RH']==21){
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat != 21 order by nom');
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat = 21 order by nom');
+		}else{
+			$data['conge'] = $this->Generalisation->avoirTable('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
+			$data['demande'] = $this->Generalisation->avoirTable('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
+		}
+		$this->load->view('header2');
+		$this->load->view('listeconge', $data);
+	}
+
 	public function versPrimeEmploye()
 	{
-		$data['prime'] = $this->Generalisation->avoirTable("TypePrime");
+		$data['prime'] = $this->Generalisation->avoirTable("typeprime");
+		$data['employe'] = $this->Generalisation->avoirTable("employe");
+		$this->load->view('header2');
 		$this->load->view('primeemploye', $data);
 	}
 
@@ -107,7 +125,6 @@ class Welcome extends CI_Controller {
 		$data['service'] =  $this->Generalisation->avoirTable('service');
 		$this->load->view('creationcontratessai', $data);
 	}
-
 
 	//Test an'ilay note Employer fotsiny
 	public function versCalculeNote(){
@@ -216,6 +233,17 @@ class Welcome extends CI_Controller {
 	// Insertion Prime Employe
 	public function formulairePrimeEmploye(){
 
+	}
+
+	// Validation demande 
+	public function validationDemandeRH(){
+		$iddemande = $this->input->get('iddemande');
+		$this->Generalisation->miseAJour("demandeconge", "etat=21", sprintf("iddemandeconge='%s'", $iddemande));
+		if($_SESSION['RH']==21){
+			redirect("welcome/versListeConge?tous=1");
+		}else{
+			redirect("welcome/versListeConge");
+		}
 	}
 
 

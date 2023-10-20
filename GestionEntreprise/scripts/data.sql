@@ -345,3 +345,5 @@ INSERT INTO Ancienete (debut, fin, valeur) VALUES
     (10, 15, 15000),
     (15, 20, 30000),
     (20, 100, 35000);
+
+-- Employe 21 RH

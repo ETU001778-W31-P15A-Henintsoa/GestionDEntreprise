@@ -340,7 +340,7 @@ create sequence seqCongeEmploye;
 create table CongeEmploye(
     idCongeEmploye varchar(20) default concat('COE'|| nextval('seqCongeEmploye')) primary key,
     idemploye varchar(20),
-    DebutCange timestamp,
+    DebutConge timestamp,
     FinConge timestamp,
     idTypeConge varchar(20), 
     foreign key (idTypeConge) references TypeConge(idTypeConge),

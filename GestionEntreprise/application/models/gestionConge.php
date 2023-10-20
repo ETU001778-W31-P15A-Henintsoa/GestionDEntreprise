@@ -90,7 +90,7 @@ class gestionConge extends CI_Model {
     function verification($datedebut){
         $distance = $this->distanceEntreDate($datedebut);
         $distance = floatval($distance->ageenjour);
-        var_dump($distance);
+        // var_dump($distance);
         if($distance<15){
             return false;
         }
@@ -102,8 +102,11 @@ class gestionConge extends CI_Model {
         if($distance==false){
             return false;
         }
-        // $employe = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("matricule='%s'", $matricule));
-        // $this->Generalisation->insertion("demandeconge(idemploye, idTypeconge, datedebut, datefin)", sprintf("('%s', '%s', '%s', '%s')", $employe[0]->idemploye, $idtypeconge, $datetimedebut, $datetimefin));
+        $employe = $this->Generalisation->avoirTableSpecifique("employe", "*", sprintf("matricule='%s'", $matricule));
+        var_dump($employe);
+        // echo sprintf("('%s', '%s', '%s', '%s')", $employe[0]->idemploye, $idtypeconge, $datetimedebut, $datetimefin);
+        $this->Generalisation->insertion("demandeconge(idemploye, idTypeconge, datedebut, datefin)", sprintf("('%s', '%s', '%s', '%s')", $employe[0]->idemploye, $idtypeconge, $datetimedebut, $datetimefin));
+        return true;
     }
 
     

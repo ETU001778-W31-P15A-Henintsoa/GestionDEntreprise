@@ -169,6 +169,21 @@
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
             </li>
+            <?php if($_SESSION['RH']==21){ ?>
+            <li class="menu-item">
+            <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Liste Demande Conge</div>
+              </a>
+            </li>
+            <?php } else{ ?>
+              <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Conges</div>
+              </a>
+            </li>
+            <?php } ?>
           </ul>
         </aside>
         <!-- / Menu -->
