@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                  <a href="<?php echo site_url('Candidat/detailsCV/') . $cvs['idcandidat']; ?>" class="btn btn-sm btn-primary">
+                  <a href="<?php echo site_url('Candidat/detailsCV/' . $cvs['idcandidat']); ?>" class="btn btn-sm btn-primary">
                       <i class="fas fa-user"></i> View Details
                     </a>
                   </div>
