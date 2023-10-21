@@ -1,5 +1,5 @@
 create or replace view v_BrancheDepartement as
-    select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
+    select Branche.libelle as branche, Branche.mgr, Departement.nomDepartement as departement,bd.*
     from BrancheDepartement as bd
         join Branche on Branche.idBranche= bd.idBranche
         join Departement on Departement.idDepartement = bd.idDepartement;
@@ -42,14 +42,14 @@ create or replace view v_QuestionsReponsesVBesoinPersonnelle as
         join Questions on Questions.idbesoin = v_BesoinPersonnelle.idbesoin
         join Reponses on Reponses.idquestion = Questions.idquestion ;
 
------------------------- VUE QUESTIONS & REPONSES EVALUATION/EMPLOYE ---------------------------------------------------
-create or replace view v_QuestionsReponsesEmployeEvaluation as 
-    select v_employeposte.*
-    QuestionsEvaluation.idquestionEvaluation, QuestionsEvaluation.libellEvaluatione as libellequestionEvaluation, QuestionsEvaluation.coefficient as coefficientquestion,
-    Reponses.idreponse, Reponses.libelle as libellereponse, Reponses.bonnereponse
-    from v_employeposte
-        join ReponsesEvaluation on ReponsesEvaluation.idemploye = v_employeposte.idemploye
-        join QuestionsEvaluation on QuestionsEvaluation.idbesoin = ReponsesEvaluation.idquestionEvaluation;
+-- ------------------------ VUE QUESTIONS & REPONSES EVALUATION/EMPLOYE ---------------------------------------------------
+-- create or replace view v_QuestionsReponsesEmployeEvaluation as 
+--     select v_employeposte.*
+--     QuestionsEvaluation.idquestionEvaluation, QuestionsEvaluation.libellEvaluatione as libellequestionEvaluation, QuestionsEvaluation.coefficient as coefficientquestion,
+--     Reponses.idreponse, Reponses.libelle as libellereponse, Reponses.bonnereponse
+--     from v_employeposte
+--         join ReponsesEvaluation on ReponsesEvaluation.idemploye = v_employeposte.idemploye
+--         join QuestionsEvaluation on QuestionsEvaluation.idbesoin = ReponsesEvaluation.idquestionEvaluation;
 
 
 ----------------------- VUE FORMULAIRERE TEST CANDIDAT/QUESTION/REPONSE ------------------------------------------
@@ -77,6 +77,7 @@ create or replace view v_BesoinPersonnelleAnnonce as
     select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
         left join annonce  on bp.idBesoin=annonce.idBesoin;
 
+-- ----------------------------------------
 create or replace view v_employePoste as
     select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost  from employe as emp
         join posteEmploye as p on emp.idEmploye=p.idEmploye
@@ -118,7 +119,7 @@ create or replace view v_candidat as
 -- -------------------------------CONGE----------------------------------------------
 
 create or replace view v_demandeCongeEmploye as
-    select dc.idemploye,dc.debutConge as debutDemande,dc.finConge as finDemande,ce.* 
+    select dc.idemploye,dc.datedebut as debutDemande,dc.datefin as finDemande,ce.* 
     from demandeConge as dc 
         join CongeEmploye as ce on ce.idDemandeConge=dc.idDemandeConge;
 
@@ -137,11 +138,11 @@ create or replace view v_retraitCongeEmploye as
         join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge;
 
 ------------------------------------- CONGE EMPLOYE ------------------------------------------------------------
-create or replace view v_CongeEmploye as
-    select CongeEmploye.*,
-    Employe.nom, Employe.prenom
-    from CongeEmploye
-        join Employe on Employe.idEmploye = CongeEmploye.idEmploye;
+-- create or replace view v_CongeEmploye as
+--     select CongeEmploye.*,
+--     Employe.nom, Employe.prenom
+--     from CongeEmploye
+--         join Employe on Employe.idEmploye = CongeEmploye.idEmploye;
 
 ------------------------------------- DEMANDE EMPLOYE ------------------------------------------------------------
 create or replace view v_DemandeConge as

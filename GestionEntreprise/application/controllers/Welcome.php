@@ -47,7 +47,7 @@ class Welcome extends CI_Controller {
 			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat != 21 order by nom');
 			$data['demandeemployevalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat = 21 order by nom');
 		}else{
-			$data['conge'] = $this->Generalisation->avoirTable('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
+			// $data['conge'] = $this->Generalisation->avoirTable('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
 			$data['demande'] = $this->Generalisation->avoirTable('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
 		}
 		$this->load->view('header2');
@@ -135,6 +135,13 @@ class Welcome extends CI_Controller {
 		$candidats = $this->Generalisation->avoirTable("candidat");
 		$candidatNote = $this->QuestionsReponses->calculNoteParCandidat($candidats);
 		var_dump($candidatNote);
+	}
+
+	// Hijery fiche de paie
+	public function versChoixFicheDePaie(){
+		$data['employe'] = $this->Generalisation->avoirTable("employe");
+		$this->load->view('header2');
+		$this->load->view('choixfichedepaix', $data);
 	}
 
 	//Calcule et insertion des reponses du test du candidat

@@ -422,7 +422,6 @@ create table QualiteRequise(
 -- );
 
 -------------------------------------DEMANDES CONGE ---------------------------------------
-
 create sequence seqDemandeConge;
 create table DemandeConge(
     idDemandeConge varchar(20) default concat('DEC'|| nextval('seqDemandeConge')) primary key,
@@ -507,6 +506,9 @@ ADD situation float;
 ALTER table Critere 
 ADD age int;
 
+ALTER table Critere 
+ADD agefin int;
+
 ALTER table Criterecoefficient
 ADD age float;
 
@@ -579,5 +581,11 @@ alter table Salaire
 drop idbranchedepartement,
 add idemploye varchar(20),
 add CONSTRAINT idemploye foreign key (idemploye) references employe(idemploye);
+
+--------------------- 
+alter table CongeEmploye
+drop idemploye,
+add iddemandeconge varchar(20),
+add constraint iddemandeconge foreign key (iddemandeconge) references demandeconge(iddemandeconge);
 
 

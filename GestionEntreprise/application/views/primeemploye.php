@@ -6,14 +6,16 @@
     <title>Questions/Reponses</title>
 </head>
 <body>
-<h2>Questions pour le testes</h2>
 
 <?php  // var_dump($besoin); ?>
+        <div class="content-wrapper">
+            <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulaire d'Insertion des</span> Primes</h4>
             <div class="row">
                 <div class="col-xl">
                   <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Formulaire de demande de conge</h5>
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Choix d'Employe</h5>
                       <!-- <small class="text-muted float-end">Default label</small> -->
                     </div>
                     <div class="card-body">
@@ -28,12 +30,17 @@
                             <?php } ?>
                             </select>
                     </div>
+
                     <?php for ($i=0; $i < count($prime); $i++) { ?>
-                    <div class="mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            <label class="form-check-label" for="defaultCheck1"> <?php echo $prime[$i]->libelle; ?> </label>
+                    <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="defaultCheck1" onchange="plus('<?php echo $prime[$i]->idtypeprime; ?>')" />
+                            <label class="form-check-label" for="defaultCheck1">     <?php echo $prime[$i]->libelle; ?> </label>
+                            <div id="<?php echo $prime[$i]->idtypeprime; ?>">
+                            </div>
                     </div>
+                    <br>
                     <?php } ?>
+                    <button type="submit" class="btn btn-primary">Soumetre</button>
                     </form>
                     </div>
                   </div>
@@ -41,47 +48,11 @@
             </div>
 
 <script>
-    function plusautrereponse(idbesoins, numeroquestion, numeroreponse) {
-        var string = 'question' + numeroquestion + 'autre' + numeroreponse;
-        // alert(string);
-        var element = document.getElementById(string);
-            if (element.value == "") {
-                alert("Suggestion vide");
-            } else {
-
-                numeroreponseavant = numeroreponse;
-                numeroreponse = numeroreponse + 1;
-                numeromanaraka = numeroreponse + 1;
-
-                var idspan = "" + idbesoins + numeroquestion+numeroreponse
-
-                var nouveau = "<div class="mb-3"><input id="basic-default-fullname" class="form-control" type=text name='"+idbesoins+"question" + numeroquestion + "autre" + numeroreponse + "' id='question"+numeroquestion+"autre"+numeroreponse+"' placeholder='Autre " + numeroreponse + "'  "+"/> <span id='"+ idspan +"'><button type='button' id='"+ idspan +"'  onclick=plusautrereponse('" +idbesoins+ "'," + numeroquestion + "," + numeroreponse + ")>+</button></span>" +
-                    "<div id='question" + numeroquestion + "autre" + numeromanaraka + "'></div>";
-
-                string = 'question' + numeroquestion + 'autre' + numeroreponse;
-                // alert(nouveau);
-
-                var conteneur = document.getElementById(string);
-                conteneur.innerHTML = nouveau;
-
-                //Creation du bouton
-                // let btn = document.createElement("button");
-                // btn.innerHTML = "+";
-                // btn.type = "button";
-
-                // btn.addEventListener("click",()=>{
-                //     plusautrereponse(idbesoins , numeroquestion,numeroreponse); 
-                // });
-
-                // var span = document.getElementById(idspan);
-                // span.appendChild(btn);
-
-                // alert("" + idbesoins + numeroquestion + "" + numeroreponseavant);
-
-                // Suppression du span
-                var ancienSpan = document.getElementById("" + idbesoins + numeroquestion + "" + numeroreponseavant);
-                ancienSpan.remove();
-            }   
+    function plus(idtypeprime) {
+        var nouveau =  "<p><input class='form-control' type='number' value='Sneat' id= 'html5-text-input' name='"+idtypeprime+"Q' placeholder='Quantite'/></p>"+
+                        "<p><input class='form-control' type='datetime-local' id='html5-datetime-local-input' name='"+idtypeprime+"D' /></p>";
+        var conteneur = document.getElementById(idtypeprime);
+        conteneur.innerHTML = nouveau;
     }
 </script>
 </html>

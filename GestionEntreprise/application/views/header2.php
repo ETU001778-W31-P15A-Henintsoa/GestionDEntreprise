@@ -169,12 +169,17 @@
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
             </li>
-<<<<<<< HEAD
             <?php if($_SESSION['RH']==21){ ?>
             <li class="menu-item">
             <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables"> Liste Demande Conge</div>
+              </a>
+            </li>
+            <li class="menu-item">
+            <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Voir Fiche De Paie</div>
               </a>
             </li>
             <?php } else{ ?>
@@ -185,7 +190,6 @@
               </a>
             </li>
             <?php } ?>
-=======
             <li class="menu-item">
               <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
@@ -199,12 +203,11 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo site_url('listeController/formulaireDemandeConges/') ?>" class="menu-link">
+              <a href="<?php echo site_url('listeController/formuslaireDemandeConges/') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables"> Demande de Conges </div>
               </a>
             </li>
->>>>>>> f29b694c8a3b079f7008aa63983f6ad8c8b7ebfb
           </ul>
         </aside>
         <!-- / Menu -->

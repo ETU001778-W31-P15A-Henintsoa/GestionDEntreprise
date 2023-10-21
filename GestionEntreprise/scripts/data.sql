@@ -157,6 +157,8 @@ INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
 VALUES ('Wilson', 'Michael', '202 Cedar Street', '0345678943', 'michael.wilson@email.com', 'motdepasse5', TRUE);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
 VALUES ('Lee', 'Linda', '303 Maple Avenue', '0330340000', 'linda.lee@email.com', 'motdepasse6', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, etat, estessaie)
+values ('HERINJANAHRY', 'Lova Henintsoa', 'GVAS 8 Soamanandrariny', '0322222222', 'henintsoa@gmail.com','henintsoa', 21,true)
 
 -- -----------------------------CONTRAT ESSAI--------------------------------------------
 INSERT INTO contratEssai (idEmploye, salairebrut, salairenet, duree, idBrancheDepartement)
@@ -354,8 +356,6 @@ INSERT INTO Ancienete (debut, fin, valeur) VALUES
     (10, 15, 15000),
     (15, 20, 30000),
     (20, 100, 35000);
-<<<<<<< HEAD
 
 -- Employe 21 RH
-=======
->>>>>>> f29b694c8a3b079f7008aa63983f6ad8c8b7ebfb
+
