@@ -44,11 +44,15 @@ class Welcome extends CI_Controller {
 		$tous = $this->input->get('tous');
 		$data = array();
 		if($_SESSION['RH']==21){
-			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat != 21 order by nom');
-			$data['demandeemployevalider'] = $this->Generalisation->avoirTableConditionnee('v_demandeconge where etat = 21 order by nom');
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat != 21 order by nom');
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat = 21 order by nom');
+		}else if($_SESSION['RH']==11){
+			$departement = $this->Generalisation->avoirTableSpecifique('employe', 'iddepartement', sprintf("idemploye='%s'", $_SESSION['utilisateur']));
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat!=21 order by nom", $iddepartement[0]->iddepartement));
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat=21 order by nom", $iddepartement[0]->iddepartement));
 		}else{
-			// $data['conge'] = $this->Generalisation->avoirTable('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
-			$data['demande'] = $this->Generalisation->avoirTable('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
+			$data['conge'] = $this->Generalisation->avoirTableSpecifique('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
+			$data['demande'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
 		}
 		$this->load->view('header2');
 		$this->load->view('listeconge', $data);
@@ -60,6 +64,11 @@ class Welcome extends CI_Controller {
 		$data['employe'] = $this->Generalisation->avoirTable("employe");
 		$this->load->view('header2');
 		$this->load->view('primeemploye', $data);
+	}
+
+	public function versFicheDePaix(){
+		$this->load->view('header2');
+		$this->load->view('fichedepaix');
 	}
 
 	public function versFormulaireBesoin()
@@ -81,6 +90,7 @@ class Welcome extends CI_Controller {
 	public function versQuestionsResponses(){
 		$nombre = 1;
 		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
+		$this->load->view("header2");
 		$this->load->view("qr", $data);
 	}
 
@@ -144,7 +154,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('choixfichedepaix', $data);
 	}
 
-	//Calcule et insertion des reponses du test du candidat
+	//Calcule et insertion des reponses du test du candidat   
 	public function formulairetestcansidat(){
 		$idcandidat = "CAN1";
 		$idbesoin = $this->input->post('idbesoin');

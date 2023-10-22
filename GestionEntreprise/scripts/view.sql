@@ -137,19 +137,21 @@ create or replace view v_retraitCongeEmploye as
         join RetraitConge on RetraitConge.idcongeEmploye = CongeEmploye.idcongeEmploye
         join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge;
 
-------------------------------------- CONGE EMPLOYE ------------------------------------------------------------
--- create or replace view v_CongeEmploye as
---     select CongeEmploye.*,
---     Employe.nom, Employe.prenom
---     from CongeEmploye
---         join Employe on Employe.idEmploye = CongeEmploye.idEmploye;
+----------------------------------- CONGE EMPLOYE ------------------------------------------------------------
+create or replace view v_CongeEmploye as
+    select CongeEmploye.*,
+    DemandeConge.idemploye
+    from CongeEmploye
+        join DemandeConge on DemandeConge.iddemandeconge = CongeEmploye.iddemandeconge;
 
 ------------------------------------- DEMANDE EMPLOYE ------------------------------------------------------------
 create or replace view v_DemandeConge as
-    select DemandeConge.*,
-    Employe.nom, Employe.prenom
+    select DemandeConge.iddemandeconge, DemandeConge.idTypeConge, DemandeConge.datedebut, DemandeConge.datefin, DemandeConge.etat as etatvalidation,
+    v_employePoste.*,
+    TypeConge.libelle
     from DemandeConge
-        join Employe on Employe.idEmploye = DemandeConge.idEmploye;
+        join v_employePoste on v_employePoste.idEmploye = DemandeConge.idEmploye
+        join TypeConge on TypeConge.idTypeConge = DemandeConge.idTypeConge;
 
 ------------------------------------- VUE EMPLOYE/TYPE PRIME/ PRIME EMPLOYEs----------------------------
 create or replace view v_TypePrimeEmploye as

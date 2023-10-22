@@ -158,7 +158,9 @@ VALUES ('Wilson', 'Michael', '202 Cedar Street', '0345678943', 'michael.wilson@e
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
 VALUES ('Lee', 'Linda', '303 Maple Avenue', '0330340000', 'linda.lee@email.com', 'motdepasse6', TRUE);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, etat, estessaie)
-values ('HERINJANAHRY', 'Lova Henintsoa', 'GVAS 8 Soamanandrariny', '0322222222', 'henintsoa@gmail.com','henintsoa', 21,true)
+values ('HERINJANAHRY', 'Lova Henintsoa', 'GVAS 8 Soamanandrariny', '0322222222', 'henintsoa@gmail.com','henintsoa', 21,true);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, etat, estessaie)
+values ('HERINJANAHRY', 'DG', 'GVAS 8 Soamanandrariny', '0322222222', 'dg@gmail.com','dg', 11,true)
 
 -- -----------------------------CONTRAT ESSAI--------------------------------------------
 INSERT INTO contratEssai (idEmploye, salairebrut, salairenet, duree, idBrancheDepartement)

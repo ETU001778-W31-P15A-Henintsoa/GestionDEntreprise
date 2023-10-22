@@ -169,6 +169,7 @@
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
             </li>
+            <!-- Raha ETAT RH IZY -->
             <?php if($_SESSION['RH']==21){ ?>
             <li class="menu-item">
             <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
@@ -182,14 +183,25 @@
                 <div data-i18n="Tables">Voir Fiche De Paie</div>
               </a>
             </li>
-            <?php } else{ ?>
+            <!-- Raha Chef de Departement -->
+            <?php }else if ($_SESSION['RH']==11){ ?>
               <li class="menu-item">
               <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Conges</div>
+                <div data-i18n="Tables"> Demande de Conge </div>
+              </a>
+            </li>
+            <!-- Raha employe Tsotra -->
+            <?php }else {?>
+              <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables"> Mes Conges </div>
               </a>
             </li>
             <?php } ?>
+
+
             <li class="menu-item">
               <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
