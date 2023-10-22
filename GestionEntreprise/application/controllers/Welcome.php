@@ -125,6 +125,8 @@ class Welcome extends CI_Controller {
 		$data['employer'] = $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['contrat'] = $this->Generalisation->avoirTableSpecifique('contratessai', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['contrat'][0]->idbranchedepartement));
+		$data['services'] = $this->Generalisation->avoirTableSpecifique('v_serviceservicescandidat', '*', sprintf("idcontratessai='%s'", $data['contrat'][0]->idcontratessai));
+		$this->load->view('header2');
 		$this->load->view('moncontratessai', $data);
 	}
 
