@@ -223,6 +223,7 @@
               <a href="<?php echo site_url('listeController/listeEmploye/') ?>" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables">Listes Employes </div>
+            </a>
             </li>
           </ul>
         </aside>
