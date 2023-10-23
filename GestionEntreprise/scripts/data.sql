@@ -370,4 +370,28 @@ insert into IRSA values
 	(600000, 0, 20); -- 600000 ou plus
     
 -- Employe 21 RH
+-- ---------------------------- BRANCHE DEPARTEMENT--------------------------------------
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1000000 WHERE idbranchedepartement = 'BRA1';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA2';
+UPDATE BrancheDepartement SET salaireMinimum = 1500000, salaireMaximum = 10000000 WHERE idbranchedepartement = 'BRA3';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA4';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA5';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 6000000 WHERE idbranchedepartement = 'BRA6';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 10000000 WHERE idbranchedepartement = 'BRA7';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA8';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 2000000 WHERE idbranchedepartement = 'BRA9';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 2500000 WHERE idbranchedepartement = 'BRA10';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA11';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 3500000 WHERE idbranchedepartement = 'BRA12';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 3000000 WHERE idbranchedepartement = 'BRA13';
+UPDATE BrancheDepartement SET salaireMinimum = 1200000, salaireMaximum = 2000000 WHERE idbranchedepartement = 'BRA14';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1500000 WHERE idbranchedepartement = 'BRA15';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1000000 WHERE idbranchedepartement = 'BRA16';
 
+-- -----------------------HIERARCHIE DES BRANCHES---------------------------
+INSERT INTO Branche (libelle) VALUES ('Chef de projets');
+
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA1';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA6';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA7';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA8';

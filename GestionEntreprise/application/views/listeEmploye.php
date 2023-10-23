@@ -41,7 +41,7 @@
                         <th>Adresse</th>
                         <th>Jour de retraite</th>
                         <th>Departement et branche</th>
-                        <th>Commentaire </th>
+                        <th> Fiche de poste </th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -54,6 +54,7 @@
                                     <td><?php echo $employe[$i]['dateRetraite']->format("Y-m-d"); ?></td>
                                     <td><?php echo $employe[$i]['employe']->departement ." ". $employe[$i]['employe']->branche; ?></td>
                                     <td><?php echo $employe[$i]['messageRetraite']; ?></td>
+                                    <td><a href="<?php echo site_url('listeController/versFichePoste?idemploye=' . $employe[$i]['employe']->idemploye) ?>">voir</a></td>
                                 </tr>
                             <?php }
                         ?>

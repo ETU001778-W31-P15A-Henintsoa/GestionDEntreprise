@@ -181,3 +181,12 @@ create or replace view v_departementadresse as
     from Entreprise
         join DepartementAdresse on Entreprise.identreprise = DepartementAdresse.identreprise
         join Ville on Ville.idville = Entreprise.ville;
+
+-- ---------------------VUE FICHE DE POSTE-------------------------
+create or replace view v_ficheDePoste as
+    select ep.*, 
+    d.idavantagenature,d.libelle as avantage,d.idavantagedepartement,d.libelle,
+    c.salairebrut,c.salairenet,c.datedebut,c.datefin
+    from v_employePoste ep
+        join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
+        join contratessai c on ep.idemploye=c.idemploye; 
