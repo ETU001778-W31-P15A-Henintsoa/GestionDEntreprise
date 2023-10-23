@@ -31,10 +31,15 @@ class Generalisation extends CI_Model {
         $this->db->query($sql);
     }
 
+    function miseAJour($NomTable, $nouveau, $conditions){ // Metre values comme => '(data1, data2, 'data3')' par exemple
+        $sql = sprintf( 'Update %s set %s where %s',$NomTable, $nouveau, $conditions);
+        $this->db->query($sql);
+    }
+
     public function avoirTableSpecifique($NomTable, $colonnes, $conditions){
         // $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
-        echo $sql;
+        // echo $sql;
         $query = $this->db->query($sql);
         $resultats = array();
         $a=0;
@@ -55,5 +60,19 @@ class Generalisation extends CI_Model {
             $a++;
         }
         return $resultats;
+    }
+
+    function dateLisible($dateSql) {
+        date_default_timezone_set('Europe/Paris');
+           // Crée un objet DateTime à partir de la date SQL
+        $date = new DateTime($dateSql);
+        
+        // Crée un objet IntlDateFormatter pour formater la date en français
+        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+        
+        // Formate la date
+        $date_lisible = $formatter->format($date);
+        
+        return $date_lisible;
     }
 }

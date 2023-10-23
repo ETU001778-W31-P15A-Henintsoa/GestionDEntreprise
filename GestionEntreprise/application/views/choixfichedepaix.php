@@ -25,6 +25,30 @@
                             <?php } ?>
                             </select>
                         </div>
+                        <div class="mb-3">
+                        <label class="form-label" for="basic-default-company">Debut</label>
+                            <!-- <div class="col-md-12"> -->
+                            <input
+                                class="form-control"
+                                type="date"
+                                id="html5-datetime-local-input"
+                                name="debut"
+                            />
+                                <!-- </div> -->
+                            <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
+                        </div>
+                        <div class="mb-3">
+                        <label class="form-label" for="basic-default-company">Fin</label>
+                            <!-- <div class="col-md-12"> -->
+                            <input
+                                class="form-control"
+                                type="date"
+                                id="html5-datetime-local-input"
+                                name="fin"
+                            />
+                                <!-- </div> -->
+                            <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
+                        </div>
                         <button type="submit" class="btn btn-primary">Voir</button>
                       </form>
                     </div>

@@ -389,6 +389,15 @@ create table QualiteRequise(
     libelle varchar(100)
 );
 
+create sequence seqIRSA;
+create table IRSA (
+	idIRSA varchar(20) default concat() primary key,
+	debut float,
+	fin float,
+	pourcentage
+);
+
+
 ------------------------------ QUESTIONS EVALUATION------------------------------
 -- create sequence seqQuestionEvaluation;
 -- create table questionsEvluation (
@@ -540,11 +549,19 @@ ADD matricule varchar(100);
 ALTER TABLE Employe
 ADD dateEmbauche date;
 
+ALTER TABLE Employe
+ADD datedenaissance date;
+
 
 alter table contratessai 
 drop duree,
 add datedebut date,
 add datefin date;
+
+alter table contratessai 
+add salairebrut float,
+add salairenet float;
+
 
 --------------------15 Octobte---------------------------
 alter table employe

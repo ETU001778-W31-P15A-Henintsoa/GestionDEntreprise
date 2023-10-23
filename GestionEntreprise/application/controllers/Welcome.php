@@ -123,6 +123,7 @@ class Welcome extends CI_Controller {
 	public function versMonContratEssai(){
 		$idemploye = $this->input->get('idemploye');
 		$data['employer'] = $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $idemploye));
+		$data['employer'][0]->datedenaissance = $this->Generalisation->dateLisible($data['employer'][0]->datedenaissance);
 		$data['contrat'] = $this->Generalisation->avoirTableSpecifique('contratessai', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['contrat'][0]->idbranchedepartement));
 		$data['services'] = $this->Generalisation->avoirTableSpecifique('v_serviceservicescandidat', '*', sprintf("idcontratessai='%s'", $data['contrat'][0]->idcontratessai));
@@ -132,9 +133,10 @@ class Welcome extends CI_Controller {
 
 	public function versCreerContratEssai(){
 		$data['idemploye'] = $this->input->get('idemploye');
-		$employe =  $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $this->input->get('idemploye')));
+		$employe =  $this->Generalisation->avoirTableSpecifique('v_employeposte', '*', sprintf("idemploye='%s'", $this->input->get('idemploye')));
 		$data['poste'] =  $this->Generalisation->avoirTableSpecifique('v_branchedepartement', '*', sprintf("iddepartement='%s'", $employe[0]->iddepartement));
 		$data['service'] =  $this->Generalisation->avoirTable('service');
+		$this->load->view('header2');
 		$this->load->view('creationcontratessai', $data);
 	}
 

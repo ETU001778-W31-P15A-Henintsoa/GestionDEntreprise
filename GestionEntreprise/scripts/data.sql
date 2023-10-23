@@ -271,12 +271,12 @@ VALUES('CNAPS',250000),
 -- VALUES('service1','contrEssai13');
 
 -- ----------------------------EMPLOYE UPDATE-----------------------------------------
-UPDATE Employe set dateNaissance='22-03-1973' where idemploye='emp1';
-UPDATE Employe set dateNaissance='10-01-1993' where idemploye='emp2';
-UPDATE Employe set dateNaissance='01-05-2000' where idemploye='emp3';
-UPDATE Employe set dateNaissance='02-06-1998' where idemploye='emp4';
-UPDATE Employe set dateNaissance='21-04-1980' where idemploye='emp5';
-UPDATE Employe set dateNaissance='25-10-1985' where idemploye='emp6';
+UPDATE Employe set datedenaissance ='22-03-1973' where idemploye='emp1';
+UPDATE Employe set datedenaissance ='10-01-1993' where idemploye='emp2';
+UPDATE Employe set datedenaissance ='01-05-2000' where idemploye='emp3';
+UPDATE Employe set datedenaissance ='02-06-1998' where idemploye='emp4';
+UPDATE Employe set datedenaissance ='21-04-1980' where idemploye='emp5';
+UPDATE Employe set datedenaissance ='25-10-1985' where idemploye='emp6';
 
 -- ------------------------------BRANCHE DEPARTEMENT----------------
 UPDATE brancheDepartement
@@ -360,5 +360,14 @@ INSERT INTO Ancienete (debut, fin, valeur) VALUES
     (15, 20, 30000),
     (20, 100, 35000);
 
+------------------------------- IRSA --------------------------------------------
+
+insert into IRSA values
+	(0, 350000, 0),
+	(350000, 400000, 5),
+	(400000, 500000, 10),
+	(500000, 600000, 15),
+	(600000, 0, 20); -- 600000 ou plus
+    
 -- Employe 21 RH
 
