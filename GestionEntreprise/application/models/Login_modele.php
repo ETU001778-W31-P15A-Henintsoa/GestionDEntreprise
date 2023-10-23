@@ -12,10 +12,8 @@ class Login_modele extends CI_Model {
 				if ($user->mail == $mail && $user->mdp == $mdp) {
 					// session_start();
 					$_SESSION['utilisateur'] = $user->idemploye;
-<<<<<<< Updated upstream
+
 					$_SESSION['RH'] = $user->etat;
-=======
->>>>>>> Stashed changes
 					$this->load->library('session');
 					return true;
 				}
