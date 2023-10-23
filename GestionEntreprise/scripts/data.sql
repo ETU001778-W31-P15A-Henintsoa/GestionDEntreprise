@@ -68,6 +68,7 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
+<<<<<<< Updated upstream
 
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
@@ -386,3 +387,12 @@ UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA1';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA6';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA7';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA8';
+=======
+-- --------------------NATIONNALITE-------------------
+INSERT INTO entreprise (ville, adresse, numero, fax)
+VALUES ('ville1', 'Village des jeux Ankorondrano', '0123456789', '0123456789');
+
+-- --------------------Employe-------------------
+insert into employe (nom,prenom,adresse,numero,mail,mdp,idDepartement,etat) VALUES
+('RABE','Manantsoa','Lot 86 btd','0206676798','manantsoa@gmail.com','manantsoa','DEPT1',11);
+>>>>>>> Stashed changes

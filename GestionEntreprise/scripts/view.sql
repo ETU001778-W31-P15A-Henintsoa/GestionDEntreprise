@@ -6,6 +6,7 @@ create or replace view v_BrancheDepartement as
 
 
 create or replace view v_BesoinPersonnelle as
+<<<<<<< Updated upstream
     select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
     from BesoinPersonnelle bp
         join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
@@ -186,3 +187,39 @@ create view v_brancheDepartementEmploye as
 select emp.*,bd.idBranche
 from v_employePoste as emp 
 join brancheDepartement as bd on bd.idBrancheDepartement=emp.idBrancheDepartement;
+=======
+select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
+from BesoinPersonnelle bp
+join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
+
+create or replace view v_Critere as
+select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
+Diplome.libelle as diplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, 
+Filiere.libelle as filiere,Critere.*
+from Critere 
+join v_BesoinPersonnelle bp on bp.idBesoin=Critere.idBesoin
+join Diplome on Diplome.idDiplome=Critere.idDiplome
+join Nationnalite on Nationnalite.idNationnalite=Critere.idNationnalite
+join Experience on Experience.idExperience=Critere.idExperience 
+join Filiere on Filiere.idFiliere = Critere.idFiliere;
+
+create or replace view v_CritereCoefficient as 
+select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
+vc.sexe,cc.sexe as noteSexe,
+vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
+vc.idExperience,vc.Experience,cc.Experience as noteExperience,
+vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
+vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion
+from CritereCoefficient as cc
+join v_Critere vc on vc.idBesoin=cc.idBesoin;
+
+create or replace view v_BesoinPersonnelleAnnonce as 
+select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
+left join annonce  on bp.idBesoin=annonce.idBesoin;
+
+create or replace view v_BesoinPersonnelleAnnonceDetails as
+select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye
+from v_BesoinPersonnelleAnnonce as bpa 
+join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
+left join employe as emp on emp.idDepartement=bd.idDepartement;
+>>>>>>> Stashed changes

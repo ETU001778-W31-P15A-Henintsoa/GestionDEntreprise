@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>FTT (Firaisankinan'ny Tia Tanindrazana)</h1>
-    <div><button><a href="<?php echo site_url("welcome/versQuestionsResponses"); ?>">Questions/Reponses</a></button></div>
+    <!-- <div><button><a href="<?php echo site_url("welcome/versQuestionsResponses"); ?>">Questions/Reponses</a></button></div> -->
 </body>
 </html>
