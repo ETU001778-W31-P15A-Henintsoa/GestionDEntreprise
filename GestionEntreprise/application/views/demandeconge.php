@@ -21,7 +21,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="defaultSelect" class="form-label">type de Conge</label>
-                            <select id="defaultSelect" class="form-select">
+                            <select id="defaultSelect" class="form-select" name="idtypeconge">
                             <option>Choisir</option>
                             <?php for ($i=0; $i < count($typeconge); $i++) { ?>
                                 <option value="<?php echo $typeconge[$i]->idtypeconge; ?>"><?php echo $typeconge[$i]->libelle; ?></option>

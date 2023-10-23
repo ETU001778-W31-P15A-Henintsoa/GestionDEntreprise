@@ -14,12 +14,25 @@ class Generalisation extends CI_Model {
         return $raisons;
     }
 
-    function insertion($NomTable, $values){ // Metre values comme => '(data1, data2, 'data3')' par exemple
-        $sql = sprintf( 'insert into %s values%s',$NomTable, $values);
+    public function avoirTableConditionnee($NomTable){
+        $sql = "SELECT * FROM $NomTable";
+        $query = $this->db->query($sql);
+        $resultats = array();
+        $a=0;
+        foreach($query->result() as $row){
+            $resultats[$a] = $row;
+            $a++;
+        }
+        return $resultats;
+    }
+
+    public function insertion($NomTable, $values){ // Metre values comme => '(data1, data2, 'data3')' par exemple
+        $sql = sprintf('insert into %s values%s',$NomTable, $values);
         $this->db->query($sql);
     }
 
-    public function avoirTableSpecifique($NomTable, $colonnes, $conditions ){
+    public function avoirTableSpecifique($NomTable, $colonnes, $conditions){
+        // $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         $sql = "SELECT $colonnes FROM $NomTable WHERE $conditions";
         echo $sql;
         $query = $this->db->query($sql);

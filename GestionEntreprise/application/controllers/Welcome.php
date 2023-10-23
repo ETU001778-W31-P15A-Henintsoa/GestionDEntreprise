@@ -38,10 +38,37 @@ class Welcome extends CI_Controller {
 		$this->load->view('demandeconge', $data);
 	}
 
+	public function versListeConge()
+	{
+		$idemploye = 'emp1'; //$this->input->get('idemploye');
+		$tous = $this->input->get('tous');
+		$data = array();
+		if($_SESSION['RH']==21){
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat != 21 order by nom');
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat = 21 order by nom');
+		}else if($_SESSION['RH']==11){
+			$departement = $this->Generalisation->avoirTableSpecifique('employe', 'iddepartement', sprintf("idemploye='%s'", $_SESSION['utilisateur']));
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat!=21 order by nom", $iddepartement[0]->iddepartement));
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat=21 order by nom", $iddepartement[0]->iddepartement));
+		}else{
+			$data['conge'] = $this->Generalisation->avoirTableSpecifique('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
+			$data['demande'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
+		}
+		$this->load->view('header2');
+		$this->load->view('listeconge', $data);
+	}
+
 	public function versPrimeEmploye()
 	{
-		$data['prime'] = $this->Generalisation->avoirTable("TypePrime");
+		$data['prime'] = $this->Generalisation->avoirTable("typeprime");
+		$data['employe'] = $this->Generalisation->avoirTable("employe");
+		$this->load->view('header2');
 		$this->load->view('primeemploye', $data);
+	}
+
+	public function versFicheDePaix(){
+		$this->load->view('header2');
+		$this->load->view('fichedepaix');
 	}
 
 	public function versFormulaireBesoin()
@@ -63,6 +90,7 @@ class Welcome extends CI_Controller {
 	public function versQuestionsResponses(){
 		$nombre = 1;
 		$data['besoin'] = $this->Besoins->avoirVueBesoins($nombre);
+		$this->load->view("header2");
 		$this->load->view("qr", $data);
 	}
 
@@ -97,6 +125,8 @@ class Welcome extends CI_Controller {
 		$data['employer'] = $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['contrat'] = $this->Generalisation->avoirTableSpecifique('contratessai', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['contrat'][0]->idbranchedepartement));
+		$data['services'] = $this->Generalisation->avoirTableSpecifique('v_serviceservicescandidat', '*', sprintf("idcontratessai='%s'", $data['contrat'][0]->idcontratessai));
+		$this->load->view('header2');
 		$this->load->view('moncontratessai', $data);
 	}
 
@@ -107,7 +137,6 @@ class Welcome extends CI_Controller {
 		$data['service'] =  $this->Generalisation->avoirTable('service');
 		$this->load->view('creationcontratessai', $data);
 	}
-
 
 	//Test an'ilay note Employer fotsiny
 	public function versCalculeNote(){
@@ -120,7 +149,14 @@ class Welcome extends CI_Controller {
 		var_dump($candidatNote);
 	}
 
-	//Calcule et insertion des reponses du test du candidat
+	// Hijery fiche de paie
+	public function versChoixFicheDePaie(){
+		$data['employe'] = $this->Generalisation->avoirTable("employe");
+		$this->load->view('header2');
+		$this->load->view('choixfichedepaix', $data);
+	}
+
+	//Calcule et insertion des reponses du test du candidat   
 	public function formulairetestcansidat(){
 		$idcandidat = "CAN1";
 		$idbesoin = $this->input->post('idbesoin');
@@ -216,6 +252,17 @@ class Welcome extends CI_Controller {
 	// Insertion Prime Employe
 	public function formulairePrimeEmploye(){
 
+	}
+
+	// Validation demande 
+	public function validationDemandeRH(){
+		$iddemande = $this->input->get('iddemande');
+		$this->Generalisation->miseAJour("demandeconge", "etat=21", sprintf("iddemandeconge='%s'", $iddemande));
+		if($_SESSION['RH']==21){
+			redirect("welcome/versListeConge?tous=1");
+		}else{
+			redirect("welcome/versListeConge");
+		}
 	}
 
 
