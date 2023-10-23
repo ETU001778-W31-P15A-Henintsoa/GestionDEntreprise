@@ -6,7 +6,6 @@ create or replace view v_BrancheDepartement as
 
 
 create or replace view v_BesoinPersonnelle as
-<<<<<<< Updated upstream
     select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
     from BesoinPersonnelle bp
         join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
@@ -174,6 +173,15 @@ create or replace view v_MoisTypePrimeEmploye as
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
 
+------------------------------------ VUE DEPARTEMENTADRESSE -------------------------------------
+create or replace view v_departementadresse as
+    select Entreprise.*,
+    DepartementAdresse.iddepartementadresse, DepartementAdresse.iddepartement, DepartementAdresse.adresse as localisation,
+    Ville.ville as nomville
+    from Entreprise
+        join DepartementAdresse on Entreprise.identreprise = DepartementAdresse.identreprise
+        join Ville on Ville.idville = Entreprise.ville;
+
 -- ---------------------VUE FICHE DE POSTE-------------------------
 create or replace view v_ficheDePoste as
     select ep.*, 
@@ -222,4 +230,3 @@ select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye
 from v_BesoinPersonnelleAnnonce as bpa 
 join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
 left join employe as emp on emp.idDepartement=bd.idDepartement;
->>>>>>> Stashed changes
