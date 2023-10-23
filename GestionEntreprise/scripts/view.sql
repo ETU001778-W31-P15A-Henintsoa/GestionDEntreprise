@@ -145,7 +145,7 @@ create or replace view v_CongeEmploye as
 
 ------------------------------------- DEMANDE EMPLOYE ------------------------------------------------------------
 create or replace view v_DemandeConge as
-    select DemandeConge.iddemandeconge, DemandeConge.idTypeConge, DemandeConge.datedebut, DemandeConge.datefin, DemandeConge.etat as etatvalidation,
+    select DemandeConge.iddemandeconge, DemandeConge.idTypeConge, DemandeConge.debutconge, DemandeConge.finconge, DemandeConge.etat as etatvalidation,
     v_employePoste.*,
     TypeConge.libelle
     from DemandeConge
@@ -181,3 +181,8 @@ create or replace view v_ficheDePoste as
     from v_employePoste ep
         join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
         join contratessai c on ep.idemploye=c.idemploye; 
+
+create view v_brancheDepartementEmploye as
+select emp.*,bd.idBranche
+from v_employePoste as emp 
+join brancheDepartement as bd on bd.idBrancheDepartement=emp.idBrancheDepartement;

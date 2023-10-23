@@ -47,9 +47,9 @@ class Welcome extends CI_Controller {
 			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat != 21 order by nom');
 			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', 'etat = 21 order by nom');
 		}else if($_SESSION['RH']==11){
-			// $departement = $this->Generalisation->avoirTableSpecifique('employe', 'iddepartement', sprintf("idemploye='%s'", $_SESSION['utilisateur']));
-			// $data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat!=21 order by nom", $iddepartement[0]->iddepartement));
-			// $data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat=21 order by nom", $iddepartement[0]->iddepartement));
+			$departement = $this->Generalisation->avoirTableSpecifique('v_employeposte', 'iddepartement', sprintf("idemploye='%s'", $_SESSION['utilisateur']));
+			$data['demandeemployenonvalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat!=21 order by nom", $departement[0]->iddepartement));
+			$data['demandeemployevalider'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("iddepartement='%s' and etat=21 order by nom", $departement[0]->iddepartement));
 		}else{
 			$data['conge'] = $this->Generalisation->avoirTableSpecifique('v_congeemploye', '*', sprintf("idemploye='%s' order by debutconge", $idemploye));
 			$data['demande'] = $this->Generalisation->avoirTableSpecifique('v_demandeconge', '*', sprintf("idemploye='%s' order by datedebut", $idemploye));
