@@ -1,8 +1,9 @@
 create or replace view v_BrancheDepartement as
-select Branche.libelle as branche,Branche.mgr, Departement.nomDepartement as departement,bd.*
-from BrancheDepartement as bd
-join Branche on Branche.idBranche= bd.idBranche
-join Departement on Departement.idDepartement = bd.idDepartement;
+    select Branche.libelle as branche, Departement.nomDepartement as departement,bd.*
+    from BrancheDepartement as bd
+        join Branche on Branche.idBranche= bd.idBranche
+        join Departement on Departement.idDepartement = bd.idDepartement;
+
 
 create or replace view v_BesoinPersonnelle as
     select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
@@ -41,6 +42,15 @@ create or replace view v_QuestionsReponsesVBesoinPersonnelle as
         join Questions on Questions.idbesoin = v_BesoinPersonnelle.idbesoin
         join Reponses on Reponses.idquestion = Questions.idquestion ;
 
+------------------------ VUE QUESTIONS & REPONSES EVALUATION/EMPLOYE ---------------------------------------------------
+create or replace view v_QuestionsReponsesEmployeEvaluation as 
+    select v_employeposte.*
+    QuestionsEvaluation.idquestionEvaluation, QuestionsEvaluation.libellEvaluatione as libellequestionEvaluation, QuestionsEvaluation.coefficient as coefficientquestion,
+    Reponses.idreponse, Reponses.libelle as libellereponse, Reponses.bonnereponse
+    from v_employeposte
+        join ReponsesEvaluation on ReponsesEvaluation.idemploye = v_employeposte.idemploye
+        join QuestionsEvaluation on QuestionsEvaluation.idbesoin = ReponsesEvaluation.idquestionEvaluation;
+
 
 ----------------------- VUE FORMULAIRERE TEST CANDIDAT/QUESTION/REPONSE ------------------------------------------
 create or replace view v_FTCQuestionReponse as 
@@ -50,7 +60,6 @@ create or replace view v_FTCQuestionReponse as
     from formulaireTestCandidat
         join Reponses on Reponses.idreponse = formulaireTestCandidat.idreponse
         join Questions on Questions.idquestion = Reponses.idquestion;
-
 
 create or replace view v_ServiceServicesCandidat as
     select Service.idservice, Service.libelle, Service.valeur,
@@ -63,8 +72,6 @@ create or replace view v_avantagedepartement as
     AvantageDepartement.idAvantageDepartement, AvantageDepartement.idBrancheDepartement
     from AvantageDepartement
         join avantageNature on AvantageNature.idAvantageNature = AvantageDepartement.idAvantage;
-
-
 
 create or replace view v_BesoinPersonnelleAnnonce as 
     select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
@@ -106,7 +113,6 @@ join filiere on c.idfiliere=filiere.idFiliere
 join Nationnalite on c.idNationnalite=Nationnalite.idnationnalite
 join SituationMatrimoniale sm on sm.idSituation=c.idSituation
 join Annonce on annonce.idannonce= c.idannonce 
-join v_BesoinPersonnelle vb on annonce.idbesoin= vb.idbesoin;
 
 -- -------------------------------CONGE----------------------------------------------
 
@@ -119,3 +125,34 @@ create or replace view v_retraitCongeEmploye as
     select rc.resteconge,rc.totalpris,dc.*
     from RetraitConge as rc 
         left join v_demandeCongeEmploye as dc on dc.idcongeEmploye=rc.idcongeEmploye;
+
+------------------------------------- RETRAIT CONGE EMPLOYE ------------------------------------------------------------
+create or replace view v_retraitCongeEmploye as
+    select CongeEmploye.*,
+    RetraitConge.idretraitconge, RetraitConge.resteconge, RetraitConge.totalpris,
+    TypeConge.libelle, TypeConge.durreeJournalier, TypeConge.estDeductible
+    from CongeEmploye
+        join RetraitConge on RetraitConge.idcongeEmploye = CongeEmploye.idcongeEmploye
+        join TypeConge on TypeConge.idTypeConge = CongeEmploye.idTypeConge;
+
+------------------------------------- VUE EMPLOYE/TYPE PRIME/ PRIME EMPLOYEs----------------------------
+create or replace view v_TypePrimeEmploye as
+    select Employe.*,
+    PrimeEmploye.idPrimeEmploye, PrimeEmploye.idTypePrime, PrimeEmploye.quantite,
+    TypePrime.libelle, TypePrime.pourcentage
+    from Employe 
+        join PrimeEmploye on PrimeEmploye.idEmploye = Employe.idEmploye
+        join TypePrime on TypePrime.idTypePrime = PrimeEmploye.idTypePrime;
+
+------------------------------- VUE MOIS PRIME -------------------------------------------------
+create or replace view MoisPrime as
+    SELECT idprimeemploye, EXTRACT(MONTH FROM dateprime) AS moisprime 
+    FROM PrimeEmploye;
+
+------------------------------- VUE TYPEPTIMEEMPLOYE -------------------------------------------
+create or replace view v_MoisTypePrimeEmploye as
+    select v_TypePrimeEmploye.*,
+    MoisPrime.moisprime
+    from v_TypePrimeEmploye
+        join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
+

@@ -347,6 +347,18 @@ create table CongeEmploye(
     foreign key (idEmploye) references Employe(idEmploye)
 );
 
+
+-------------------------- RETRAIT CONGE ---------------------------------------------------
+create sequence seqRetraitConge;
+create table RetraitConge(
+    idretraitconge varchar(20) default concat('RC'|| nextval('seqRetraitConge')) primary key,
+    idcongeemploye varchar(20),
+    resteconge float,
+    totalpris float,
+    foreign key (idcongeemploye) references CongeEmploye(idcongeemploye)
+);
+
+
 --------------------JourMois---------------------------
 create sequence seqJourMois;
 create table jourMois(
@@ -369,6 +381,7 @@ create table posteEmploye(
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
 
+
 -- ----------------------QUALITE REQUISE----------------------------------------
 create sequence seqQualite;
 create table QualiteRequise(
@@ -376,8 +389,80 @@ create table QualiteRequise(
     libelle varchar(100)
 );
 
---------------------------------------- ALTER ---------------------------------------------
+------------------------------ QUESTIONS EVALUATION------------------------------
+-- create sequence seqQuestionEvaluation;
+-- create table questionsEvluation (
+--     idquestionEvaluation varchar(20) default concat('QEV'|| nextval('seqQuestionEvaluation')) primary key,
+--     idBrancheDepartement varchar(20),
+--     libelle varchar(30),
+--     coefficient int,
+--     Foreign Key (idBrancheDepartement) REFERENCES BrancheDepartement(idBrancheDepartement)
+-- );
 
+-- ------------------------------ REPONSES EVA------------------------------------
+-- create sequence seqReponseEvaluation;
+-- create table reponsesEvaluation (
+--     idreponseEvaluation varchar(20) default concat('REV'|| nextval('seqReponseEvaluation')) primary key,
+--     idquestionEvaluation varchar(20),
+--     libelle varchar(30),
+--     bonnereponse boolean,
+--     foreign key (idquestionEValuation) references questionsEvaluation(idquestionEvaluation)
+-- );
+
+------------------------------ REPONSES EVALUATION EMPLOYE ------------------------------------
+-- create sequence seqReponseEvaluationEmploye;
+-- create table reponsesEvaluationEmploye (
+--     idreponseEvaluationEmploye varchar(20) default concat('REE'|| nextval('seqReponseEvaluationEmploye')) primary key,
+--     idemploye varchar(20),
+--     idquestionEvaluation varchar(20),
+--     idreponseEvaluation varchar(20),
+--     foreign key (idquestionEvaluation) references questionsEvaluation(idquestionEvaluation),
+--     foreign key (idreponseEvaluation) references reponsesEvaluation(idreponseEvaluation),
+--     foreign key (idemploye) references employe(idemploye)
+-- );
+
+-------------------------------------DEMANDES CONGE ---------------------------------------
+
+create sequence seqDemandeConge;
+create table DemandeConge(
+    idDemandeConge varchar(20) default concat('DEC'|| nextval('seqDemandeConge')) primary key,
+    idEmploye varchar(20),
+    idTypeConge varchar(20),
+    datedebut timestamp,
+    datefin timestamp,
+    etat int default 0, 
+    foreign key (idEmploye) references Employe(idEmploye),
+    foreign key (idTypeConge) references TypeConge(idTypeConge)
+);
+
+
+------------------------------------- TYPE PRIME -------------------------------------------
+create sequence seqTypePrime;
+create table TypePrime(
+    idTypePrime varchar(20) default concat('TYPR'|| nextval('seqTypePrime')) primary key,
+    libelle varchar(60),
+    pourcentage float
+);
+
+------------------------------------ PRIME EMPLOYE -----------------------------------------
+create sequence seqPrimeEmploye;
+create table PrimeEmploye(
+    idPrimeEmploye varchar(20) default concat('PEMP'|| nextval('seqPrimeEmploye')) primary key,
+    idEmploye varchar(60),
+    idTypePrime varchar(20),
+    quantite float
+);
+
+------------------------------------ ANCIENETE -----------------------------------------
+create sequence seqAncienete;
+create table Ancienete(
+    idAncienete varchar(20) default concat('ANC'|| nextval('seqAncienete')) primary key,
+    debut int,
+    fin int,
+    valeur float
+);
+
+--------------------------------------- ALTER ---------------------------------------------
 ALTER TABLE Diplome
 ADD etat int;
 
@@ -437,7 +522,6 @@ ADD nombreDemande int;
 alter table Employe 
 ADD estessaie boolean;
 
-
 -- -------------------NEW ALTER-------------------------------
 ALTER TABLE Candidat 
 ADD totalNote float;
@@ -473,4 +557,27 @@ drop dateembauche cascade;
 alter table Branche
 add mgr varchar(15),
 ADD CONSTRAINT fk_branchedept FOREIGN KEY (mgr) REFERENCES Branche(idBranche);
+
+-------------------------------
+alter table congeemploye
+add accordDG boolean,
+add accordRH boolean;
+
+alter table congeemploye
+drop accordDG cascade,
+drop accordRH cascade;
+
+--------------------- FOURCHETTE ------------------------
+alter table BrancheDepartement
+ADD salaireMinimum float,
+ADD salaireMAximum float;
+
+alter table PrimeEmploye
+ADD dateprime date;
+
+alter table Salaire
+drop idbranchedepartement,
+add idemploye varchar(20),
+add CONSTRAINT idemploye foreign key (idemploye) references employe(idemploye);
+
 

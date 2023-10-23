@@ -145,18 +145,18 @@ INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
 VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
 
 -- ---------------------EMPLOYE-----------------------------
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', 'DEPT1', TRUE);
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Smith', 'Jane', '456 Elm Avenue', '0341791777', 'jane.smith@email.com', 'motdepasse2', 'DEPT2', TRUE);
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Brown', 'Robert', '789 Oak Lane', '0330414876', 'robert.brown@email.com', 'motdepasse3', 'DEPT3', TRUE);
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Davis', 'Susan', '101 Pine Road', '0334853212', 'susan.davis@email.com', 'motdepasse4', 'DEPT4', TRUE);
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Wilson', 'Michael', '202 Cedar Street', '0345678943', 'michael.wilson@email.com', 'motdepasse5', 'DEPT5', TRUE);
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, iddepartement, estessaie)
-VALUES ('Lee', 'Linda', '303 Maple Avenue', '0330340000', 'linda.lee@email.com', 'motdepasse6', 'DEPT6', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Smith', 'Jane', '456 Elm Avenue', '0341791777', 'jane.smith@email.com', 'motdepasse2', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Brown', 'Robert', '789 Oak Lane', '0330414876', 'robert.brown@email.com', 'motdepasse3', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Davis', 'Susan', '101 Pine Road', '0334853212', 'susan.davis@email.com', 'motdepasse4', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Wilson', 'Michael', '202 Cedar Street', '0345678943', 'michael.wilson@email.com', 'motdepasse5', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
+VALUES ('Lee', 'Linda', '303 Maple Avenue', '0330340000', 'linda.lee@email.com', 'motdepasse6', TRUE);
 
 -- -----------------------------CONTRAT ESSAI--------------------------------------------
 INSERT INTO contratEssai (idEmploye, salairebrut, salairenet, duree, idBrancheDepartement)
@@ -284,11 +284,11 @@ WHERE idbranchedepartement = 'BRA1';
 ------------------------------Type Conge -------------------------------
 INSERT INTO TypeConge (libelle, durreeJournalier, estDeductible)
 VALUES
-    ('Congé annuel', 30, true),
-    ('Congé de maladie', 0.5, true),
+    ('Congé an', 2.5, true),
+    ('Congé de maladie', 1.0, true),
     ('Congé de maternité', 1.0, false),
     ('Congé de paternité', 1.0, false),
-    ('Congé sans solde', 0.0, true);
+    ('Congé sans so', 1.0, true);
 
 --------------------------Programme--------------------
 insert into programme values(default,'monday','08:00:00','17:00:00','DEPT1');
@@ -336,3 +336,22 @@ INSERT INTO demandeConge values(default,'emp2','2023-11-11 12:00:00','2023-11-16
 
 -- --------------------RETRAIT CONGE--------------------------
 INSERT INTO RetraitConge values(default,null,2.5,0,'emp1');
+
+--------------------------- TYPE PRIME ------------------------------------
+INSERT INTO TypePrime(libelle, pourcentage) VALUES
+    ('Prime de Rendement', 0),
+    ('Prime d Anciennete', 0),
+    ('Heure Suplementaire 8h', 30),
+    ('Heure Suplementaire 16h', 50),
+    ('Travail Week-End', 40),
+    ('Travaux Jour Feries', 200),
+    ('Travail de nuit', 30),
+    ('Prime Diverse', 20),
+    ('Droit de Conge', 0);
+
+------------------------------ ANCIENETE -------------------------------------
+INSERT INTO Ancienete (debut, fin, valeur) VALUES
+    (5, 10, 10000),
+    (10, 15, 15000),
+    (15, 20, 30000),
+    (20, 100, 35000);
