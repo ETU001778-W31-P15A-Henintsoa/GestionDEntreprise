@@ -140,8 +140,8 @@
                         </td>
                         <td><?php echo $demandeemployenonvalider[$i]-> libelle; ?></td>
                         <td><?php echo $demandeemployenonvalider[$i]->libelle; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datedebut; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datefin; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->debutconge; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->finconge; ?></td>
                         <td><span class="badge bg-label-warning me-1">Non Valide</span></td>
                         <td>
                             <a href="<?php echo site_url("welcome/validationDemandeRH?iddemande=".$demandeemployenonvalider[$i]->iddemandeconge); ?>">

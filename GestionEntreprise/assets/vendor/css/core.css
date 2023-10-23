@@ -623,7 +623,11 @@ progress {
   padding-right: var(--bs-gutter-x, 1.625rem);
   padding-left: var(--bs-gutter-x, 1.625rem);
   margin-right: auto;
+<<<<<<< Updated upstream
   /* margin-left: auto; */
+=======
+  margin-left: auto;
+>>>>>>> Stashed changes
 }
 
 @media (min-width: 576px) {

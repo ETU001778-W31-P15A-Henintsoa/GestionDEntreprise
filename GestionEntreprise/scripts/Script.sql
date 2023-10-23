@@ -129,11 +129,50 @@ create table service(
     valeur float
 );
 
+create sequence seqCandidat;
+create table Candidat(
+    idCandidat varchar(30) default concat('CAN'|| nextval('seqCandidat')) primary key,
+    nom varchar(50),
+    prenom varchar(50),
+    dateNaissance date,
+    adresse varchar(50),
+    email varchar(100),
+    sexe varchar(10),
+    telephone varchar(10),
+    photo varchar(50),
+    idnationnalite varchar(30),
+    idexperience varchar(30),
+    iddiplome varchar(30),
+    diplomeFile varchar(50),
+    dateDiplome date,
+    attestation varchar(50),
+    certificat varchar(50),
+    idfiliere varchar(30),
+    idville varchar(30),
+    idSituation varchar(20),
+    datePostulation date default current_date,
+    idAnnonce varchar(20),
+    etat int,
+    foreign key(idAnnonce) references Annonce(idAnnonce),
+    foreign key(idSituation) references SituationMatrimoniale(idSituation),
+    foreign key(iddiplome) references Diplome(idDiplome),
+    foreign key(idexperience) references Experience(idExperience),
+    foreign key(idnationnalite) references Nationnalite(idNationnalite),
+    foreign key(idville) references ville(idVille),
+    foreign key(idfiliere) references filiere(idFiliere)
+);
+insert into candidat(nom,prenom,dateNaissance,adresse,email,sexe,telephone,idAnnonce,etat) values
+(default,'Maharavo','Soatiana','2000-02-03','lot 86 VT Andoahalo','soatiana@gamil.com',0,'0345623454',)
+
 -- ----------------ContratEssai------------------------
 create sequence seqContratEssai;
 create table contratEssai(
     idContratEssai varchar(15) default concat('contrEssai'|| nextval('seqContratEssai')) primary key,
+<<<<<<< Updated upstream
     idEmploye varchar(15),
+=======
+    idCandidat varchar (15),
+>>>>>>> Stashed changes
     salaireBrut float,
     salaireNet float,
     duree float,
@@ -208,6 +247,7 @@ create table departementAdresse(
     foreign key(idEntreprise) references Entreprise(idEntreprise)
 );
 
+<<<<<<< Updated upstream
 ------------------------------ ANNONCE ----------------------------------------------------
 create sequence seqAnnonce;
 create table annonce(
@@ -260,13 +300,20 @@ create table Candidat(
 );
 
 
+=======
+>>>>>>> Stashed changes
 -- ------------------Programme izany hoe ny lera fidirana sy firavana---------------------------
 create sequence seqProgramme;
 create table programme(
     idProgramme varchar(20) default concat('PRO'|| nextval('seqProgramme')) primary key,
     nomJour varchar(30),
+<<<<<<< Updated upstream
     heureEntre timestamp,
     heureFin timestamp,
+=======
+    heureEntre varchar(15),
+    heureFin varchar(15),
+>>>>>>> Stashed changes
     idBrancheDepartement varchar(15),
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
@@ -275,8 +322,13 @@ create table programme(
 create sequence seqPause;
 create table pause(
     idPause varchar(20) default concat('PAU'|| nextval('seqPause')) primary key,
+<<<<<<< Updated upstream
     heureDebut varchar(30),
     heureFin timestamp,                              
+=======
+    heureDebut varchar(15),
+    heureFin varchar(15),                              
+>>>>>>> Stashed changes
     idBrancheDepartement varchar(15),
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
@@ -292,6 +344,7 @@ create table entretien(
     foreign key(idCandidat) references candidat(idCandidat)
 );
 
+<<<<<<< Updated upstream
 ----------------------------- FORMULAIRE REPONSE CANDIDAT -----------------------------------------
 
 create sequence seqFTC;
@@ -606,3 +659,8 @@ add iddemandeconge varchar(20),
 add constraint iddemandeconge foreign key (iddemandeconge) references demandeconge(iddemandeconge);
 
 
+=======
+-- ------------------Candidat---------------------------
+ALTER table candidat 
+ADD etat int;
+>>>>>>> Stashed changes

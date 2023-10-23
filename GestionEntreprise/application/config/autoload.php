@@ -132,7 +132,11 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
+<<<<<<< Updated upstream
 
 $autoload['model'] = array('Besoins', 'Generalisation', 'Criteres', 'Login_modele', 'QuestionsReponses', 'ContratEssai','Annonce','Candidats','gestionConge','Employe','Fiche');
 
 
+=======
+$autoload['model'] = array('Besoins', 'Generalisation', 'Criteres', 'Login_modele');
+>>>>>>> Stashed changes

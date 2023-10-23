@@ -7,6 +7,7 @@
             $idemploye=$_SESSION['utilisateur'];
             $emp=$this->Generalisation->avoirTableSpecifique("v_brancheDepartementEmploye","*", " idemploye='".$idemploye."'");
             $data['annonce']=$this->Annonce->afficher($emp[0]->iddepartement);
+            $this->load->view('header2');
             $this->load->view('genererentretien',$data);
         }
         public function genererlisteentretien(){
