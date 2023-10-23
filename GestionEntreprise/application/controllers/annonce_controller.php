@@ -15,8 +15,10 @@
         }
 
         public function afficherTous(){
-            $this->load->view('header');
-            $data['annonces']=$this->Annonce->afficher("");
+            $idemploye=$_SESSION['utilisateur'];
+            $emp=$this->Generalisation->avoirTableSpecifique("v_employePoste","*", " idemploye='".$idemploye."' ");
+            $this->load->view('header2');
+            $data['annonces']=$this->Annonce->afficher($emp[0]->iddepartement);
             $this->load->view('afficherannonce',$data);
         }
 

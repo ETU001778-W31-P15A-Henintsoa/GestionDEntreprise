@@ -23,18 +23,16 @@
             $this->load->view('Vlisteentretien',$data);
         }
 
-        public function listeEmploye($idDepartement){
-            $idUtilisateur=$_SESSION['utilisateur'];
-            $iddepartement=$this->Generalisation->avoirTableSpecifique("v_brancheDepartementEmploye"," idEmploye='".$idUtilisateur."'");
-            $data['employe']=$this->Generalisation->avoirTableSpecifique("","*"," idDepartement='".$iddepartement[0]->iddepartement."'");
+        public function listeEmploye(){
+            $idemploye=$_SESSION['utilisateur'];
+            $emp=$this->Generalisation->avoirTableSpecifique("v_employePoste","*", " idemploye='".$idemploye."' ");
+            $data['employe']=$this->Employe->avoirListeEmploye($emp[0]->iddepartement);
+            $this->load->view('header2',$data);
             $this->load->view('listeEmploye',$data);
         }
 
         public function listeConge(){
-            date_default_timezone_set('Africa/Nairobi');
-            $dateDebut=new DateTime("2023-09-12");
-            $dateFin=new DateTime("2023-12-12");
-            $data['conge']=$this->gestionConge->nombreJourConge($dateDebut,$dateFin,null,null,null,null);
+            $data['conge']=$this->gestionConge->avoirLesConges();
             $this->load->view('header2');
             $this->load->view('listeConge',$data);
         }

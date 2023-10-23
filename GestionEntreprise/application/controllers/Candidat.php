@@ -103,13 +103,17 @@ class Candidat extends CI_Controller {
     }
 
     public function listeCV() {
-        $data['cv']=$this->Candidats->avoirCV("");
+        $idemploye=$_SESSION['utilisateur'];
+        $emp=$this->Generalisation->avoirTableSpecifique("v_employePoste","*", " idemploye='".$idemploye."' ");
+        $data['cv']=$this->Candidats->avoirCV("",$emp[0]->iddepartement);
         $this->load->view('header2',$data);
 		$this->load->view('CV',$data);
     }
 
     public function detailsCV($idcandidat) {
-        $data['cv'] = $this->Candidats->avoirCV($idcandidat);
+        $idemploye=$_SESSION['utilisateur'];
+        $emp=$this->Generalisation->avoirTableSpecifique("v_employePoste","*", " idemploye='".$idemploye."' ");
+        $data['cv'] = $this->Candidats->avoirCV($idcandidat,$emp[0]->iddepartement);
         $this->load->view('header2');
         $this->load->view('DetailsCV', $data);
     }
