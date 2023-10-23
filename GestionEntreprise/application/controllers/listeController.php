@@ -58,5 +58,12 @@
 
             redirect('listeController/listeConge/');
         }
+
+        public function versFichePoste() {
+            $idemploye = $this->input->get('idemploye');
+            $data['ficheposte'] = $this->Fiche->avoirFichePoste($idemploye);
+            $this->load->view('header2');
+            $this->load->view('fichePoste',$data);
+        }
     }
 ?>  

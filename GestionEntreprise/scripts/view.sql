@@ -173,3 +173,11 @@ create or replace view v_MoisTypePrimeEmploye as
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
 
+-- ---------------------VUE FICHE DE POSTE-------------------------
+create or replace view v_ficheDePoste as
+    select ep.*, 
+    d.idavantagenature,d.libelle as avantage,d.idavantagedepartement,d.libelle,
+    c.salairebrut,c.salairenet,c.datedebut,c.datefin
+    from v_employePoste ep
+        join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
+        join contratessai c on ep.idemploye=c.idemploye; 
