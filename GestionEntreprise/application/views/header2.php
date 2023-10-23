@@ -219,6 +219,28 @@
                 <div data-i18n="Tables">Listes Annonces</div>
               </a>
             </li>
+            
+            <?php if($_SESSION['RH']==21){ ?>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versFormulaireBesoin'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Besoins Entreprises</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Fiche de paix</div>
+              </a>
+            </li>
+            <?php  }  ?>
+
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versListeEmployeEnEssaie'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Contrat d'essai</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->

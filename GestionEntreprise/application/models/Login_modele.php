@@ -12,8 +12,9 @@ class Login_modele extends CI_Model {
 				if ($user->mail == $mail && $user->mdp == $mdp) {
 					// session_start();
 					$_SESSION['utilisateur'] = $user->idemploye;
-
 					$_SESSION['RH'] = $user->etat;
+					$_SESSION['RH'] = $user->etat;
+
 					$this->load->library('session');
 					return true;
 				}

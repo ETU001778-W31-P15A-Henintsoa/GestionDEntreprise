@@ -22,8 +22,11 @@ class Employe extends CI_Model {
     }
 
     public function avoirListeEmploye($iddepartement){
-        $tousLesEmployes=$this->Generalisation->avoirTableSpecifique("v_employePoste","*","iddepartement='".$iddepartement."'");
-        $affichageEmp=array();
+        if($_SESSION['RH']=21){
+            $tousLesEmployes=$this->Generalisation->avoirTable("v_employeposte","*");
+        }else{
+        $tousLesEmployes=$this->Generalisation->avoirTableSpecifique("v_employeposte","*","iddepartement='".$iddepartement."'");
+        }
         for($i=0;$i<count($tousLesEmployes);$i++){
             $affichageEmp[$i]=$this->verifierRetraite($tousLesEmployes[$i]);
         }

@@ -18,7 +18,7 @@
                     <div class="card-body">
                       <p for=""><strong>Nom : </strong> <?php echo $employer[0]->nom; ?></p>
                       <p for=""><strong>Prenoms : </strong><?php echo $employer[0]->prenom; ?></p>
-                      <p for=""><strong>Date de naissance : </strong><?php echo $employer[0]->datedenaissance; ?></p>
+                      <p for=""><strong>Date de naissance : </strong><?php echo $employer[0]->datenaissance; ?></p>
                       <p for=""><strong>Adresse :</strong> <?php echo $employer[0]->adresse; ?></p>
                    </div>
                   </div>

@@ -68,8 +68,6 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
-<<<<<<< Updated upstream
-
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -396,7 +394,7 @@ UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA1';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA6';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA7';
 UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA8';
-=======
+
 -- --------------------NATIONNALITE-------------------
 INSERT INTO entreprise (ville, adresse, numero, fax)
 VALUES ('ville1', 'Village des jeux Ankorondrano', '0123456789', '0123456789');
@@ -404,4 +402,16 @@ VALUES ('ville1', 'Village des jeux Ankorondrano', '0123456789', '0123456789');
 -- --------------------Employe-------------------
 insert into employe (nom,prenom,adresse,numero,mail,mdp,idDepartement,etat) VALUES
 ('RABE','Manantsoa','Lot 86 btd','0206676798','manantsoa@gmail.com','manantsoa','DEPT1',11);
->>>>>>> Stashed changes
+
+insert into PrimeEmploye values
+(default,'emp1','TYPR1',4),
+(default,'emp1','TYPR2',4),
+(default,'emp1','TYPR3',4),
+(default,'emp1','TYPR4',4),
+(default,'emp1','TYPR5',4),
+(default,'emp1','TYPR6',4),
+(default,'emp1','TYPR7',4),
+(default,'emp1','TYPR8',4),
+(default,'emp1','TYPR9',4);
+
+UPDATE PrimeEmploye SET dateprime='2023-10-12';
