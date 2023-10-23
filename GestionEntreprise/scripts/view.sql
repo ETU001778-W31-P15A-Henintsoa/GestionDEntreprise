@@ -96,7 +96,7 @@ create or replace view v_candidatEntretien as
 
 -- ---------------------------------CANDIDAT-----------------------------------------------------
 create or replace view v_candidat as 
-select c.*,vb.branche,vb.departement,
+select c.*,vb.branche,vb.departement,vb.iddepartement,vb.idBranche,
 diplome.libelle as diplome,experience.anneeExperience,ville.ville ,filiere.libelle as filiere,Nationnalite.libelle as nationnalite
 from Candidat c
 join diplome on c.iddiplome=diplome.idDiplome

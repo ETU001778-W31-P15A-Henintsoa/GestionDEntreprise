@@ -16,7 +16,7 @@
 
 
 			if($reponse==true){
-				redirect("Candidat/listeCV");
+					redirect("listeController/listeEmploye");
 			}
 		}
 
@@ -27,7 +27,8 @@
 
 		public function deconnection(){
 			session_destroy();
-			$this->load->view('login');
+			$this->load->view('index');
+			// redirection('index.php');
 		}
     }
 ?>

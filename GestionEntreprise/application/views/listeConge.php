@@ -8,25 +8,25 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Employe</th>
-                        <th>Nombre Conge</th>
+                        <th>idEmploye</th>
                         <th>Type</th>
                         <th>idDemande</th>
                         <th>dateDebut</th>
                         <th>dateFin</th>
+                        <th>total prix</th>
                         <th>reste</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         <?php foreach($conge as $conges) { ?>
                       <tr>
-                        <td><strong><?php echo $conges['idEmploye']; ?></strong></td>
-                        <td><?php echo  $conges['nombreConge']; ?></td>
-                        <td><?php echo $conges['type']; ?></td>
-                        <td><?php echo $conges['idDemande']; ?></td>
-                        <td><?php echo $conges['dateDebut']->format("y-m-d"); ?></td>
-                        <td><?php echo $conges['dateFin']->format("y-m-d"); ?></td>
-                        <td><?php echo $conges['reste']; ?></td>
+                        <td><strong><?php echo $conges['idemploye']; ?></strong></td>
+                        <td><?php echo  $conges['idtypeconge']; ?></td>
+                        <td><?php echo $conges['iddemandeconge']; ?></td>
+                        <td><?php echo $conges['debutconge']; ?></td>
+                        <td><?php echo $conges['finconge'];?></td>
+                        <td><?php echo $conges['totalpris']; ?></td>
+                        <td><?php echo $conges['resteconge']; ?></td>
                       </tr>
                       <?php } ?>
                     </tbody>

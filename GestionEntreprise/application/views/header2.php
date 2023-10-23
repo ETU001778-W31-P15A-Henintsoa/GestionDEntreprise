@@ -148,43 +148,48 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            
-            <!-- Cards --> 
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="<?php ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Criteres</div>
+          <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!-- <i class="menu-icon tf-icons bx bx-lock-open-alt"></i> -->
+                <div data-i18n="Authentications">Authentications</div>
               </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="<?php echo site_url("Login/deconnection/") ?>" class="menu-link" target="_blank">
+                    <div data-i18n="Basic">Logout</div>
+                  </a>
+                </li>
+              </ul>
             </li>
+            
             <li class="menu-item">
               <a href="<?php echo site_url('annonce_controller/afficherTous'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables">Listes Annonces</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables"> Voir CV</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables"> Conges </div>
               </a>
             </li>
             <li class="menu-item">
               <a href="<?php echo site_url('listeController/formulaireConge/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables">Insertion Conges </div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo site_url('listeController/formulaireDemandeConges/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Demande de Conges </div>
+              <a href="<?php echo site_url('listeController/listeEmploye/') ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Listes Employes </div>
               </a>
             </li>
           </ul>
