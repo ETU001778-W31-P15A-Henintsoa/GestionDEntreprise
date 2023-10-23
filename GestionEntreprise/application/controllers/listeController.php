@@ -31,11 +31,11 @@
             $this->load->view('listeEmploye',$data);
         }
 
-        public function listeConge(){
-            $data['conge']=$this->gestionConge->avoirLesConges();
-            $this->load->view('header2');
-            $this->load->view('listeConge',$data);
-        }
+        // public function listeConge(){
+        //     $data['conge']=$this->gestionConge->avoirLesConges();
+        //     $this->load->view('header2');
+        //     $this->load->view('listeConge',$data);
+        // }
 
         public function formulaireConge() {
             $data['typeConge'] = $this->gestionConge->avoirTypeConge();
