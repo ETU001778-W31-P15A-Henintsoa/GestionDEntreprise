@@ -25,6 +25,7 @@
                         </tr>
                       <!-- </thead> -->
                       <tbody class="table-border-bottom-0">
+                        <?php // var_dump($demandeemployevalider); ?>
                         <?php for($i=0; $i<count($demandeemployevalider); $i++){ ?>
                         <tr>
                             <td>

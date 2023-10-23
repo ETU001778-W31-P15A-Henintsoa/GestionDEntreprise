@@ -141,8 +141,8 @@ INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
 VALUES ('DEPT4', 'entreprise2', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
 VALUES ('DEPT5', 'entreprise2', 'Ankorondrano');
-INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
+-- INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
+-- VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
 
 -- ---------------------EMPLOYE-----------------------------
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)

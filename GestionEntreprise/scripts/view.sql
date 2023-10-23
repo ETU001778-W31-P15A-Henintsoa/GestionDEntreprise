@@ -173,3 +173,11 @@ create or replace view v_MoisTypePrimeEmploye as
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
 
+------------------------------------ VUE DEPARTEMENTADRESSE -------------------------------------
+create or replace view v_departementadresse as
+    select Entreprise.*,
+    DepartementAdresse.iddepartementadresse, DepartementAdresse.iddepartement, DepartementAdresse.adresse as localisation,
+    Ville.ville as nomville
+    from Entreprise
+        join DepartementAdresse on Entreprise.identreprise = DepartementAdresse.identreprise
+        join Ville on Ville.idville = Entreprise.ville;

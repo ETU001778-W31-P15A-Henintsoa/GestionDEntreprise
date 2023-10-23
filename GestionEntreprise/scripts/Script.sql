@@ -115,7 +115,7 @@ create table avantageNature(
 create sequence seqavantageDepartement;
 create table avantageDepartement(
     idAvantageDepartement varchar(30) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
-    idBrancheDepartement varchar(15),
+    idBrancheDepartement varchar(20),
     idAvantage varchar(30),
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement),
     foreign key(idAvantage) references avantageNature(idAvantageNature)

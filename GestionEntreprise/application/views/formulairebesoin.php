@@ -1,24 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Formulaire de Besoin</title>
-</head>
 
-<body>
-	<h3>Formulaire des Besoins du Departement</h3>
-	<?php //var_dump($departement); ?>
-	<form action="<?php echo site_url("welcome/formulaireBesoin"); ?>" method="POST">
-		<select name="iddepartement" id="maListeDeroulante">
-			<option value="">Departement</option>
-			<?php for($i=0; $i<count($departement); $i++){ ?>
-				<option value="<?php echo $departement[$i]->iddepartement; ?>"><?php echo $departement[$i]->nomdepartement; ?></option>
-			<?php } ?>
-		</select>
-		<div id="check"><div>
-	</form>
+     <!-- Content wrapper -->
+    <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Les Besoins de L'</span> entreprise</h4>
+
+ 			<div class="row">
+                <div class="col-xl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Formulaire de Besoins</h5>
+                      <!-- <small class="text-muted float-end">Default label</small> -->
+                    </div>
+					<div class="card-body">
+					<?php //var_dump($departement); ?>
+					<form action="<?php echo site_url("welcome/formulaireBesoin"); ?>" method="POST">
+						<div class="mb-3">	
+							<label for="defaultSelect" class="form-label">Departement</label>
+							<select class="form-select" name="iddepartement" id="maListeDeroulante">
+								<option value="">Departement</option>
+								<?php for($i=0; $i<count($departement); $i++){ ?>
+									<option value="<?php echo $departement[$i]->iddepartement; ?>"><?php echo $departement[$i]->nomdepartement; ?></option>
+								<?php } ?>
+							</select>
+							<div id="check"><div>
+						</form>
+				  </div>
+				</div>
+				</div>
+			</div>
+			</div>
+	</div>
 
 <script>
 
@@ -26,7 +39,7 @@
 function myFunction(table){
 	let argument = table.split("//");
 	var div = document.getElementById(argument[1]);
-	div.innerHTML = "Besoins "+ argument[0] +" <input type='text' name='B"+argument[1]+"'>";
+	div.innerHTML = "<label class='form-label' for='basic-default-fullname'>Besoins "+ argument[0] +"</label><input type='number' class='form-control' id='basic-default-fullname' name='B"+argument[1]+"'>";
 }
 
 	////// Apparaitre CheckBox
@@ -58,10 +71,10 @@ function myFunction(table){
 			var div = "<h5>Besoins Personnelles </h5>"
 
 			for(var i=0; i<tab.length; i++){
-				nouveau = nouveau + "<div><input type='checkbox' name='"+tab[i].idbranchedepartement+"' id='"+tab[i].branche+"' onchange=myFunction('"+ tab[i].branche.split(" ").join("").concat("//")+tab[i].idbranchedepartement +"')>"+tab[i].branche+"</div>";
-				div = div + "<div id='"+ tab[i].idbranchedepartement +"'></div>";
+				nouveau = nouveau + "<div class='mb-3'><input type='checkbox' name='"+tab[i].idbranchedepartement+"' id='"+tab[i].branche+"' onchange=myFunction('"+ tab[i].branche.split(" ").join("").concat("//")+tab[i].idbranchedepartement +"')><label>"+tab[i].branche+"</label></div>";
+				div = div + "<div class='mb-3' id='"+ tab[i].idbranchedepartement +"'></div>";
 			}
-			nouveau = nouveau + div + "<div><input type='submit' value='OK'</div>";
+			nouveau = nouveau + div + "<button type='submit' class='btn btn-primary'>Soumetre</button>";
 			// alert(nouveau);
 			var boxcheck = document.getElementById('check');
 			boxcheck.innerHTML = nouveau;

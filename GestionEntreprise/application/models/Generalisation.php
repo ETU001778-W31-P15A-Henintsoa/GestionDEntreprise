@@ -75,4 +75,25 @@ class Generalisation extends CI_Model {
         
         return $date_lisible;
     }
+
+    function differenceEntreDeuxDates($date2, $format) {
+        // Crée deux objets DateTime à partir des dates
+        $date1 = new DateTime();
+        // $datetime1 = new DateTime($date1);
+        $datetime2 = new DateTime($date2);
+        
+        // Calcule la différence entre les deux dates
+        $interval = $date1->diff($datetime2);
+        
+        // Récupère la différence sous forme de jours, mois ou années en fonction du format spécifié
+        if ($format === 'jours') {
+            return $interval->days;
+        } elseif ($format === 'mois') {
+            return $interval->y * 12 + $interval->m;
+        } elseif ($format === 'annees') {
+            return $interval->y;
+        } else {
+            return false; // Format non valide
+        }
+    }
 }

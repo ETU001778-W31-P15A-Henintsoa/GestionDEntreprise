@@ -75,6 +75,7 @@ class Welcome extends CI_Controller {
 	{
 		$data['departement'] = $this->Generalisation->avoirTable("departement");
 		// $this->load->view('header');
+		$this->load->view('header2');
 		$this->load->view('formulairebesoin', $data);
 	}
 
@@ -105,15 +106,15 @@ class Welcome extends CI_Controller {
 	}
 
 	public function versListeEmployeEnEssaie(){
-		$data['employe'] = $this->Generalisation->avoirTableSpecifique('employe', '*', 'estessaie=true');
+		$data['employe'] = $this->Generalisation->avoirTableSpecifique('v_employeposte', '*', 'estessaie=true');
+		$this->load->view('header2');
 		$this->load->view('listeemployeenessaie', $data);
 	} 
 
 	public function versContratEssaie(){
 		$idemploye = $this->input->get('idemploye');
 		$avoir = $this->ContratEssai->aUnContratEssai($idemploye);
-		// var_dump($avoir);
-		if($avoir==true){
+		if($avoir==1){
 			redirect('welcome/versMonContratEssai?idemploye='.$idemploye);
 		}else{
 			redirect('welcome/versCreerContratEssai?idemploye='.$idemploye);
@@ -122,12 +123,13 @@ class Welcome extends CI_Controller {
 
 	public function versMonContratEssai(){
 		$idemploye = $this->input->get('idemploye');
-		$data['employer'] = $this->Generalisation->avoirTableSpecifique('employe', '*', sprintf("idemploye='%s'", $idemploye));
+		$data['employer'] = $this->Generalisation->avoirTableSpecifique('v_employeposte', '*', sprintf("idemploye='%s'", $idemploye));
 		$data['employer'][0]->datedenaissance = $this->Generalisation->dateLisible($data['employer'][0]->datedenaissance);
 		$data['contrat'] = $this->Generalisation->avoirTableSpecifique('contratessai', '*', sprintf("idemploye='%s'", $idemploye));
+		$data['entreprise'] = $this->Generalisation->avoirTableSpecifique('v_departementadresse', '*', sprintf("iddepartement='%s'", $data['employer'][0]->iddepartement));
 		$data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['contrat'][0]->idbranchedepartement));
 		$data['services'] = $this->Generalisation->avoirTableSpecifique('v_serviceservicescandidat', '*', sprintf("idcontratessai='%s'", $data['contrat'][0]->idcontratessai));
-		$this->load->view('header2');
+		$this->load->view('header2');	
 		$this->load->view('moncontratessai', $data);
 	}
 
@@ -174,7 +176,7 @@ class Welcome extends CI_Controller {
 		$iddepartement = $this->input->post("iddepartement");
 		$vectorBranche = $this->avoirLesBranchesAAjouter($iddepartement);
 		$brancheDepartementBesoin = $this->avoirLesBesoinsParBranche($vectorBranche);
-		$this->Besoins->insertionBesoins($brancheDepartementBesoin);
+		// $this->Besoins->insertionBesoins($brancheDepartementBesoin);
 		$data['branchebesoin'] = ($vectorBranche);
 		$data['diplome'] = $this->Generalisation->avoirTable("diplome");
 		$data['nationnalite'] = $this->Generalisation->avoirTable("nationnalite");
@@ -183,6 +185,7 @@ class Welcome extends CI_Controller {
 		$data['experience'] = $this->Generalisation->avoirTable("experience");
 		$data['situation'] = $this->Generalisation->avoirTable("situationmatrimoniale");
 		// var_dump($data['experience']);
+		$this->load->view('header2');
 		$this->load->view('criteres', $data);
 	}
 
