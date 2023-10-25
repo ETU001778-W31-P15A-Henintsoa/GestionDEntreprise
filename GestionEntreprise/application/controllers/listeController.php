@@ -26,7 +26,8 @@
 
         public function listeEmploye(){
             $idemploye=$_SESSION['utilisateur'];
-            $emp=$this->Generalisation->avoirTableSpecifique("v_employePoste","*", " idemploye='".$idemploye."' ");
+            $emp=$this->Generalisation->avoirTableSpecifique("v_employeposte","*", " idemploye='".$idemploye."' ");
+            // var_dump($emp);
             $data['employe']=$this->Employe->avoirListeEmploye($emp[0]->iddepartement);
             $this->load->view('header2',$data);
             $this->load->view('listeEmploye',$data);
@@ -57,7 +58,7 @@
 
             $this->gestionConge->insertionConge($dateDebut,$heureDebut,$dateFin,$heureFin,$idDemande,$idTypeConge);
 
-            redirect('listeController/listeConge/');
+            redirect('welcome/versListeConge/');
         }
 
         public function versFichePoste() {

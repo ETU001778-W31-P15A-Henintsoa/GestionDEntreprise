@@ -192,3 +192,4 @@ create or replace view v_ficheDePoste as
         join contratessai c on ep.idemploye=c.idemploye; 
 
 
+

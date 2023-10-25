@@ -68,8 +68,6 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
-<<<<<<< Updated upstream
-
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -439,5 +437,4 @@ insert into autreValeurSalaire values
 
 -- ---------------SMIG------------------------------
 insert into smig values(default,'2023-10-23',250000);
-
 
