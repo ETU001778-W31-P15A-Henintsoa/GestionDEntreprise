@@ -68,6 +68,8 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
+<<<<<<< Updated upstream
+
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -140,8 +142,8 @@ INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
 VALUES ('DEPT4', 'entreprise2', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
 VALUES ('DEPT5', 'entreprise2', 'Ankorondrano');
--- INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
--- VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
+INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
+VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
 
 -- ---------------------EMPLOYE-----------------------------
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
@@ -415,3 +417,27 @@ insert into PrimeEmploye values
 (default,'emp1','TYPR9',4);
 
 UPDATE PrimeEmploye SET dateprime='2023-10-12';
+
+-- ---------------------Candidats---------------------
+insert into candidat(nom,prenom,dateNaissance,adresse,email,sexe,telephone,idAnnonce,etat) values
+(default,'Maharavo','Soatiana','2000-02-03','lot 86 VT Andoahalo','soatiana@gamil.com',0,'0345623454',)
+
+-- --------------------IRSA-------------------------------------
+insert into IRSA values
+	(default,0, 350000, 0),
+	(default,350000, 400000, 5),
+	(default,400000, 500000, 10),
+	(default,500000, 600000, 15),
+	(default,600000, 0, 20); -- 600000 ou plus
+
+-- -----------------AUTRE VALEUR SALAIRE--------------------------
+insert into autreValeurSalaire values
+(default,'periodeanterieur',100000,2,'emp1','2023-10-12'),
+(default,'droitConge',1,4,'emp1','2023-10-12'),
+(default,'preavis',100000,1,'emp1','2023-10-12'),
+(default,'licenciement',100000,1,'emp1','2023-10-12');
+
+-- ---------------SMIG------------------------------
+insert into smig values(default,'2023-10-23',250000);
+
+

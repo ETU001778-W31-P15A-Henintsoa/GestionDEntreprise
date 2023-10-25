@@ -163,13 +163,13 @@ create or replace view v_TypePrimeEmploye as
 
 ------------------------------- VUE MOIS PRIME -------------------------------------------------
 create or replace view MoisPrime as
-    SELECT idprimeemploye, EXTRACT(MONTH FROM dateprime) AS moisprime 
+    SELECT idprimeemploye, EXTRACT(MONTH FROM dateprime) AS moisprime,dateprime
     FROM PrimeEmploye;
 
 ------------------------------- VUE TYPEPTIMEEMPLOYE -------------------------------------------
 create or replace view v_MoisTypePrimeEmploye as
     select v_TypePrimeEmploye.*,
-    MoisPrime.moisprime
+    MoisPrime.moisprime,datePrime
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
 
@@ -191,84 +191,4 @@ create or replace view v_ficheDePoste as
         join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
         join contratessai c on ep.idemploye=c.idemploye; 
 
-create view v_brancheDepartementEmploye as
-select emp.*,bd.idBranche
-from v_employePoste as emp 
-join brancheDepartement as bd on bd.idBrancheDepartement=emp.idBrancheDepartement;
-=======
-select bd.branche ,bd.idBranche, bd.departement ,bd.idDepartement, bd.njhparpersonne,bp.*
-from BesoinPersonnelle bp
-join v_BrancheDepartement bd on bd.idBrancheDepartement=bp.idBrancheDepartement;
 
-create or replace view v_Critere as
-select bp.branche,bp.idbranche,bp.iddepartement,bp.departement,bp.idBrancheDepartement,bp.njHParPersonne,bp.dateInsertion,
-Diplome.libelle as diplome,Nationnalite.libelle as nationnalite,Experience.anneeExperience as Experience, 
-Filiere.libelle as filiere,Critere.*
-from Critere 
-join v_BesoinPersonnelle bp on bp.idBesoin=Critere.idBesoin
-join Diplome on Diplome.idDiplome=Critere.idDiplome
-join Nationnalite on Nationnalite.idNationnalite=Critere.idNationnalite
-join Experience on Experience.idExperience=Critere.idExperience 
-join Filiere on Filiere.idFiliere = Critere.idFiliere;
-
-create or replace view v_CritereCoefficient as 
-select cc.idCritereCoefficient,vc.idCritere,vc.idDiplome,vc.diplome,cc.diplome as noteDiplome,
-vc.sexe,cc.sexe as noteSexe,
-vc.idNationnalite,vc.nationnalite,cc.nationnalite as noteNationnalite,
-vc.idExperience,vc.Experience,cc.Experience as noteExperience,
-vc.idFiliere,vc.filiere,cc.filiere as noteFiliere,cc.pourcentageNote,
-vc.idbranche,vc.branche,vc.iddepartement,vc.departement,vc.idBrancheDepartement,vc.njHParPersonne,vc.dateInsertion
-from CritereCoefficient as cc
-join v_Critere vc on vc.idBesoin=cc.idBesoin;
-
-create or replace view v_BesoinPersonnelleAnnonce as 
-select bp.*,annonce.idannonce,annonce.texte from besoinPersonnelle as bp
-left join annonce  on bp.idBesoin=annonce.idBesoin;
-
-create or replace view v_BesoinPersonnelleAnnonceDetails as
-select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye
-from v_BesoinPersonnelleAnnonce as bpa 
-join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
-left join employe as emp on emp.idDepartement=bd.idDepartement;
-
-create sequence seqSmig;
-create table smig(
-    idSmig  varchar(20) default concat('SMI'|| nextval('seqSmig')) primary key,
-    dateEntre date,
-    valeur float
-);
-
-insert into smig values(default,'2023-10-23',250000);
-
-create sequence seqIRSA;
-create table IRSA (
-	idIRSA varchar(20) default concat('IRS'|| nextval('seqIRSA')) primary key,
-	debut float,
-	fin float,
-	pourcentage float
-);
-
-
-
-insert into IRSA values
-	(default,0, 350000, 0),
-	(default,350000, 400000, 5),
-	(default,400000, 500000, 10),
-	(default,500000, 600000, 15),
-	(default,600000, 0, 20); -- 600000 ou plus
-
-create sequence seqautre;
-create table autreValeurSalaire(
-	idAutre varchar(20) default concat('AUT'|| nextval('seqAutre')) primary key,
-	libelle varchar(30),
-	valeur float,
-	nombre int,
-	idEmploye varchar(20),
-	date date,
-	foreign key(idEmploye) references employe(idEmploye)
-);
-insert into autreValeurSalaire values
-(default,'periodeanterieur',100000,2,'emp1','2023-10-12'),
-(default,'droitConge',1,4,'emp1','2023-10-12'),
-(default,'preavis',100000,1,'emp1','2023-10-12'),
-(default,'licenciement',100000,1,'emp1','2023-10-12');
