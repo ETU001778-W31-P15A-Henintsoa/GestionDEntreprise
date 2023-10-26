@@ -440,4 +440,3 @@ insert into autreValeurSalaire values
 -- ---------------SMIG------------------------------
 insert into smig values(default,'2023-10-23',250000);
 
-

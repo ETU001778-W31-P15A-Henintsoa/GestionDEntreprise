@@ -190,5 +190,3 @@ create or replace view v_ficheDePoste as
     from v_employePoste ep
         join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
         join contratessai c on ep.idemploye=c.idemploye; 
-
-
