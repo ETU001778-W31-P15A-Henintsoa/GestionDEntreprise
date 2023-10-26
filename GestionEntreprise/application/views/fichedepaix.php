@@ -1,10 +1,5 @@
         <!-- Content wrapper -->
-<style>
-  .body{
-   
-  }
-</style>
-<div class="body">
+
 <?php 
     //var_dump($donnee);
   ?>
