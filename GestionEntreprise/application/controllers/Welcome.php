@@ -210,7 +210,7 @@ class Welcome extends CI_Controller {
 		$existants = $this->lesbesoinsExistants($iddepartement);
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
 		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
-		echo 'Okey';
+		$this->load->view("acceuil");
 		// Load view manaraka
 	}
 	
