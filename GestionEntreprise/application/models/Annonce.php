@@ -2,7 +2,7 @@
 class Annonce extends CI_Model {
   public function getDescriptionAnnonce($annonceParDefaut,$brancheDepartement,$entreprise){
     $annonce=$annonceParDefaut->texte;
-    // var_dump($brancheDepartement);
+    var_dump($brancheDepartement);
         $annonce=str_replace("NomEntrepriseIci", $entreprise[0]->nom, $annonce);
         $annonce=str_replace("titreDuPoste", $brancheDepartement->branche, $annonce);
         $annonce=str_replace("NomPosteIci", $brancheDepartement->branche, $annonce);

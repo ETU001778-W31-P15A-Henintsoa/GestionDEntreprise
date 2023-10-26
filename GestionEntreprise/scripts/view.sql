@@ -79,7 +79,7 @@ create or replace view v_BesoinPersonnelleAnnonce as
 
 -- ----------------------------------------
 create or replace view v_employePoste as
-    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost  from employe as emp
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost,bd.rendement  from employe as emp
         join posteEmploye as p on emp.idEmploye=p.idEmploye
         join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
 
@@ -104,16 +104,17 @@ create or replace view v_candidatEntretien as
 
 -- ---------------------------------CANDIDAT-----------------------------------------------------
 create or replace view v_candidat as 
-select c.*,vb.branche,vb.departement,vb.iddepartement,vb.idBranche,
-diplome.libelle as diplome,experience.anneeExperience,ville.ville ,filiere.libelle as filiere,Nationnalite.libelle as nationnalite
-from Candidat c
-join diplome on c.iddiplome=diplome.idDiplome
-join experience on c.idexperience=experience.idExperience
-join ville on c.idville=Ville.idVille
-join filiere on c.idfiliere=filiere.idFiliere
-join Nationnalite on c.idNationnalite=Nationnalite.idnationnalite
-join SituationMatrimoniale sm on sm.idSituation=c.idSituation
-join Annonce on annonce.idannonce= c.idannonce 
+  select c.*,vb.branche,vb.departement,vb.iddepartement,
+    diplome.libelle as diplome,experience.anneeExperience,ville.ville ,filiere.libelle as filiere,Nationnalite.libelle as nationnalite
+    from Candidat c
+        join diplome on c.iddiplome=diplome.idDiplome
+        join experience on c.idexperience=experience.idExperience
+        join ville on c.idville=Ville.idVille
+        join filiere on c.idfiliere=filiere.idFiliere
+        join Nationnalite on c.idNationnalite=Nationnalite.idnationnalite
+        join SituationMatrimoniale sm on sm.idSituation=c.idSituation
+        join Annonce on annonce.idannonce= c.idannonce 
+        join v_BesoinPersonnelle vb on annonce.idbesoin= vb.idbesoin;
 
 -- -------------------------------CONGE----------------------------------------------
 

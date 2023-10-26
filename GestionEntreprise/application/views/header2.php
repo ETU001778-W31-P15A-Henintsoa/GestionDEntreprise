@@ -172,13 +172,11 @@
               <?php if($_SESSION['RH']==21){ ?>
                 <li class="menu-item">
                   <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-table"></i>
                     <div data-i18n="Tables"> Liste Demande Conge</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-table"></i>
                     <div data-i18n="Tables">Voir Fiche De Paie</div>
                   </a>
                 </li>
@@ -212,13 +210,29 @@
               <?php } ?>
               </ul>
             </li>
-            
+
             <li class="menu-item">
-              <a href="<?php echo site_url('annonce_controller/afficherTous'); ?>" class="menu-link">
-                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
-                <div data-i18n="Tables">Listes Annonces</div>
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!-- <i class="menu-icon tf-icons bx bx-lock-open-alt"></i> -->
+                <div data-i18n="Authentications">Annonces</div>
               </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="<?php echo site_url('annonce_Controller/afficherTous'); ?>" class="menu-link">
+                    <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">Listes Annonces</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('annonceController/index'); ?>" class="menu-link">
+                    <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">generer une annonces</div>
+                  </a>
+                </li>
+              </ul>
             </li>
+            
+            
             
             <?php if($_SESSION['RH']==21){ ?>
             <li class="menu-item">
@@ -233,8 +247,8 @@
                 <div data-i18n="Tables">Fiche de paix</div>
               </a>
             </li>
-            <?php  }  ?>
-
+            <?php  } ?>
+              
             <li class="menu-item">
               <a href="<?php echo site_url('welcome/versListeEmployeEnEssaie'); ?>" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->

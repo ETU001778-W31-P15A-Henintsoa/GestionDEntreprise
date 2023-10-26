@@ -11,7 +11,7 @@
             <select name="idBesoin">
                 <?php
                     for($i=0;$i<count($besoins);$i++){ ?>
-                        <option value="<?php echo $besoins[$i]->idbesoin ?>"><?php echo $besoins[$i]->iddepartement ." ". $besoins[$i]->dateinsertion ?></option>
+                        <option value="<?php echo $besoins[$i]->idbesoin ?>"><?php echo $besoins[$i]->idbesoin." " . $besoins[$i]->iddepartement ." ". $besoins[$i]->dateinsertion ?></option>
                     <?php }
                 ?>
             </select>

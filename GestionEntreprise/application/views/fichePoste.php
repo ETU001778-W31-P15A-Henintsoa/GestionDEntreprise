@@ -74,7 +74,11 @@
                       <h5 class="mb-0">Avantages en nature</h5>
                     </div>
                     <div class="card-body">
-                      <h6><?php echo $ficheposte['libelle']; ?></h6>
+                      <ul>
+                        <?php for ($i=0; $i < count($avantageNature); $i++) {  ?>
+                            <li><?php echo $avantageNature[$i]->libelle ?></li>
+                        <?php } ?>
+                      </ul>
                    </div>
                   </div>
                 </div>

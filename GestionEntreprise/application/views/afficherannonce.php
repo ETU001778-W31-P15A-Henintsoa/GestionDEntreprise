@@ -27,7 +27,7 @@
               </div>
             </div>
           </nav> -->
-          <?php if($annonces != null) { ?>
+          
             <div class="col-md mb-4 mb-md-0" style="width:90%; margin-left:30px">
                   <?php foreach($annonces as $annonce) { ?>
                   <div class="accordion mt-3" id="accordionExample">
@@ -64,9 +64,7 @@
                   </div>
                   <?php } ?>
             </div>
-          <?php }else{ ?>
-            <h4>aucun annonce disponible pour le moment</h4>
-            <?php } ?>
+
         </div>
       </div>
 </div>
