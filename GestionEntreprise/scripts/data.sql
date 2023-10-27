@@ -68,8 +68,6 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
-<<<<<<< Updated upstream
-
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -108,7 +106,7 @@ VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),(
 insert into entreprise(ville,adresse,numero,fax) values('ville1','village des jeux Ankorondrano','0202234456','67891234567');
 
 -------------------- ANNONCE PAR DEFAUT -----------------------------------------
-insert into annonceParDefaut(idEntreprise,texte,avantage) values('entrepise1',
+insert into annonceParDefaut(idEntreprise,texte,avantage) values('entreprise1',
 'Nous sommes à la recherche d_un(e) titreDuPoste passionné(e) et talentueux(se) pour rejoindre notre équipe 
 chez _NomEntrepriseIci_. En tant que _NomPosteIci_, vous jouerez un rôle essentiel dans _DescriptionIci_.
  Vous travaillerez en étroite collaboration avec _DepartementIci_ pour _missionIci_.','Salaire compétitif; 
@@ -133,21 +131,21 @@ VALUES ('Mamindrakotroka','Santatra','10-01-2002','Lot 86 btb','santatra@gmail.c
 
 -- ---------------------DEPARTEMENT ADRESSE--------------------------------------
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT1', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT1', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT2', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT2', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT3', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT3', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT4', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT4', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT5', 'entreprise2', 'Ankorondrano');
-INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT5', 'entreprise1', 'Ankorondrano');
+-- INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
+-- VALUES ('DEPT6', 'entreprise1', 'Ankorondrano');
 
 -- ---------------------EMPLOYE-----------------------------
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
-VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie, etat)
+VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', FALSE, 21);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
 VALUES ('Smith', 'Jane', '456 Elm Avenue', '0341791777', 'jane.smith@email.com', 'motdepasse2', TRUE);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)

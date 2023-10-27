@@ -168,7 +168,11 @@ class Welcome extends CI_Controller {
 		$reponses = $this->reponseAuxQuestion($lesquestions);
 		$this->QuestionsReponses->insererReponseCandidat($idcandidat, $reponses);
 		echo "Okey";
-		
+	}
+
+	public function versEtatDePaix(){
+		$this->load->view('header2');
+		$this->load->view('etatdepaix');
 	}
 
 	// Insertion formnulaire besoins
@@ -192,7 +196,7 @@ class Welcome extends CI_Controller {
 	// Insertion formulaire criteres 
 	public function formulaireCriteres(){
 		$iddepartement = $this->input->post("iddepartement");
-		$critereCoefficient = $this->Criteres->criteresParBranches($iddepartement);
+		$critereCoefficient = $this->criteresParBranches($iddepartement);
 		$besoinsentree = $this->Besoins->avoirbesoins(count($critereCoefficient));
 		for($i=0; $i<count($critereCoefficient); $i++){
 			$this->Criteres->insertionCritere($besoinsentree[$i], $critereCoefficient[$i]);
@@ -206,7 +210,7 @@ class Welcome extends CI_Controller {
 		$existants = $this->lesbesoinsExistants($iddepartement);
 		$questionsReponses = $this->receuilleDonneesQuestionsReponses($existants);
 		$this->QuestionsReponses->insererQuestionsReponses($questionsReponses);
-		echo 'Okey';
+		$this->load->view("acceuil");
 		// Load view manaraka
 	}
 	
