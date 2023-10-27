@@ -36,34 +36,32 @@
     <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/css/core.css"); ?>" class="template-customizer-core-css" />
     <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/css/theme-default.css"); ?>" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="<?php echo site_url("../assets/css/demo.css"); ?>" />
-<<<<<<< Updated upstream
-=======
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"); ?>" />
+    <!-- <link rel="stylesheet" href="<?php //echo site_url("../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"); ?>" /> -->
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/css/pages/page-auth.css"); ?>" />
+    <!-- <link rel="stylesheet" href="<?php // echo site_url("../assets/vendor/css/pages/page-auth.css"); ?>" /> -->
     <!-- Helpers -->
-    <script src="<?php echo site_url("../assets/vendor/js/helpers.js"); ?>" ></script>
+    <!-- <script src="<?php // echo site_url("../assets/vendor/js/helpers.js"); ?>" ></script> -->
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="<?php echo site_url("../assets/js/config.js"); ?>" ></script>
+    <!-- <script src="<?php // echo site_url("../assets/js/config.js"); ?>" ></script>
   </head>
 
-  <body>
+  <body> -->
     <!-- Content -->
 
-    <div class="container-xxl">
+    <!-- <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
+        <div class="authentication-inner"> -->
           <!-- Register -->
-          <div class="card">
-            <div class="card-body">
+          <!-- <div class="card">
+            <div class="card-body"> -->
               <!-- Logo -->
-              <div class="app-brand justify-content-center">
+              <!-- <div class="app-brand justify-content-center">
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
@@ -122,9 +120,9 @@
                   </span>
                   <span class="app-brand-text demo text-body fw-bolder">DIMPEX</span>
                 </a>
-              </div>
+              </div> -->
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome! 👋</h4>
+              <!-- <h4 class="mb-2">Welcome! 👋</h4>
               <p class="mb-4">Veuillez vous connecter. </p>
 
               <form id="formAuthentication" class="mb-3" action="<?php echo site_url("login/traitementlogin"); ?>" method="POST">
@@ -176,19 +174,18 @@
                 </a>
               </p>
             </div>
-          </div>
+          </div> -->
           <!-- /Register -->
-        </div>
+        <!-- </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- / Content -->
->>>>>>> Stashed changes
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"); ?>" />
 
-<<<<<<< Updated upstream
+
     <!-- Page CSS -->
     <!-- Page -->
     <link rel="stylesheet" href="<?php echo site_url("../assets/vendor/css/pages/page-auth.css"); ?>" />

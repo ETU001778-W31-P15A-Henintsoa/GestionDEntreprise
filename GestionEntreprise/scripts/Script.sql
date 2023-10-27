@@ -392,10 +392,10 @@ create table QualiteRequise(
 
 create sequence seqIRSA;
 create table IRSA (
-	idIRSA varchar(20) default concat() primary key,
+	idIRSA varchar(20) default concat('IRSA' || nextval('seqIRSA')) primary key,
 	debut float,
 	fin float,
-	pourcentage
+	pourcentage float
 );
 
 -- ----------------AUTRE VALEUR SALAIRE--------------------
