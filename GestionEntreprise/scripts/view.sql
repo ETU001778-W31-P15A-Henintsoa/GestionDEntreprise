@@ -91,7 +91,7 @@ create or replace view v_BesoinPersonnelleAnnonceDetails as
         left join v_employePoste as emp on emp.idDepartement=bd.idDepartement;
 
 create or replace view v_candidatEntretien as
-    select c.*,entretien.heuredebut,entretien.heurefin,entretien.jour,bd.idDepartement from candidat as c
+    select c.*,entretien.heuredebut,entretien.heurefin, bd.idDepartement from candidat as c
         left join entretien  on c.idCandidat=entretien.idCandidat
         left join annonce on annonce.idAnnonce=c.idAnnonce
         join besoinPersonnelle as bp on annonce.idBesoin=bp.idBesoin
@@ -146,7 +146,7 @@ create or replace view v_CongeEmploye as
 
 ------------------------------------- DEMANDE EMPLOYE ------------------------------------------------------------
 create or replace view v_DemandeConge as
-    select DemandeConge.iddemandeconge, DemandeConge.idTypeConge, DemandeConge.debutconge, DemandeConge.finconge, DemandeConge.etat as etatvalidation,
+    select DemandeConge.iddemandeconge, DemandeConge.idTypeConge, DemandeConge.datedebut, DemandeConge.datefin, DemandeConge.etat as etatvalidation,
     v_employePoste.*,
     TypeConge.libelle
     from DemandeConge
