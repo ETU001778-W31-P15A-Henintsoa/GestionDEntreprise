@@ -8,7 +8,7 @@
 </style>
 <div class="content-wrapper" id="choix">
 <div class="container-xxl flex-grow-1 container-p-y" class="choix">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Fiche de</span> Conge</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Fiche de</span> paix</h4>
              <!-- Basic Layout -->
               <div class="row">
                 <div class="col-xl">
@@ -31,6 +31,26 @@
                                 <option value="<?php echo $employe[$i]-> idemploye; ?>"><?php echo $employe[$i]->nom; ?> <?php echo $employe[$i]->prenom; ?></option>
                             <?php } ?>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-company" name="datefin">Date debut</label>
+                              <!-- <div class="col-md-12"> -->
+                              <input
+                                  class="form-control"
+                                  type="date"
+                                  id="html5-datetime-local-input"
+                                  name="datedebut"
+                              />
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-company" name="datefin">Date fin</label>
+                              <!-- <div class="col-md-12"> -->
+                              <input
+                                  class="form-control"
+                                  type="date"
+                                  id="html5-datetime-local-input"
+                                  name="datefin"
+                              />
                         </div>
                         <button type="submit" class="btn btn-primary">Voir</button>
                       </form>

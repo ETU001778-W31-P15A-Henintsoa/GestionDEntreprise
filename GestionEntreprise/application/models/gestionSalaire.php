@@ -84,7 +84,7 @@ class gestionSalaire extends CI_Model {
 
     public function calculerGenPrime($nomPrime,$idEmploye,$date,$salaire,$dateDebut,$dateFin){//raha manome date izy dia izay omeny sinon today
         $mois=$date->format('n');
-        $primeEmploye=$this->Generalisation->avoirTableSpecifique("v_moistypeprimeemploye","*"," idEmploye='".$idEmploye."' and libelle='".$nomPrime."' and dateprime>='".$dateDebut."' and dateprime<='".$dateFin."'");
+        $primeEmploye=$this->Generalisation->avoirTableSpecifique("v_moistypeprimeemploye","*"," idEmploye='".$idEmploye."' and libelle='".$nomPrime."' and dateprime>='".$dateDebut."'and dateprime<='".$dateFin."'");
         if(count($primeEmploye)!=0){
             $somme=$this->sommeQuantitePrime($primeEmploye);
             $prime['montant']=number_format((($primeEmploye[0]->pourcentage*($salaire/173.33))/100)*$somme, 2, ',', '');
@@ -174,6 +174,8 @@ class gestionSalaire extends CI_Model {
     public function avoirsalaire($idEmploye,$sal,$dateDebut,$dateFin){
         date_default_timezone_set('Africa/Nairobi');
         $date=new DateTime(date('Y-m-d'));
+        $dDebut=new DateTime($dateDebut);
+        $dfin=new DateTime($dateFin);
         $intervalleIrsa=$this->Generalisation->avoirTable("irsa");
         $employe=$this->Generalisation->avoirTableSpecifique("v_employePoste","*"," idEmploye='".$idEmploye."'");
         $salaire['prime']=$this->tousPrime($idEmploye,$sal,$date,$dateDebut,$dateFin);
@@ -192,6 +194,37 @@ class gestionSalaire extends CI_Model {
         $salaire['licenciement']=$this->calculerAutreValeur($idEmploye,"licenciement",$dateDebut,$dateFin);
         $salaire['totalRetenus']=$this->totalRetenus($salaire);
         $salaire['aPaye']=$sal[0]->montantbrute-$salaire['totalRetenus'];
+         $diffe=$dfin->diff($dDebut);
+        if($diffe->d<28){
+            echo "sdfghjk",
+            $salaire['aPaye']=( $salaire['aPaye']/20)*$diffe->d;
+        }
+        // $salaire['abscence']=$this->payeAbscense($idEmploye,$sal);
         return $salaire;
+    }
+
+    public function insertionPrime($idEmploye,$typePrime,$nombre,$date){
+        $valeur="(default,'".$idEmploye."','".$typePrime."',".$nombre."'".$date."')";
+        $this->Generalisation->insertion("primeEmploye",$valeur);
+    }
+
+    public function payeAbscense($idEmploye,$salaire){
+        $congeDernier=$this->Generalisation->avoirTableSpecifique("v_retraitCongeEmploye","*"," idEmploye='".$idEmploye."' order by idretraitconge limit 1");
+        $jour=$salaire/30;
+        if($congeDernier[0]->reste<0){
+            $aPayer=$jour*$congeDernier[0]->reste*-1;
+            $this->Generalisation->modifier("retraitConge"," reste=2.5 where idRetraitConge='".$congeDernier[0]->idretraitconge."'");
+            return $aPayer;
+        }
+        return 0;
+    }
+
+    public function  tousFichePaix($debut,$fin,$employes){
+        $salairesmois=array();
+        for ($i=0; $i <count($employes) ; $i++) { 
+            $salaire=$this->Generalisation->avoirTableSpecifique("salaire","*"," idEmploye='".$employes[$i]->idemploye."'");
+            $salaireMois[$i]=$this->avoirsalaire($employes[$i]->idemploye,$salaire,$debut,$fin);
+        }
+        return $salairesmois;
     }
 }

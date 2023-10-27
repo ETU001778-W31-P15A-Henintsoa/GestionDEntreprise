@@ -84,7 +84,7 @@ create or replace view v_employePoste as
         join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
 
 create or replace view v_BesoinPersonnelleAnnonceDetails as
-    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot
+    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot,bd.descriptionpost,bd.mission
     from v_BesoinPersonnelleAnnonce as bpa 
         join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
         left join v_critere as c on c.idBesoin=bpa.idBesoin
@@ -119,12 +119,12 @@ create or replace view v_candidat as
 -- -------------------------------CONGE----------------------------------------------
 
 create or replace view v_demandeCongeEmploye as
-    select dc.idemploye,dc.datedebut as debutDemande,dc.datefin as finDemande,ce.* 
+    select dc.idemploye,dc.debutconge as debutDemande,dc.finconge as finDemande,ce.* 
     from demandeConge as dc 
         join CongeEmploye as ce on ce.idDemandeConge=dc.idDemandeConge;
 
 create or replace view v_retraitCongeEmploye as
-    select rc.resteconge,rc.totalpris,dc.*
+    select rc.resteconge,rc.totalpris,rc.idretraitconge,dc.*
     from RetraitConge as rc 
         left join v_demandeCongeEmploye as dc on dc.idcongeEmploye=rc.idcongeEmploye;
 

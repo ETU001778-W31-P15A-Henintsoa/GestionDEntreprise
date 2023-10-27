@@ -64,7 +64,8 @@
         public function versFichePoste() {
             $idemploye = $this->input->get('idemploye');
             $data['ficheposte'] = $this->Fiche->avoirFichePoste($idemploye);
-            $data['avantageNature'] = $this->Generalisation->avoirTableSpecifique('v_avantagedepartement', '*', sprintf("idbranchedepartement='%s'", $data['ficheposte']['iddepartement']));
+            $data['avantage'] = $this->Fiche->avoirAvantageDepartement($data['ficheposte']['idbranchedepartement']);
+            $data['superieur'] = $this->Fiche->avoirNomBranche($data['ficheposte']['mgr']);
             $this->load->view('header2');
             $this->load->view('fichePoste',$data);
         }

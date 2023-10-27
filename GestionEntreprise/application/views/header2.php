@@ -175,13 +175,13 @@
                     <div data-i18n="Tables"> Liste Demande Conge</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
-                    <div data-i18n="Tables">Voir Fiche De Paie</div>
-                  </a>
-                </li>
               <!-- Raha Chef de Departement -->
               <?php }else if ($_SESSION['RH']==11){ ?>
+                  <li class="menu-item">
+                    <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                      <div data-i18n="Tables"> Liste Demande Conge</div>
+                    </a>
+                  </li>
                   <li class="menu-item">
                   <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
                     <div data-i18n="Tables">Liste de Conge </div>

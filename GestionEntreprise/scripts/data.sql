@@ -440,3 +440,7 @@ insert into autreValeurSalaire values
 -- ---------------SMIG------------------------------
 insert into smig values(default,'2023-10-23',250000);
 
+insert into employe (nom,prenom,adresse,numero,mail,mdp,estessaie) VALUES
+('Santatra','Fifaliana','Lot 06 btd','0330323671','santatra@gmail.com','santatra',TRUE);
+INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
+('emp10','BRA1','2020-03-15');

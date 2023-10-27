@@ -2,7 +2,7 @@
 class Annonce extends CI_Model {
   public function getDescriptionAnnonce($annonceParDefaut,$brancheDepartement,$entreprise){
     $annonce=$annonceParDefaut->texte;
-    var_dump($brancheDepartement);
+    // var_dump($brancheDepartement);
         $annonce=str_replace("NomEntrepriseIci", $entreprise[0]->nom, $annonce);
         $annonce=str_replace("titreDuPoste", $brancheDepartement->branche, $annonce);
         $annonce=str_replace("NomPosteIci", $brancheDepartement->branche, $annonce);
@@ -12,6 +12,11 @@ class Annonce extends CI_Model {
         return $annonce;
   }
 
+  public function avoirCritere($critere){
+    $critere="Diplome:".$critere[0]->diplome."_nationalite:".$critere[0]->nationnalite."_filiere:".$critere[0]->filiere."_situation matrimoniale:".$critere[0]->situation;
+    return $critere;
+  }
+
   public function genererDescriptionPoste($brancheDepartement,$nombrePersonne){//besoin
       $annonceParDefaut=$this->Generalisation->avoirTable("annoncepardefaut");
      // $brancheDepartement=$this->Generalisation->avoirTableSpecifique("v_besoinPersonnelle","*"," dateInsertion='".$date."' and iddepartement='".$idDepartement."'");
@@ -19,7 +24,7 @@ class Annonce extends CI_Model {
       $critere=$this->Generalisation->avoirTableSpecifique("v_Critere","*"," dateInsertion='".$brancheDepartement->dateinsertion."' and iddepartement='".$brancheDepartement->iddepartement."'");
       $annonceDescri=$this->getDescriptionAnnonce($annonceParDefaut[0],$brancheDepartement,$entreprise);
     //  $avantage=explode(";",$annonceParDefaut['avantage']);
-      $data['critere']=$critere;
+      $data['critere']=$this->avoirCritere($critere);
       //$data['avantage']=$avantage;
       $data['annonceDescri']=$annonceDescri;
       $data['nombrePersonne']=$nombrePersonne;
@@ -34,6 +39,7 @@ class Annonce extends CI_Model {
 }
 
 public function insererAnnonce($annonce,$idBesoin){
+    // var_dump($annonce);
     $this->Generalisation->insertion('annonce',"(default,'".$idBesoin."','".$annonce['annonceDescri']."',".$annonce['nombrePersonne'].",'".$annonce['critere']."')");
   }
 
@@ -42,7 +48,7 @@ public function insererAnnonce($annonce,$idBesoin){
       $annonce=array();
       if($besoinCauche[0]->texte==null){
           $besoin=$this->Generalisation->avoirTableSpecifique("v_BesoinPersonnelleAnnonceDetails","*"," dateInsertion='".$besoinCauche[0]->dateinsertion."' and iddepartement='".$besoinCauche[0]->iddepartement."' and texte is null");
-          var_dump($besoin);
+          // var_dump($besoin);
           for($i=0;$i<count($besoin);$i++){
               $annonce[$i]=$this->genererDescriptionPoste($besoin[$i],$this->NombrePersonneNecessairDuBranche($besoin[$i]));
               $this->insererAnnonce($annonce[$i],$besoin[$i]->idbesoin);
@@ -55,13 +61,13 @@ public function insererAnnonce($annonce,$idBesoin){
       date_default_timezone_set('Africa/Nairobi');
       $aujourdui= date('d-m-Y');
       $annonce=array();
-      if($idDepartement==""){
-        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*","  dateFinDepot>'".$aujourdui."'");
+      if($idDepartement==null){
+        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*");
         // $annonce=$this->Generalisation->avoirTable("v_besoinpersonnelleannoncedetails");
         
       }
       else{
-        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*"," dateFinDepot>'".$aujourdui."' and iddepartement='".$idDepartement."'");
+        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*","iddepartement='".$idDepartement."'");
        // $annonce=$this->Generalisation->avoirTable("v_besoinpersonnelleannoncedetails");
       }
       return $annonce;

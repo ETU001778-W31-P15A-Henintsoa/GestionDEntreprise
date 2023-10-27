@@ -75,9 +75,7 @@
                     </div>
                     <div class="card-body">
                       <ul>
-                        <?php for ($i=0; $i < count($avantageNature); $i++) {  ?>
-                            <li><?php echo $avantageNature[$i]->libelle ?></li>
-                        <?php } ?>
+                          <li><?php echo $avantage['libelle']; ?></li>
                       </ul>
                    </div>
                   </div>

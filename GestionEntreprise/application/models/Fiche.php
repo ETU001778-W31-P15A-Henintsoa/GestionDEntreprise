@@ -9,4 +9,18 @@ class Fiche extends CI_Model {
             return $result;
     }
 
+    public function avoirAvantageDepartement($idbranchedepartement) {
+        $sql = "SELECT * FROM v_avantagedepartement where idbranchedepartement= ?";
+        $query = $this->db->query($sql, array($idbranchedepartement));
+        $result = $query->row_array();
+        return $result;
+    }
+
+    public function avoirNomBranche($idbranche) {
+        $sql = "SELECT libelle from branche where idbranche= ?";
+        $query = $this->db->query($sql,array($idbranche));
+        $result = $query->row();
+        return $result;
+    }
+
 }

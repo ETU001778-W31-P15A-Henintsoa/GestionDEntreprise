@@ -11,12 +11,12 @@
         public function generer(){
             $idBesoin=$_POST['idBesoin'];
             $data['annonce']=$this->Annonce->getAllAnnonce($idBesoin);
-            $this->load->view('accueil');
+            redirect('annonceController/afficherTous');
         }
 
         public function afficherTous(){
             $data['annonces']=$this->Annonce->afficher("");
-            $this->load->view('header');
+            $this->load->view('header2');
             $this->load->view('afficherannonce',$data);
         }
     }
