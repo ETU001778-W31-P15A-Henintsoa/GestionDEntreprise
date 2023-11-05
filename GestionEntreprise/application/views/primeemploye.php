@@ -19,11 +19,11 @@
                       <!-- <small class="text-muted float-end">Default label</small> -->
                     </div>
                     <div class="card-body">
-                    <form action="<?php echo site_url("welcome/formulaireDemandeConge"); ?>" method="post">
+                    <form action="<?php echo site_url("salaireController/insertionPrime"); ?>" method="post">
   
                     <div class="mb-3">
                             <label for="defaultSelect" class="form-label">Employe</label>
-                            <select id="defaultSelect" class="form-select" name="idtypeconge">
+                            <select id="defaultSelect" class="form-select" name="idEmploye">
                             <option>Choisir</option>
                             <?php for ($i=0; $i < count($employe); $i++) { ?>
                                 <option value="<?php echo $employe[$i]->idemploye; ?>"><?php echo $employe[$i]->nom; ?> <?php echo $employe[$i]->prenom; ?></option>
@@ -33,7 +33,7 @@
 
                     <?php for ($i=0; $i < count($prime); $i++) { ?>
                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="defaultCheck1" onchange="plus('<?php echo $prime[$i]->idtypeprime; ?>')" />
+                            <input class="form-check-input" type="checkbox" name=<?php echo $prime[$i]->idtypeprime ?> id="defaultCheck1" onchange="plus('<?php echo $prime[$i]->idtypeprime; ?>')" />
                             <label class="form-check-label" for="defaultCheck1">     <?php echo $prime[$i]->libelle; ?> </label>
                             <div id="<?php echo $prime[$i]->idtypeprime; ?>">
                             </div>
@@ -49,8 +49,8 @@
 
 <script>
     function plus(idtypeprime) {
-        var nouveau =  "<p><input class='form-control' type='number' value='Sneat' id= 'html5-text-input' name='"+idtypeprime+"Q' placeholder='Quantite'/></p>"+
-                        "<p><input class='form-control' type='datetime-local' id='html5-datetime-local-input' name='"+idtypeprime+"D' /></p>";
+        var nouveau =  "<p><input class='form-control' type='number' id= 'html5-text-input' name='"+idtypeprime+"Q' placeholder='Quantite'/></p>"+
+                        "<p><input class='form-control' type='date' id='html5-datetime-local-input' name='"+idtypeprime+"D' /></p>";
         var conteneur = document.getElementById(idtypeprime);
         conteneur.innerHTML = nouveau;
     }

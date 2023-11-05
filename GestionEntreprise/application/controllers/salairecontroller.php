@@ -12,5 +12,25 @@
             $this->load->view('header2',$data);
             $this->load->view('fichedepaix',$data);
         }
+
+        public function insertionPrime(){
+            $idemploye=$_POST['idEmploye'];
+            $typePrime=$this->Generalisation->avoirTable("typeprime");
+            for ($i=0; $i <count($typePrime) ; $i++) { 
+                if(isset($_POST[$typePrime[$i]->idtypeprime])){
+                    $id= $typePrime[$i]->idtypeprime;
+                    $date=$_POST[$id."D"];
+                    $quantite=$_POST[$id."Q"];
+                    $this->gestionSalaire->insertionPrime($idemploye,$id,$quantite,$date);
+                }
+            }
+            redirect('listeController/listeEmploye');
+
+        }
+
+        public function etatDePaix(){
+            $dateDebut=date("2023-10-01");
+            $dateFin=date("2023-10-30");
+        }
     }
 ?>

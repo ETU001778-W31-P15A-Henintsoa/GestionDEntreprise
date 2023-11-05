@@ -201,6 +201,7 @@ class Welcome extends CI_Controller {
 		for($i=0; $i<count($critereCoefficient); $i++){
 			$this->Criteres->insertionCritere($besoinsentree[$i], $critereCoefficient[$i]);
 		}
+		$this->load->view('header2');
 		$this->load->view('acceuil');
 	}
 

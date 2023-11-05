@@ -61,13 +61,13 @@ public function insererAnnonce($annonce,$idBesoin){
       date_default_timezone_set('Africa/Nairobi');
       $aujourdui= date('d-m-Y');
       $annonce=array();
-      if($idDepartement==null){
-        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*");
+      if($idDepartement==""){
+        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*","  dateFinDepot>'".$aujourdui."'");
         // $annonce=$this->Generalisation->avoirTable("v_besoinpersonnelleannoncedetails");
         
       }
       else{
-        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*","iddepartement='".$idDepartement."'");
+        $annonce=$this->Generalisation->avoirTableSpecifique("v_besoinpersonnelleannoncedetails","*"," dateFinDepot>'".$aujourdui."' and iddepartement='".$idDepartement."'");
        // $annonce=$this->Generalisation->avoirTable("v_besoinpersonnelleannoncedetails");
       }
       return $annonce;

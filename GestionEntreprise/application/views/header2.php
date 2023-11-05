@@ -256,6 +256,18 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versPrimeEmploye'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Prime</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/formulaireCriteres'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Changer Etat Employe</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
                 <div data-i18n="Tables"> CV</div>
