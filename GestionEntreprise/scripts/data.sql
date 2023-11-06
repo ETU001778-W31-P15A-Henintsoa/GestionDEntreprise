@@ -68,7 +68,6 @@ INSERT INTO Diplome(libelle) VALUES
 INSERT INTO Nationnalite(libelle) VALUES
 ('Malagasy'),('Etrangere');
 
-
 INSERT INTO Filiere (libelle) VALUES
     ('Comptable'),
     ('Informatique'),
@@ -107,7 +106,7 @@ VALUES ('Celibataire'),('Marie(e)'),('Divorce(e)'),('Veuf'),('En concubinage'),(
 insert into entreprise(ville,adresse,numero,fax) values('ville1','village des jeux Ankorondrano','0202234456','67891234567');
 
 -------------------- ANNONCE PAR DEFAUT -----------------------------------------
-insert into annonceParDefaut(idEntreprise,texte,avantage) values('entrepise1',
+insert into annonceParDefaut(idEntreprise,texte,avantage) values('entreprise1',
 'Nous sommes à la recherche d_un(e) titreDuPoste passionné(e) et talentueux(se) pour rejoindre notre équipe 
 chez _NomEntrepriseIci_. En tant que _NomPosteIci_, vous jouerez un rôle essentiel dans _DescriptionIci_.
  Vous travaillerez en étroite collaboration avec _DepartementIci_ pour _missionIci_.','Salaire compétitif; 
@@ -132,21 +131,21 @@ VALUES ('Mamindrakotroka','Santatra','10-01-2002','Lot 86 btb','santatra@gmail.c
 
 -- ---------------------DEPARTEMENT ADRESSE--------------------------------------
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT1', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT1', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT2', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT2', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT3', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT3', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT4', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT4', 'entreprise1', 'Ankorondrano');
 INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT5', 'entreprise2', 'Ankorondrano');
-INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
-VALUES ('DEPT6', 'entreprise2', 'Ankorondrano');
+VALUES ('DEPT5', 'entreprise1', 'Ankorondrano');
+-- INSERT INTO departementAdresse (idDepartement, idEntreprise, adresse)
+-- VALUES ('DEPT6', 'entreprise1', 'Ankorondrano');
 
 -- ---------------------EMPLOYE-----------------------------
-INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
-VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', TRUE);
+INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie, etat)
+VALUES ('Doe', 'John', '123 Main Street', '0330323617', 'john.doe@email.com', 'motdepasse1', FALSE, 21);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
 VALUES ('Smith', 'Jane', '456 Elm Avenue', '0341791777', 'jane.smith@email.com', 'motdepasse2', TRUE);
 INSERT INTO Employe (nom, prenom, adresse, numero, mail, mdp, estessaie)
@@ -271,12 +270,12 @@ VALUES('CNAPS',250000),
 -- VALUES('service1','contrEssai13');
 
 -- ----------------------------EMPLOYE UPDATE-----------------------------------------
-UPDATE Employe set dateNaissance='22-03-1973' where idemploye='emp1';
-UPDATE Employe set dateNaissance='10-01-1993' where idemploye='emp2';
-UPDATE Employe set dateNaissance='01-05-2000' where idemploye='emp3';
-UPDATE Employe set dateNaissance='02-06-1998' where idemploye='emp4';
-UPDATE Employe set dateNaissance='21-04-1980' where idemploye='emp5';
-UPDATE Employe set dateNaissance='25-10-1985' where idemploye='emp6';
+UPDATE Employe set datedenaissance ='22-03-1973' where idemploye='emp1';
+UPDATE Employe set datedenaissance ='10-01-1993' where idemploye='emp2';
+UPDATE Employe set datedenaissance ='01-05-2000' where idemploye='emp3';
+UPDATE Employe set datedenaissance ='02-06-1998' where idemploye='emp4';
+UPDATE Employe set datedenaissance ='21-04-1980' where idemploye='emp5';
+UPDATE Employe set datedenaissance ='25-10-1985' where idemploye='emp6';
 
 -- ------------------------------BRANCHE DEPARTEMENT----------------
 UPDATE brancheDepartement
@@ -336,6 +335,7 @@ INSERT INTO Branche (libelle) VALUES ('Chef de projets');
 
 -- -------------------DEMANDE CONGE---------------------------
 INSERT INTO demandeConge values(default,'emp1','2023-11-24 12:00:00','2023-11-28 12:00:00','TYC1');
+INSERT INTO demandeConge values(default,'emp2','2023-11-11 12:00:00','2023-11-16 12:00:00','TYC1');
 
 -- --------------------RETRAIT CONGE--------------------------
 INSERT INTO RetraitConge values(default,null,2.5,0,'emp1');
@@ -359,5 +359,86 @@ INSERT INTO Ancienete (debut, fin, valeur) VALUES
     (15, 20, 30000),
     (20, 100, 35000);
 
--- Employe 21 RH
+------------------------------- IRSA --------------------------------------------
 
+insert into IRSA values
+	(0, 350000, 0),
+	(350000, 400000, 5),
+	(400000, 500000, 10),
+	(500000, 600000, 15),
+	(600000, 0, 20); -- 600000 ou plus
+    
+-- Employe 21 RH
+-- ---------------------------- BRANCHE DEPARTEMENT--------------------------------------
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1000000 WHERE idbranchedepartement = 'BRA1';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA2';
+UPDATE BrancheDepartement SET salaireMinimum = 1500000, salaireMaximum = 10000000 WHERE idbranchedepartement = 'BRA3';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA4';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA5';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 6000000 WHERE idbranchedepartement = 'BRA6';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 10000000 WHERE idbranchedepartement = 'BRA7';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA8';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 2000000 WHERE idbranchedepartement = 'BRA9';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 2500000 WHERE idbranchedepartement = 'BRA10';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 5000000 WHERE idbranchedepartement = 'BRA11';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 3500000 WHERE idbranchedepartement = 'BRA12';
+UPDATE BrancheDepartement SET salaireMinimum = 1000000, salaireMaximum = 3000000 WHERE idbranchedepartement = 'BRA13';
+UPDATE BrancheDepartement SET salaireMinimum = 1200000, salaireMaximum = 2000000 WHERE idbranchedepartement = 'BRA14';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1500000 WHERE idbranchedepartement = 'BRA15';
+UPDATE BrancheDepartement SET salaireMinimum = 800000, salaireMaximum = 1000000 WHERE idbranchedepartement = 'BRA16';
+
+-- -----------------------HIERARCHIE DES BRANCHES---------------------------
+INSERT INTO Branche (libelle) VALUES ('Chef de projets');
+
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA1';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA6';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA7';
+UPDATE Branche SET mgr='BRA22' WHERE idBranche='BRA8';
+
+-- --------------------NATIONNALITE-------------------
+INSERT INTO entreprise (ville, adresse, numero, fax)
+VALUES ('ville1', 'Village des jeux Ankorondrano', '0123456789', '0123456789');
+
+-- --------------------Employe-------------------
+insert into employe (nom,prenom,adresse,numero,mail,mdp,idDepartement,etat) VALUES
+('RABE','Manantsoa','Lot 86 btd','0206676798','manantsoa@gmail.com','manantsoa','DEPT1',11);
+
+insert into PrimeEmploye values
+(default,'emp1','TYPR1',4),
+(default,'emp1','TYPR2',4),
+(default,'emp1','TYPR3',4),
+(default,'emp1','TYPR4',4),
+(default,'emp1','TYPR5',4),
+(default,'emp1','TYPR6',4),
+(default,'emp1','TYPR7',4),
+(default,'emp1','TYPR8',4),
+(default,'emp1','TYPR9',4);
+
+UPDATE PrimeEmploye SET dateprime='2023-10-12';
+
+-- ---------------------Candidats---------------------
+insert into candidat(nom,prenom,dateNaissance,adresse,email,sexe,telephone,idAnnonce,etat) values
+(default,'Maharavo','Soatiana','2000-02-03','lot 86 VT Andoahalo','soatiana@gamil.com',0,'0345623454',)
+
+-- --------------------IRSA-------------------------------------
+insert into IRSA values
+	(default,0, 350000, 0),
+	(default,350000, 400000, 5),
+	(default,400000, 500000, 10),
+	(default,500000, 600000, 15),
+	(default,600000, 0, 20); -- 600000 ou plus
+
+-- -----------------AUTRE VALEUR SALAIRE--------------------------
+insert into autreValeurSalaire values
+(default,'periodeanterieur',100000,2,'emp1','2023-10-12'),
+(default,'droitConge',1,4,'emp1','2023-10-12'),
+(default,'preavis',100000,1,'emp1','2023-10-12'),
+(default,'licenciement',100000,1,'emp1','2023-10-12');
+
+-- ---------------SMIG------------------------------
+insert into smig values(default,'2023-10-23',250000);
+
+insert into employe (nom,prenom,adresse,numero,mail,mdp,estessaie) VALUES
+('Santatra','Fifaliana','Lot 06 btd','0330323671','santatra@gmail.com','santatra',TRUE);
+INSERT INTO posteEmploye(idEmploye,idBrancheDepartement,dateEmbauche) values
+('emp10','BRA1','2020-03-15');

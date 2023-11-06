@@ -8,7 +8,6 @@
 		
         public function traitementlogin()
 		{
-			
 			$mail = $this->input->post('mail');
 			$mdp = $this->input->post('mdp');
 
@@ -16,7 +15,9 @@
 
 
 			if($reponse==true){
-				redirect("Candidat/listeCV");
+				redirect("listeController/listeEmploye");
+				// $this->load->view('formulaireCandidat');
+				// echo $reponse;
 			}
 		}
 
@@ -27,7 +28,9 @@
 
 		public function deconnection(){
 			session_destroy();
-			$this->load->view('login');
+
+			$this->load->view('index');
+			// redirection('index.php');
 		}
     }
 ?>

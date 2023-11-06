@@ -79,19 +79,19 @@ create or replace view v_BesoinPersonnelleAnnonce as
 
 -- ----------------------------------------
 create or replace view v_employePoste as
-    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost  from employe as emp
+    select emp.*,p.idBrancheDepartement,p.dateEmbauche,bd.iddepartement,bd.departement,bd.branche,bd.mgr,mission,DescriptionPost,bd.rendement  from employe as emp
         join posteEmploye as p on emp.idEmploye=p.idEmploye
         join v_BrancheDepartement as bd on p.idBrancheDepartement=bd.idBrancheDepartement;
 
 create or replace view v_BesoinPersonnelleAnnonceDetails as
-    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot
+    select bpa.*,bd.idDepartement,bd.departement,bd.idBranche,bd.branche,idEmploye,c.njHParPersonne,datefindepot,bd.descriptionpost,bd.mission
     from v_BesoinPersonnelleAnnonce as bpa 
         join v_BrancheDepartement as bd on bd.idBrancheDepartement=bpa.idBrancheDepartement
         left join v_critere as c on c.idBesoin=bpa.idBesoin
         left join v_employePoste as emp on emp.idDepartement=bd.idDepartement;
 
 create or replace view v_candidatEntretien as
-    select c.*,entretien.heuredebut,entretien.heurefin,entretien.jour,bd.idDepartement from candidat as c
+    select c.*,entretien.heuredebut,entretien.heurefin, bd.idDepartement from candidat as c
         left join entretien  on c.idCandidat=entretien.idCandidat
         left join annonce on annonce.idAnnonce=c.idAnnonce
         join besoinPersonnelle as bp on annonce.idBesoin=bp.idBesoin
@@ -104,7 +104,7 @@ create or replace view v_candidatEntretien as
 
 -- ---------------------------------CANDIDAT-----------------------------------------------------
 create or replace view v_candidat as 
-  select c.*,vb.branche,vb.departement,
+  select c.*,vb.branche,vb.departement,vb.iddepartement,
     diplome.libelle as diplome,experience.anneeExperience,ville.ville ,filiere.libelle as filiere,Nationnalite.libelle as nationnalite
     from Candidat c
         join diplome on c.iddiplome=diplome.idDiplome
@@ -119,12 +119,12 @@ create or replace view v_candidat as
 -- -------------------------------CONGE----------------------------------------------
 
 create or replace view v_demandeCongeEmploye as
-    select dc.idemploye,dc.datedebut as debutDemande,dc.datefin as finDemande,ce.* 
+    select dc.idemploye,dc.debutconge as debutDemande,dc.finconge as finDemande,ce.* 
     from demandeConge as dc 
         join CongeEmploye as ce on ce.idDemandeConge=dc.idDemandeConge;
 
 create or replace view v_retraitCongeEmploye as
-    select rc.resteconge,rc.totalpris,dc.*
+    select rc.resteconge,rc.totalpris,rc.idretraitconge,dc.*
     from RetraitConge as rc 
         left join v_demandeCongeEmploye as dc on dc.idcongeEmploye=rc.idcongeEmploye;
 
@@ -174,3 +174,20 @@ create or replace view v_MoisTypePrimeEmploye as
     from v_TypePrimeEmploye
         join MoisPrime on MoisPrime.idprimeemploye = v_TypePrimeEmploye.idprimeemploye;
 
+------------------------------------ VUE DEPARTEMENTADRESSE -------------------------------------
+create or replace view v_departementadresse as
+    select Entreprise.*,
+    DepartementAdresse.iddepartementadresse, DepartementAdresse.iddepartement, DepartementAdresse.adresse as localisation,
+    Ville.ville as nomville
+    from Entreprise
+        join DepartementAdresse on Entreprise.identreprise = DepartementAdresse.identreprise
+        join Ville on Ville.idville = Entreprise.ville;
+
+-- ---------------------VUE FICHE DE POSTE-------------------------
+create or replace view v_ficheDePoste as
+    select ep.*, 
+    d.idavantagenature,d.libelle as avantage,d.idavantagedepartement,d.libelle,
+    c.salairebrut,c.salairenet,c.datedebut,c.datefin
+    from v_employePoste ep
+        join v_avantagedepartement d on ep.idbranchedepartement=d.idbranchedepartement
+        join contratessai c on ep.idemploye=c.idemploye; 

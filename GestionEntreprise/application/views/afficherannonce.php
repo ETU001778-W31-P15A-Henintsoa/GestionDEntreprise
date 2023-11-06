@@ -51,9 +51,12 @@
                         data-bs-parent="#accordionExample"
                       >
                         <div class="accordion-body">
-                          Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing
-                          marzipan gummi bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping
-                          soufflé. Wafer gummi bears marshmallow pastry pie.
+                          <?php 
+                             echo $annonce->texte;
+                          ?>
+                        <div>
+                            <b>Date Fin de Depot</b>: <?php echo $annonce->datefindepot ;?>
+                        </div>
                         </div>
                         <div><a class="badge bg-label-primary me-1" href="<?php echo site_url('Candidat/FormulaireCV/' . $annonce->idannonce) ?>" style="margin-left:90%;">Postuler</a></div>
                       </div>

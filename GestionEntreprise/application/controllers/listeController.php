@@ -7,6 +7,7 @@
             $idemploye=$_SESSION['utilisateur'];
             $emp=$this->Generalisation->avoirTableSpecifique("v_brancheDepartementEmploye","*", " idemploye='".$idemploye."'");
             $data['annonce']=$this->Annonce->afficher($emp[0]->iddepartement);
+            $this->load->view('header2');
             $this->load->view('genererentretien',$data);
         }
         public function genererlisteentretien(){
@@ -23,21 +24,20 @@
             $this->load->view('Vlisteentretien',$data);
         }
 
-        public function listeEmploye($idDepartement){
-            $idUtilisateur=$_SESSION['utilisateur'];
-            $iddepartement=$this->Generalisation->avoirTableSpecifique("v_brancheDepartementEmploye"," idEmploye='".$idUtilisateur."'");
-            $data['employe']=$this->Generalisation->avoirTableSpecifique("","*"," idDepartement='".$iddepartement[0]->iddepartement."'");
+        public function listeEmploye(){
+            $idemploye=$_SESSION['utilisateur'];
+            $emp=$this->Generalisation->avoirTableSpecifique("v_employeposte","*", " idemploye='".$idemploye."' ");
+            // var_dump($emp);
+            $data['employe']=$this->Employe->avoirListeEmploye($emp[0]->iddepartement);
+            $this->load->view('header2',$data);
             $this->load->view('listeEmploye',$data);
         }
 
-        public function listeConge(){
-            date_default_timezone_set('Africa/Nairobi');
-            $dateDebut=new DateTime("2023-09-12");
-            $dateFin=new DateTime("2023-12-12");
-            $data['conge']=$this->gestionConge->nombreJourConge($dateDebut,$dateFin,null,null,null,null);
-            $this->load->view('header2');
-            $this->load->view('listeConge',$data);
-        }
+        // public function listeConge(){
+        //     $data['conge']=$this->gestionConge->avoirLesConges();
+        //     $this->load->view('header2');
+        //     $this->load->view('listeConge',$data);
+        // }
 
         public function formulaireConge() {
             $data['typeConge'] = $this->gestionConge->avoirTypeConge();
@@ -58,7 +58,16 @@
 
             $this->gestionConge->insertionConge($dateDebut,$heureDebut,$dateFin,$heureFin,$idDemande,$idTypeConge);
 
-            redirect('listeController/listeConge/');
+            redirect('welcome/versListeConge/');
+        }
+
+        public function versFichePoste() {
+            $idemploye = $this->input->get('idemploye');
+            $data['ficheposte'] = $this->Fiche->avoirFichePoste($idemploye);
+            $data['avantage'] = $this->Fiche->avoirAvantageDepartement($data['ficheposte']['idbranchedepartement']);
+            $data['superieur'] = $this->Fiche->avoirNomBranche($data['ficheposte']['mgr']);
+            $this->load->view('header2');
+            $this->load->view('fichePoste',$data);
         }
     }
 ?>  

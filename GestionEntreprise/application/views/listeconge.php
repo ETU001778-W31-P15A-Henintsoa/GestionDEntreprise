@@ -25,6 +25,7 @@
                         </tr>
                       <!-- </thead> -->
                       <tbody class="table-border-bottom-0">
+                        <?php // var_dump($demandeemployevalider); ?>
                         <?php for($i=0; $i<count($demandeemployevalider); $i++){ ?>
                         <tr>
                             <td>
@@ -32,8 +33,8 @@
                             <?php echo $demandeemployevalider[$i]->nom; ?> <?php echo $demandeemployevalider[$i]->prenom; ?></td>
                             <td><?php echo $demandeemployevalider[$i]->branche; ?></td>
                             <td><?php echo $demandeemployevalider[$i]->libelle; ?></td>
-                            <td><?php echo $demandeemployevalider[$i]->datedebut; ?></td>
-                            <td><?php echo $demandeemployevalider[$i]->datefin; ?></td>
+                            <td><?php echo $demandeemployevalider[$i]->debutconge; ?></td>
+                            <td><?php echo $demandeemployevalider[$i]->finconge; ?></td>
                             <td><span class="badge bg-label-success me-1">Valide</span></td>
                         </tr>
                         <?php } ?>  
@@ -66,8 +67,8 @@
                         </td>
                         <td><?php echo $demandeemployenonvalider[$i]->branche; ?></td>
                         <td><?php echo $demandeemployenonvalider[$i]->libelle; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datedebut; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datefin; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->debutconge; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->finconge; ?></td>
                         <td><span class="badge bg-label-warning me-1">Non Valide</span></td>
                         <td>
                             <a href="<?php echo site_url("welcome/validationDemandeRH?iddemande=".$demandeemployenonvalider[$i]->iddemandeconge); ?>">
@@ -139,8 +140,8 @@
                         </td>
                         <td><?php echo $demandeemployenonvalider[$i]-> libelle; ?></td>
                         <td><?php echo $demandeemployenonvalider[$i]->libelle; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datedebut; ?></td>
-                        <td><?php echo $demandeemployenonvalider[$i]->datefin; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->debutconge; ?></td>
+                        <td><?php echo $demandeemployenonvalider[$i]->finconge; ?></td>
                         <td><span class="badge bg-label-warning me-1">Non Valide</span></td>
                         <td>
                             <a href="<?php echo site_url("welcome/validationDemandeRH?iddemande=".$demandeemployenonvalider[$i]->iddemandeconge); ?>">

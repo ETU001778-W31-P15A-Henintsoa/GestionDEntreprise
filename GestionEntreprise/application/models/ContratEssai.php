@@ -4,9 +4,9 @@ class ContratEssai extends CI_Model {
 public function aUnContratEssai($idemploye){
     $contrat = $this->Generalisation->avoirTableSpecifique('contratessai', "*", sprintf("idemploye='%s'", $idemploye));
     if(count($contrat)==0){
-        return false;
+        return 0;
     }
-    return true;
+    return 1;
 }
 
 public function InsertionContratEssaiService($idemploye, $datedebut, $datefin, $salaire, $idbranchedepartement, $services){

@@ -115,7 +115,7 @@ create table avantageNature(
 create sequence seqavantageDepartement;
 create table avantageDepartement(
     idAvantageDepartement varchar(30) default concat('avantageDepart'|| nextval('seqAvantageDepartement')) primary key,
-    idBrancheDepartement varchar(15),
+    idBrancheDepartement varchar(20),
     idAvantage varchar(30),
     foreign key(idBrancheDepartement) references BrancheDepartement(idBrancheDepartement),
     foreign key(idAvantage) references avantageNature(idAvantageNature)
@@ -259,7 +259,6 @@ create table Candidat(
     foreign key(idfiliere) references filiere(idFiliere)
 );
 
-
 -- ------------------Programme izany hoe ny lera fidirana sy firavana---------------------------
 create sequence seqProgramme;
 create table programme(
@@ -275,8 +274,8 @@ create table programme(
 create sequence seqPause;
 create table pause(
     idPause varchar(20) default concat('PAU'|| nextval('seqPause')) primary key,
-    heureDebut varchar(30),
-    heureFin timestamp,                              
+    heureDebut timestamp,
+    heureFin timestamp,       
     idBrancheDepartement varchar(15),
     foreign key(idBrancheDepartement) references brancheDepartement(idBrancheDepartement)
 );
@@ -388,6 +387,37 @@ create table QualiteRequise(
     idQualite varchar(20) default concat('QUA' || nextval('seqQualite')) primary key,
     libelle varchar(100)
 );
+
+-- -----------------------IRSA--------------------------------
+
+create sequence seqIRSA;
+create table IRSA (
+	idIRSA varchar(20) default concat('IRSA' || nextval('seqIRSA')) primary key,
+	debut float,
+	fin float,
+	pourcentage float
+);
+
+-- ----------------AUTRE VALEUR SALAIRE--------------------
+create sequence seqautre;
+create table autreValeurSalaire(
+	idAutre varchar(20) default concat('AUT'|| nextval('seqAutre')) primary key,
+	libelle varchar(30),
+	valeur float,
+	nombre int,
+	idEmploye varchar(20),
+	date date,
+	foreign key(idEmploye) references employe(idEmploye)
+);
+
+-- -------------------SMIG-----------------------
+create sequence seqSmig;
+create table smig(
+    idSmig  varchar(20) default concat('SMI'|| nextval('seqSmig')) primary key,
+    dateEntre date,
+    valeur float
+);
+
 
 ------------------------------ QUESTIONS EVALUATION------------------------------
 -- create sequence seqQuestionEvaluation;
@@ -540,11 +570,19 @@ ADD matricule varchar(100);
 ALTER TABLE Employe
 ADD dateEmbauche date;
 
+ALTER TABLE Employe
+ADD datedenaissance date;
+
 
 alter table contratessai 
 drop duree,
 add datedebut date,
 add datefin date;
+
+alter table contratessai 
+add salairebrut float,
+add salairenet float;
+
 
 --------------------15 Octobte---------------------------
 alter table employe
@@ -556,9 +594,15 @@ add categorie varchar(15);
 alter table employe
 drop dateembauche cascade;
 
+alter table entretien
+drop jour cascade;
+
 alter table Branche
 add mgr varchar(15),
 ADD CONSTRAINT fk_branchedept FOREIGN KEY (mgr) REFERENCES Branche(idBranche);
+
+alter table brancheDepartement
+add rendement float;
 
 -------------------------------
 alter table congeemploye
@@ -587,5 +631,3 @@ alter table CongeEmploye
 drop idemploye,
 add iddemandeconge varchar(20),
 add constraint iddemandeconge foreign key (iddemandeconge) references demandeconge(iddemandeconge);
-
-

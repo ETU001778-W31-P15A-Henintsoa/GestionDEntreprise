@@ -41,14 +41,14 @@
                             <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
                         </div>
                         <div class="mb-3">
-                        <label class="form-label" for="basic-default-company" name="datefin">Date fin du Conge</label>
-                            <!-- <div class="col-md-12"> -->
-                            <input
-                                class="form-control"
-                                type="datetime-local"
-                                id="html5-datetime-local-input"
-                                name="datefin"
-                            />
+                          <label class="form-label" for="basic-default-company" name="datefin">Date fin du Conge</label>
+                              <!-- <div class="col-md-12"> -->
+                              <input
+                                  class="form-control"
+                                  type="datetime-local"
+                                  id="html5-datetime-local-input"
+                                  name="datefin"
+                              />
                                 <!-- </div> -->
                             <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
                         </div>

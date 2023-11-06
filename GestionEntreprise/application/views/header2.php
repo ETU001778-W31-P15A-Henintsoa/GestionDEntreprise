@@ -148,77 +148,137 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            
-            <!-- Cards --> 
-            <!-- Tables -->
             <li class="menu-item">
-              <a href="<?php ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Criteres</div>
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!-- <i class="menu-icon tf-icons bx bx-lock-open-alt"></i> -->
+                <div data-i18n="Authentications">Authentications</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="<?php echo site_url("Login/deconnection/") ?>" class="menu-link" target="_blank">
+                    <div data-i18n="Basic">Logout</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!-- <i class="menu-icon tf-icons bx bx-lock-open-alt"></i> -->
+                <div data-i18n="Authentications">About Conge</div>
+              </a>
+              <ul class="menu-sub">
+                        <!-- Raha ETAT RH IZY -->
+              <?php if($_SESSION['RH']==21){ ?>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                    <div data-i18n="Tables"> Liste Demande Conge</div>
+                  </a>
+                </li>
+              <!-- Raha Chef de Departement -->
+              <?php }else if ($_SESSION['RH']==11){ ?>
+                  <li class="menu-item">
+                    <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                      <div data-i18n="Tables"> Liste Demande Conge</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                  <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                    <div data-i18n="Tables">Liste de Conge </div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('listeController/formulaireConge/') ?>" class="menu-link">
+                  <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">Insertion Conges </div>
+                  </a>
+                </li>
+              <!-- Raha employe Tsotra -->
+              <?php }else {?>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-table"></i>
+                    <div data-i18n="Tables"> Mes Conges </div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('listeController/versDemandeConge/') ?>" class="menu-link">
+                  <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">Insertion demandes Conges </div>
+                  </a>
+                </li>
+              <?php } ?>
+              </ul>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!-- <i class="menu-icon tf-icons bx bx-lock-open-alt"></i> -->
+                <div data-i18n="Authentications">Annonces</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="<?php echo site_url('annonce_Controller/afficherTous'); ?>" class="menu-link">
+                    <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">Listes Annonces</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?php echo site_url('annonceController/index'); ?>" class="menu-link">
+                    <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                    <div data-i18n="Tables">generer une annonces</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            
+            
+            
+            <?php if($_SESSION['RH']==21){ ?>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versFormulaireBesoin'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Besoins Entreprises</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo site_url('annonce_controller/afficherTous'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Listes Annonces</div>
+              <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Fiche de paix</div>
+              </a>
+            </li>
+            <?php  } ?>
+              
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versListeEmployeEnEssaie'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Contrat d'essai</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/versPrimeEmploye'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Prime</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo site_url('welcome/formulaireCriteres'); ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Changer Etat Employe</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="<?php echo site_url('Candidat/listeCV/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Voir CV</div>
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables"> CV</div>
               </a>
             </li>
-            <!-- Raha ETAT RH IZY -->
-            <?php if($_SESSION['RH']==21){ ?>
+            
             <li class="menu-item">
-            <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Liste Demande Conge</div>
-              </a>
-            </li>
-            <li class="menu-item">
-            <a href="<?php echo site_url('welcome/versChoixFicheDePaie'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Voir Fiche De Paie</div>
-              </a>
-            </li>
-            <!-- Raha Chef de Departement -->
-            <?php }else if ($_SESSION['RH']==11){ ?>
-              <li class="menu-item">
-              <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Demande de Conge </div>
-              </a>
-            </li>
-            <!-- Raha employe Tsotra -->
-            <?php }else {?>
-              <li class="menu-item">
-              <a href="<?php echo site_url('welcome/versListeConge'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Mes Conges </div>
-              </a>
-            </li>
-            <?php } ?>
-
-
-            <li class="menu-item">
-              <a href="<?php echo site_url('listeController/listeConge/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Conges </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="<?php echo site_url('listeController/formulaireConge/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Insertion Conges </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="<?php echo site_url('listeController/formuslaireDemandeConges/') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables"> Demande de Conges </div>
-              </a>
+              <a href="<?php echo site_url('listeController/listeEmploye/') ?>" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-table"></i> -->
+                <div data-i18n="Tables">Listes Employes </div>
+            </a>
             </li>
           </ul>
         </aside>
